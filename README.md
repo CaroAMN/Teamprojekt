@@ -18,6 +18,10 @@ Anschließend konnten die GUI Komponenten ausgeführt werden.
 ![alt text](Screenshots/ExampleWidgetViewer2.png)
 
 
+**Example GUI Hristian **
+![alt text](Screenshots/Exampl3.png)
+![alt text](Screenshots/Example4.png)
+
 
 
 
