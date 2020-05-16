@@ -19,7 +19,7 @@ Anschließend konnten die GUI Komponenten ausgeführt werden.
 
 
 **Example GUI Hristian **
-![alt text](Screenshots/Exampl3.png)
+![alt text](Screenshots/Example3.png)
 ![alt text](Screenshots/Example4.png)
 
 
