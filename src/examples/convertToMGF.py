@@ -29,12 +29,11 @@ OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 ###########################################################################
-# Example script to convert any file to MGF
+## Example script to convert any file to MGF
 ###########################################################################
 
 # Read input
-import pyopenms
-import sys
+import pyopenms, sys
 if len(sys.argv) <= 2:
     print "Usage: convertToMGF.py inputfile outputfile"
     sys.exit()
@@ -67,7 +66,7 @@ for spectrum in msdata:
     except IndexError:
         outfile.write("PEPMASS=unknown\n")
     for peak in spectrum:
-        outfile.write("%s %s\n" % (peak.getMZ(), peak.getIntensity()))
+        outfile.write("%s %s\n" % (peak.getMZ(), peak.getIntensity() ))
     outfile.write("END IONS\n")
 
 if nr_ms2_spectra == 0:
