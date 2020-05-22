@@ -1,12 +1,13 @@
 import sys
 import pyopenms
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, \
-        QHBoxLayout, QWidget, QDesktopWidget, \
-        QAction, QFileDialog, QTableView, QSplitter, \
-        QMenu, QAbstractItemView
+    QHBoxLayout, QWidget, QDesktopWidget, \
+    QAction, QFileDialog, QTableView, QSplitter, \
+    QMenu, QAbstractItemView
 from PyQt5.QtCore import Qt, QAbstractTableModel, pyqtSignal, QItemSelectionModel, QSortFilterProxyModel, QSignalMapper, QPoint, QRegExp
 from SpectrumWidget import *
 from ScanTableWidget import ScanTableWidget, ScanTableModel
+
 
 class ScanBrowserWidget(QWidget):
 
@@ -44,9 +45,9 @@ class ScanBrowserWidget(QWidget):
         return exp
 
     def redrawPlot(self):
-        #set new spectrum and redraw
+        # set new spectrum and redraw
         self.spectrum_widget.setSpectrum(self.scan_widget.curr_spec)
-        if self.isAnnoOn: # update annotation list
+        if self.isAnnoOn:  # update annotation list
             self.updateController()
         self.spectrum_widget.redrawPlot()
 

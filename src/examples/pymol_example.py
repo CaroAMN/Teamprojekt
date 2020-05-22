@@ -35,6 +35,7 @@ print("Starting pymol")
 pymol.finish_launching()
 pepxml_file = "data/4D8B.pepXML"
 
+
 def get_peptides_protein_seq():
 
     # Read in PepXML
@@ -55,6 +56,7 @@ def get_peptides_protein_seq():
     """.split())
     return peptides, sequence
 
+
 print("Plotting Protein 4D8B")
 pymol.cmd.window("show")
 pymol.cmd.fetch("4D8B")
@@ -73,11 +75,10 @@ pymol.cmd.color("bluewhite")
 pymol.cmd.bg_color("white")
 pymol.cmd.color("wheat", res_str)
 
-# Do raytracing 
+# Do raytracing
 pymol.cmd.set("orthoscopic")
 pymol.cmd.set("ray_trace_mode", 1)
-pymol.cmd.ray(1920,1440)
+pymol.cmd.ray(1920, 1440)
 
 print("Printing output image")
 pymol.cmd.png("4D8B_coverage_white_5_ray_ortho_mode1.png", dpi=600)
-

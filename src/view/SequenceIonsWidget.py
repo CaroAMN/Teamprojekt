@@ -35,14 +35,15 @@ class SequenceIonsWidget(QWidget):
 
         self._pep.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self._pep.setMinimumSize(SequenceIonsWidget.WIDTH, SequenceIonsWidget.HEIGHT)
-        self.seqIons_layout.addItem(QSpacerItem(40, SequenceIonsWidget.HEIGHT, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum))
+        self.seqIons_layout.addItem(QSpacerItem(
+            40, SequenceIonsWidget.HEIGHT, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum))
         self.seqIons_layout.addWidget(self._pep)
-        self.seqIons_layout.addItem(QSpacerItem(40, SequenceIonsWidget.HEIGHT, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum))
+        self.seqIons_layout.addItem(QSpacerItem(
+            40, SequenceIonsWidget.HEIGHT, QSizePolicy.MinimumExpanding, QSizePolicy.Minimum))
 
         self.setFixedHeight(SequenceIonsWidget.HEIGHT)
         self.mainlayout.addWidget(self.container)
         self.show()
-
 
     def resize(self):
         """
@@ -53,7 +54,8 @@ class SequenceIonsWidget(QWidget):
         if len(self._pep.sequence) == 0:
             SequenceIonsWidget.WIDTH = 0
         else:
-            SequenceIonsWidget.WIDTH = ((len(self._pep.sequence) * 18) + (len(self._pep.sequence) - 1) * 8)
+            SequenceIonsWidget.WIDTH = ((len(self._pep.sequence) * 18) +
+                                        (len(self._pep.sequence) - 1) * 8)
         self.calculateHeight()
 
     def calculateHeight(self):
@@ -118,6 +120,7 @@ class observed_peptide(QWidget):
     red.
 
     """
+
     def __init__(self):
         QWidget.__init__(self)
         self.initUI()
@@ -126,7 +129,8 @@ class observed_peptide(QWidget):
         self.sequence = ""
         self.suffix = {}
         self.prefix = {}
-        self.colors = {"black": QColor(0, 0, 0), "red": QColor(255, 0, 0), "blue": QColor(0, 0, 255)}
+        self.colors = {"black": QColor(0, 0, 0), "red": QColor(
+            255, 0, 0), "blue": QColor(0, 0, 255)}
 
     def setSequence(self, seq):
         self.sequence = seq
@@ -141,7 +145,7 @@ class observed_peptide(QWidget):
         qp = QPainter()
         qp.begin(self)
         qp.setRenderHint(QPainter.Antialiasing)
-        qp.fillRect(event.rect(), QBrush(Qt.white)) # or changed to Qt.white
+        qp.fillRect(event.rect(), QBrush(Qt.white))  # or changed to Qt.white
         self._drawPeptide(qp)
         qp.end()
 
@@ -150,7 +154,6 @@ class observed_peptide(QWidget):
         qp.setPen(self.colors["black"])
         qp.setFont(self.getFont_Pep())
         self._fragmentPeptide(qp)
-
 
     def _fragmentPeptide(self, qp):
         """
@@ -199,29 +202,32 @@ class observed_peptide(QWidget):
                 # position lines for possible ions
                 centerOfLine = ((SequenceIonsWidget.SUFFIX_HEIGHT + height) - height / 4) - 1
 
-                start_linePos = QPointF(start_point + blank - (SPACE / 2), centerOfLine - height / 2 - 2.5)
+                start_linePos = QPointF(start_point + blank - (SPACE / 2),
+                                        centerOfLine - height / 2 - 2.5)
                 end_linePos = QPointF(start_linePos.x(), centerOfLine + height / 2 + 2.5)
 
                 qp.setFont(self.getFont_Ion())
                 metrics_ion = QFontMetricsF(self.getFont_Ion())
 
                 if i in self.prefix:
-                    left_linePos = self._drawIonsLines(qp, start_linePos, end_linePos, SPACE, "prefix")
+                    left_linePos = self._drawIonsLines(
+                        qp, start_linePos, end_linePos, SPACE, "prefix")
                     self._drawPrefixIon(qp, i, metrics_ion, left_linePos)
 
                 # for given line of existing prefix, expand with given suffix
                 if i in self.prefix and i_rev in self.suffix:
-                    right_linePos = self._drawIonsLines(qp, start_linePos, end_linePos, SPACE, "suffix")
+                    right_linePos = self._drawIonsLines(
+                        qp, start_linePos, end_linePos, SPACE, "suffix")
                     self._drawSuffixIon(qp, i_rev, metrics_ion, end_linePos, right_linePos)
 
                 elif i_rev in self.suffix and i not in self.prefix:
-                    right_linePos = self._drawIonsLines(qp, start_linePos, end_linePos, SPACE, "suffix")
+                    right_linePos = self._drawIonsLines(
+                        qp, start_linePos, end_linePos, SPACE, "suffix")
                     self._drawSuffixIon(qp, i_rev, metrics_ion, start_linePos, right_linePos)
 
                 blank += width + SPACE
                 qp.setPen(self._getPen(self.colors["black"]))
                 qp.setFont(self.getFont_Pep())
-
 
     def _drawPrefixIon(self, qp, index, metrics_ion, pos_left):
         qp.setPen(self._getPen(self.colors["blue"]))
