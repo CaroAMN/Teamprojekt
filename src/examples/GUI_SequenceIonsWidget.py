@@ -1,4 +1,3 @@
-from SequenceIonsWidget import SequenceIonsWidget
 import sys
 from PyQt5.QtWidgets import QApplication
 
@@ -6,10 +5,11 @@ import pyopenms
 
 from GUI_EXAMPLE_BASE import GUI_EXAMPLE_BASE
 sys.path.insert(0, '../view')
+from SequenceIonsWidget import SequenceIonsWidget
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = GUI_EXAMPLE_BASE()  # plain QMainWindow with basic layout and menu bar
+    ex = GUI_EXAMPLE_BASE() # plain QMainWindow with basic layout and menu bar
     example_widget = SequenceIonsWidget(ex)
     example_widget.setPeptide("HLDKIDMLKSLD")
     example_widget.setPrefix({1: ["a1", "b1", "c1"], 3: ["a3", "b3", "c3"], 5: ["a3", "b3", "c3"]})
