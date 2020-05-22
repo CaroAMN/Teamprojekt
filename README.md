@@ -1,4 +1,5 @@
 # Woche 2
+https://caroamn.github.io/Teamprojekt/
 
 * Es wurde ein Fork des Repositorys ​ https://github.com/OpenMS/pyopenms-extra​ erstellt und daraus ein neues Teamrepository angelegt.
 
@@ -17,8 +18,30 @@ Anschließend konnten die GUI Komponenten ausgeführt werden.
 ![alt text](Screenshots/ExampleWidgetViewer.png)
 ![alt text](Screenshots/ExampleWidgetViewer2.png)
 
+**Example GUI Hristian**
+
+![alt text](Screenshots/Example3.png)
+![alt text](Screenshots/Example4.png)
+
+**Example GUI Alex**
+![alt text](Screenshots/GUI_Example_Base.png)
+![alt text](Screenshots/GUI_Spectrum_widget.png)
 
 
+## Zusätzliches Problem das Hrisitan und Alex betraf
+
+Es gab Probleme bei der Auführung der GUI Elemente bedingt durch pyopenms. 
+Hristian konnte es "fixen" indem er auf Linux/ Ubuntu gewechselt ist, wo es dann über die
+Konsole funktioniert hat. Über VS Code ging es auch hier weiterhin nicht, da das Problem ja 
+trotzdem weiterhin bestand. 
+Ich (Alex) habe es auf Windows weiter versucht und habe dann in einem Forum die Lösung gefunden.
+Die libraries QT5Network und Qt5Core waren veraltet. Durch Überschreiben der Selbigen aus PyQt5 
+konnte das Problem gelöst werden. 
+Der Zeitaufwand bis es irgendwann gelöst war lag locker bei sieben Stunden. Frustrierend.
+Die entsprechenden Fehlermeldung hier:
+
+**Fehlermeldungen durch veraltete Libraries**
+![alt text](Screenshots/loading-PpyOpenMS-libraries-Fehler.png)
 
 
 
