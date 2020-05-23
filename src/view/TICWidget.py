@@ -24,7 +24,7 @@ class TICWidget(PlotWidget):
                                      region by dragging a horizontal line. The signal returns the start and end
                                      RT values within the region.
     ===============================  =============================================================================
-    """
+    """  # noqa: E501S
 
     sigRTClicked = pyqtSignal(float, name="sigRTClicked")
     sigSeleRTRegionChangeFinished = pyqtSignal(
@@ -89,7 +89,7 @@ class TICWidget(PlotWidget):
         Used to adjust y axis with the maximal y value from the current RT values. Also, redraws peak labels
         depending on the current displayed RT values.
 
-        """
+        """  # noqa: E501
         x_range = self.getAxis("bottom").range
         if x_range == [0, 1]:  # workaround for axis sometimes not being set
             x_range = [np.amin(self._rts), np.amax(self._rts)]
@@ -102,7 +102,7 @@ class TICWidget(PlotWidget):
         """
         :param xrange: A list of [min, max] bounding RT values.
         :return: An float value representing the maximal intensity current x range.
-        """
+        """  # noqa: E501
         left = np.searchsorted(self._rts, xrange[0], side="left")
         right = np.searchsorted(self._rts, xrange[1], side="right")
         self._currentIntensitiesInRange = self._ints[left:right]
@@ -119,7 +119,7 @@ class TICWidget(PlotWidget):
         it compares peak values against each other until it founds a maximal turning point.
 
         :return: A numpy array containing all peak indices, sorted descending (max first -> min last).
-        """
+        """  # noqa: E501
         data = self._ints
         maxIndices = np.zeros_like(data)
         peakValue = -np.inf
@@ -172,7 +172,7 @@ class TICWidget(PlotWidget):
 
         :param label_id: Represents index of peak position in peak_indices.
         :return: A boolean indicating if there is a clash or not.
-        """
+        """  # noqa: E501
         new_label = label_id
         clash = False
 
@@ -221,7 +221,7 @@ class TICWidget(PlotWidget):
         Function draws peak labels, starting with the maximal peak to the minimal peak. In each addition possible
         label clashes will be calculated, if so then delete label.
 
-        """
+        """  # noqa: E501
         if self._peak_labels == {}:
             for index in self._peak_indices:
                 if self._ints[index] in self._currentIntensitiesInRange:

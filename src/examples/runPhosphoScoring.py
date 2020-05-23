@@ -61,7 +61,7 @@ def mapPeptideIdsToSpectra(peptide_ids, exp, matching_mass_tol=1.0):
 filtered_ids = [
     p for p in peptide_ids if p.getHits()[0].getScore() > cutoff_score
 ]
-# For teaching purposes, only ids betwen 1200 and 1600 s in RT are kept (also the spectra are filtered)
+# For teaching purposes, only ids betwen 1200 and 1600 s in RT are kept (also the spectra are filtered) # noqa: E501
 
 
 filtered_ids = [
@@ -70,7 +70,7 @@ filtered_ids = [
     if p.getMetaValue("RT") > 1200 and p.getMetaValue("RT") < 1600
 ]
 print(
-    "==========================================================================="
+    "==========================================================================="  # noqa: E501
 )
 print(
     "Filtered: kept %s ids below the cutoff score of %s out of %s"
@@ -87,7 +87,7 @@ hit_mapping = mapPeptideIdsToSpectra(filtered_ids, exp)
 
 # Writer CSV header
 print(
-    "Will print the original, search-engine sequence, the AScore sequence and the PhosphoScorerSimple sequence"
+    "Will print the original, search-engine sequence, the AScore sequence and the PhosphoScorerSimple sequence"  # noqa: E501
 )
 writer.writerow(
     [

@@ -26,7 +26,7 @@ class RTUnitDelegate(QItemDelegate):
     Displays the minute values of the RT besides the RT values given in seconds. Through the delegate the RT values in
     the table are not changed, only difference is the display of the data in table_view. s
 
-    """
+    """  # noqa: E501
 
     def __init__(self, parent, *args):
         super(RTUnitDelegate, self).__init__(parent, *args)
@@ -64,7 +64,7 @@ class ScanTableWidget(QWidget):
                                      data.
 
     ===============================  =============================================================================
-    """
+    """  # noqa: E501
 
     sigScanClicked = pyqtSignal(QModelIndex, name="scanClicked")
 
@@ -204,7 +204,7 @@ class ScanTableWidget(QWidget):
 class ScanTableModel(QAbstractTableModel):
     """
         TODO: directly read model data from MSExperiment to remove copies
-    """
+    """  # noqa: E501
 
     def __init__(self, parent, ms_experiment, header, *args):
         QAbstractTableModel.__init__(self, parent, *args)

@@ -39,7 +39,7 @@ if __name__ == '__main__':
     example_widget.setTIC(exp.getTIC())
     mouse_click_test = TestMouseClick()
     example_widget.sigRTClicked.connect(mouse_click_test.printRT)
-    example_widget.sigSeleRTRegionChangeFinished.connect(mouse_click_test.printRTBounds)
+    example_widget.sigSeleRTRegionChangeFinished.connect(mouse_click_test.printRTBounds)  # noqa: E501
     ex.setExampleWidget(example_widget)
     ex.show()
     sys.exit(app.exec_())

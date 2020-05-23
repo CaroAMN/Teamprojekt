@@ -91,7 +91,7 @@ class SpectrumWidget(PlotWidget):
         if x_range == [
             0,
             1,
-        ]:  # workaround for axis sometimes not being set TODO: check if this is resovled
+        ]:  # workaround for axis sometimes not being set TODO: check if this is resovled # noqa: E501
             x_range = [np.amin(self._mzs), np.amax(self._mzs)]
         self.currMaxY = self._getMaxIntensityInRange(x_range)
         if self.currMaxY:
@@ -233,7 +233,7 @@ class SpectrumWidget(PlotWidget):
                     color=(100, 100, 100),
                     anchor=(0.5, 1.5),
                 )
-                # ignore bounds to prevent rescaling of axis if the text item touches the border
+                # ignore bounds to prevent rescaling of axis if the text item touches the border # noqa: E501
                 self.addItem(self.highlighted_peak_label, ignoreBounds=True)
             self.highlighted_peak_label.setText("{0:.3f}".format(x))
             self.highlighted_peak_label.setPos(x, y)

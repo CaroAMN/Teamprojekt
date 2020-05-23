@@ -17,7 +17,7 @@ class SequenceIonsWidget(QWidget):
     Used for creates a window for a peptide sequence with its given ions, which is adjusted to the sequence size.
     To avoid contortions of the window, spaceritems are added.
 
-    """
+    """  # noqa: E501
 
     HEIGHT = 0
     WIDTH = 0
@@ -74,7 +74,7 @@ class SequenceIonsWidget(QWidget):
         The integer 8 represents the additional space needed for the in addition drawn lines. The 18 represents the
         monospace width.
 
-        """
+        """  # noqa: E501
         if len(self._pep.sequence) == 0:
             SequenceIonsWidget.WIDTH = 0
         else:
@@ -88,7 +88,7 @@ class SequenceIonsWidget(QWidget):
         Calculate window height adjusting to sequence height with possible ions and set default setting in case of no
         ions.
 
-        """
+        """  # noqa: E501
         prefix = self._pep.prefix
         suffix = self._pep.suffix
 
@@ -152,7 +152,7 @@ class observed_peptide(QWidget):
     a1, b1. Each amino letter is also separated by a line and prefixes are colored blue, otherwise suffixes are colored
     red.
 
-    """
+    """  # noqa: E501
 
     def __init__(self):
         QWidget.__init__(self)
@@ -212,7 +212,7 @@ class observed_peptide(QWidget):
 
             Because of changing the fonts for the ions, the fonts needs to be reset.
 
-        """
+        """  # noqa: E501
         SPACE = 8
 
         if self.sequence != "":

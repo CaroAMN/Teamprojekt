@@ -36,7 +36,7 @@ class ErrorWidget(PlotWidget):
         :param colors: An numpy array of colors consisting of red and blue (representing prefix -> blue and suffix
         -> red ions)
 
-        """
+        """  # noqa: E501
         self._mzs = mz
         self._ppm = ppm
         self._color_lib = colors
