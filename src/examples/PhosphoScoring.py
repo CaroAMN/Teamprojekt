@@ -95,20 +95,28 @@ class PhosphoScorerSimple:
         charge = 1
         # Iterate over all possible phosphosites
         for m in re.finditer("[STY]", seq):
-            new_sequence = seq[:m.start()+1] + "(Phospho)" + seq[m.start()-1:]
+            new_sequence = (
+                seq[: m.start() + 1] + "(Phospho)" + seq[m.start() - 1 :]
+            )
             new_aaseq = pyopenms.AASequence(new_sequence)
             # Generate theoretical spectrum
             spectrum_generator = pyopenms.TheoreticalSpectrumGenerator()
             rs = pyopenms.RichMSSpectrum()
             try:
                 spectrum_generator.addPeaks(
-                    rs, new_aaseq, pyopenms.Residue.ResidueType.YIon, charge)
+                    rs, new_aaseq, pyopenms.Residue.ResidueType.YIon, charge
+                )
                 spectrum_generator.addPeaks(
-                    rs, new_aaseq, pyopenms.Residue.ResidueType.BIon, charge)
+                    rs, new_aaseq, pyopenms.Residue.ResidueType.BIon, charge
+                )
             except AttributeError:
                 # 1.11
-                spectrum_generator.addPeaks(rs, new_aaseq, pyopenms.ResidueType.YIon, charge)
-                spectrum_generator.addPeaks(rs, new_aaseq, pyopenms.ResidueType.BIon, charge)
+                spectrum_generator.addPeaks(
+                    rs, new_aaseq, pyopenms.ResidueType.YIon, charge
+                )
+                spectrum_generator.addPeaks(
+                    rs, new_aaseq, pyopenms.ResidueType.BIon, charge
+                )
             theor = convertToMSSpectrum(rs)
             theor_b = self.binSpectrum(theor)
             # Compare theoretical spectrum to experimental spectrum
@@ -125,15 +133,16 @@ class PhosphoScorerSimple:
         The two binned spectra should be created by a call to binSpectrum."""
 
         start = max(min(sp1.keys()), min(sp2.keys()))
-        end = min(max(sp1.keys()), max(sp2.keys()))+1
+        end = min(max(sp1.keys()), max(sp2.keys())) + 1
 
         # Normalize input
         import math
-        magnitude1 = math.sqrt(sum([v*v for v in sp1.values()]))
-        magnitude2 = math.sqrt(sum([v*v for v in sp2.values()]))
 
-        sp1_norm = dict([(k, v/magnitude1) for k, v in sp1.iteritems()])
-        sp2_norm = dict([(k, v/magnitude2) for k, v in sp2.iteritems()])
+        magnitude1 = math.sqrt(sum([v * v for v in sp1.values()]))
+        magnitude2 = math.sqrt(sum([v * v for v in sp2.values()]))
+
+        sp1_norm = dict([(k, v / magnitude1) for k, v in sp1.iteritems()])
+        sp2_norm = dict([(k, v / magnitude2) for k, v in sp2.iteritems()])
 
         # Compute similarity score
         score = 0
@@ -148,12 +157,13 @@ class PhosphoScorerSimple:
         mz = sp.get_peaks()[:, 0]
         bins = {}
         start = int(min(mz))
-        end = int(max(mz))+1
+        end = int(max(mz)) + 1
         for i in range(start, end):
-            bins[i] =  \
-                sum([p[1] for p in peaks if int(p[0]) == i])
+            bins[i] = sum([p[1] for p in peaks if int(p[0]) == i])
         return bins
 
 
 if __name__ == "__main__":
-    print("This file is intended as library and not as Python executable, please do not execute it directly.")
+    print(
+        "This file is intended as library and not as Python executable, please do not execute it directly."
+    )

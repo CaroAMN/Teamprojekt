@@ -31,6 +31,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # Example of displaying a Streptococcal protein and showing peptide coverage
 import pymol
 import pyopenms
+
 print("Starting pymol")
 pymol.finish_launching()
 pepxml_file = "data/4D8B.pepXML"
@@ -42,10 +43,13 @@ def get_peptides_protein_seq():
     protein_ids = []
     peptide_ids = []
     pyopenms.PepXMLFile().load(pepxml_file, protein_ids, peptide_ids)
-    peptides = [pid.getHits()[0].getSequence().toString() for pid in peptide_ids]
+    peptides = [
+        pid.getHits()[0].getSequence().toString() for pid in peptide_ids
+    ]
 
     # Sequence could be from FASTA file (or just provided here)
-    sequence = "".join("""
+    sequence = "".join(
+        """
     MNKKKLGIRLLSLLALGGFVLANPVFADQNFARNEKEAKDSAITFIQKSAAIKAGARSAE
     DIKLDKVNLGGELSGSNMYVYNISTGGFVIVSGDKRSPEILGYSTSGSFDANGKENIASF
     MESYVEQIKENKKLDTTYAGTAEIKQPVVKSLLNSKGIHYNQGNPYNLLTPVIEKVKPGE
@@ -53,7 +57,8 @@ def get_peptides_protein_seq():
     NWNNILPTYSGRESNVQKMAISELMADVGISVDMDYGPSSGSAGSSRVQRALKENFGYNQ
     SVHQINRSDFSKQDWEAQIDKELSQNQPVYYQGVGKVGGHAFVIDGADGRNFYHVNWGWG
     GVSDGFFRLDALNPSALGTGGGAGGFNGYQSAVVGIKP
-    """.split())
+    """.split()
+    )
     return peptides, sequence
 
 
