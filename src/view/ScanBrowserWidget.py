@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QAbstractTableModel, pyqtSignal  # noqa: F401
 from PyQt5.QtCore import QItemSelectionModel   # noqa: F401
 from PyQt5.QtCore import QSignalMapper, QPoint, QRegExp  # noqa: F401
 from PyQt5.QtCore import QSortFilterProxyModel  # noqa: F401
-from SpectrumWidget import *
+from SpectrumWidget import *  # noqa: F403
 from ScanTableWidget import ScanTableWidget, ScanTableModel  # noqa: F401
 
 

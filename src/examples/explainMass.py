@@ -1,9 +1,10 @@
-import pyopenms
-from pyopenms import *
+import pyopenms  # noqa: F401
+from pyopenms import *  # noqa: F403
 import sys
 
 # Example for mass decomposition (mass explanation)
-# Internal residue masses (as observed e.g. as mass shifts in tandem mass spectra) # noqa: E501
+# Internal residue masses (as observed e.g.
+# as mass shifts in tandem mass spectra)
 # are decomposed in possible amino acid strings that match in mass.
 
 mass = float(sys.argv[1])  # provide mass as first command line parameter
@@ -19,7 +20,8 @@ for r in residues:
 
 print("Mass explanations by fast algorithm:")
 # fast algorithm based on integer mass decomposition
-# returns a unique set of compositions (e.g.: only one of 'TSG' and 'GST' is reported) # noqa: E501
+# returns a unique set of compositions
+# (e.g.: only one of 'TSG' and 'GST' is reported)
 md_alg = MassDecompositionAlgorithm()
 param = md_alg.getParameters()
 param.setValue("tolerance", 0.05)

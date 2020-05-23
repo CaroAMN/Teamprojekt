@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import (
 
 
 import pyqtgraph as pg
-from pyqtgraph import PlotWidget
+from pyqtgraph import PlotWidget  # noqa: F401
 
 from collections import namedtuple
 

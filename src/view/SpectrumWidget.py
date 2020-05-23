@@ -91,7 +91,8 @@ class SpectrumWidget(PlotWidget):
         if x_range == [
             0,
             1,
-        ]:  # workaround for axis sometimes not being set TODO: check if this is resovled # noqa: E501
+        ]:  # workaround for axis sometimes not being set TODO:
+            # check if this is resovled
             x_range = [np.amin(self._mzs), np.amax(self._mzs)]
         self.currMaxY = self._getMaxIntensityInRange(x_range)
         if self.currMaxY:

@@ -1,4 +1,4 @@
-from pyopenms import *
+from pyopenms import *  # noqa: F403
 
 # Initialize Experiment
 exp = MSExperiment()
