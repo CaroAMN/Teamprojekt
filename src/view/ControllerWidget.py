@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QHBoxLayout, QWidget, QSplitter
 from PyQt5.QtCore import Qt
 
 from SpectrumWidget import SpectrumWidget
-from ScanTableWidget import ScanTableWidget, ScanTableModel
+from ScanTableWidget import ScanTableWidget, ScanTableModel  # noqa: F401
 from SequenceIonsWidget import SequenceIonsWidget
 from TICWidget import TICWidget
 from ErrorWidget import ErrorWidget

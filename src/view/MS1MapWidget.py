@@ -1,6 +1,8 @@
-import sys
-import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHBoxLayout, QWidget, QAction
+import sys  # noqa: F401
+import os  # noqa: F401
+from PyQt5.QtWidgets import QApplication  # noqa: F401
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout  # noqa: F401
+from PyQt5.QtWidgets import QHBoxLayout, QWidget, QAction  # noqa: F401
 
 import pyqtgraph as pg
 from pyqtgraph import PlotWidget
@@ -55,7 +57,8 @@ class MS1MapWidget(PlotWidget):
 
         # Set a custom color map
         pos = np.array([0., 0.01, 0.05, 0.1, 1.])
-        color = np.array([(255, 255, 255, 0), (255, 255, 0, 255), (255, 0, 0, 255),
+        color = np.array([(255, 255, 255, 0),
+                          (255, 255, 0, 255), (255, 0, 0, 255),
                           (0, 0, 255, 255), (0, 0, 0, 255)], dtype=np.ubyte)
         cmap = pg.ColorMap(pos, color)
         img.setLookupTable(cmap.getLookupTable(0.0, 1.0, 256))
