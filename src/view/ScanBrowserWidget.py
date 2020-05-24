@@ -1,12 +1,16 @@
-import sys
+import sys  # noqa: F401
 import pyopenms
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, \
-    QHBoxLayout, QWidget, QDesktopWidget, \
-    QAction, QFileDialog, QTableView, QSplitter, \
-    QMenu, QAbstractItemView
-from PyQt5.QtCore import Qt, QAbstractTableModel, pyqtSignal, QItemSelectionModel, QSortFilterProxyModel, QSignalMapper, QPoint, QRegExp
-from SpectrumWidget import *
-from ScanTableWidget import ScanTableWidget, ScanTableModel
+from PyQt5.QtWidgets import QApplication, QMainWindow  # noqa: F401
+from PyQt5.QtWidgets import QHBoxLayout, QWidget, QDesktopWidget  # noqa: F401
+from PyQt5.QtWidgets import QAction, QFileDialog  # noqa: F401
+from PyQt5.QtWidgets import QTableView, QSplitter  # noqa: F401
+from PyQt5.QtWidgets import QMenu, QAbstractItemView, QVBoxLayout  # noqa: F401
+from PyQt5.QtCore import Qt, QAbstractTableModel, pyqtSignal  # noqa: F401
+from PyQt5.QtCore import QItemSelectionModel   # noqa: F401
+from PyQt5.QtCore import QSignalMapper, QPoint, QRegExp  # noqa: F401
+from PyQt5.QtCore import QSortFilterProxyModel  # noqa: F401
+from SpectrumWidget import *  # noqa: F403
+from ScanTableWidget import ScanTableWidget, ScanTableModel  # noqa: F401
 
 
 class ScanBrowserWidget(QWidget):
@@ -28,7 +32,7 @@ class ScanBrowserWidget(QWidget):
         scans = self.readMS(file_path)
 
         # set Widgets
-        self.spectrum_widget = SpectrumWidget()
+        self.spectrum_widget = SpectrumWidget()  # noqa: F405
         self.scan_widget = ScanTableWidget(scans)
         self.scan_widget.scanClicked.connect(self.redrawPlot)
         self.msexperimentWidget.addWidget(self.spectrum_widget)

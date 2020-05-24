@@ -127,7 +127,7 @@ class ScanTableWidget(QWidget):
         # default : first row selected. in OpenMSWidgets
 
     def onRowSelected(self, index):
-        if index.siblingAtColumn(1).data() == None:
+        if index.siblingAtColumn(1).data() is None:
             return  # prevents crash if row gets filtered out
         self.curr_spec = self.ms_experiment.getSpectrum(
             index.siblingAtColumn(1).data()

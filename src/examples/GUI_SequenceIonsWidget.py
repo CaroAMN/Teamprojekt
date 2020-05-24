@@ -2,7 +2,7 @@ from SequenceIonsWidget import SequenceIonsWidget
 import sys
 from PyQt5.QtWidgets import QApplication
 
-import pyopenms
+import pyopenms  # noqa: F401
 
 from GUI_EXAMPLE_BASE import GUI_EXAMPLE_BASE
 

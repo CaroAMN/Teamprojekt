@@ -1,7 +1,8 @@
 ###########################################################################
 # Biological example of phosphopeptide-scoring
 ###########################################################################
-from PhosphoScoring import convertToRichMSSpectrum, convertToMSSpectrum
+from PhosphoScoring import convertToRichMSSpectrum  # noqa: F401
+from PhosphoScoring import convertToMSSpectrum  # noqa: F401
 from PhosphoScoring import PhosphoScorerSimple, PhosphoScorerAScore
 import pyopenms
 import csv
@@ -50,7 +51,7 @@ def mapPeptideIdsToSpectra(peptide_ids, exp, matching_mass_tol=1.0):
                 < matching_mass_tol
             ):
                 hit_mapping[i] = corresponding_spectrum
-        if not hit_mapping.has_key(i):
+        if not hit_mapping.has_key(i):  # noqa: W601
             print("Could not map hit at RT %s and MZ %s" % (rt, mz))
     return hit_mapping
 
@@ -61,7 +62,8 @@ def mapPeptideIdsToSpectra(peptide_ids, exp, matching_mass_tol=1.0):
 filtered_ids = [
     p for p in peptide_ids if p.getHits()[0].getScore() > cutoff_score
 ]
-# For teaching purposes, only ids betwen 1200 and 1600 s in RT are kept (also the spectra are filtered) # noqa: E501
+# For teaching purposes, only ids betwen 1200 and 1600 s in RT
+# are kept (also the spectra are filtered)
 
 
 filtered_ids = [
