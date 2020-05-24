@@ -9,7 +9,7 @@ Hristian hat die Aufgabe bekommen nach geeignete tools im Internet zu suchen. Da
 
 **Aufgabe 3**
 PR gegen das upstream pyopenms-extra repository
-![alt text](Screenshots/PR_auf_pyopenms-extra.png)
+![alt text](Screenshots/PR_auf_pyopenms-extra.jpeg)
 
 
 **Aufgabe 4**
