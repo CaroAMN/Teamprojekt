@@ -1,0 +1,13 @@
+Metadata-Version: 1.2
+Name: Teamprojekt-Caro-Hristian-Alex
+Version: 0.0.1
+Summary: Erster Versuch eines packages
+Home-page: https://github.com/CaroAMN/Teamprojekt
+Author: Caro_Hristian_Alex
+Author-email: author@example.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6

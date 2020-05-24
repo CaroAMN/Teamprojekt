@@ -27,15 +27,16 @@ OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
 WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
 OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-"""
+"""  # noqa: E501
 ###########################################################################
-## Example script to convert any file to MGF
+# Example script to convert any file to MGF
 ###########################################################################
 
 # Read input
-import pyopenms, sys
+import pyopenms
+import sys
 if len(sys.argv) <= 2:
-    print "Usage: convertToMGF.py inputfile outputfile"
+    print("Usage: convertToMGF.py inputfile outputfile")
     sys.exit()
 
 msdata = pyopenms.MSExperiment()
@@ -66,8 +67,8 @@ for spectrum in msdata:
     except IndexError:
         outfile.write("PEPMASS=unknown\n")
     for peak in spectrum:
-        outfile.write("%s %s\n" % (peak.getMZ(), peak.getIntensity() ))
+        outfile.write("%s %s\n" % (peak.getMZ(), peak.getIntensity()))
     outfile.write("END IONS\n")
 
 if nr_ms2_spectra == 0:
-    print("Did not find any MS2 spectra in your input, thus the output file is empty!")
+    print("Did not find any MS2 spectra in your input, thus the output file is empty!")  # noqa: E501
