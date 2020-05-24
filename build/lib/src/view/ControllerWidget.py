@@ -28,9 +28,10 @@ LadderAnnoStruct = namedtuple(
 
 class ControllerWidget(QWidget):
     """
-    Used to merge spectrum, table, TIC, error plot and sequenceIons widgets together.
+    Used to merge spectrum, table, TIC,
+    error plot and sequenceIons widgets together.
 
-    """  # noqa: E501
+    """
 
     def __init__(self, *args, **kwargs):
         QWidget.__init__(self, *args, **kwargs)

@@ -32,7 +32,7 @@ class ScanBrowserWidget(QWidget):
         scans = self.readMS(file_path)
 
         # set Widgets
-        self.spectrum_widget = SpectrumWidget()
+        self.spectrum_widget = SpectrumWidget()  # noqa: F405
         self.scan_widget = ScanTableWidget(scans)
         self.scan_widget.scanClicked.connect(self.redrawPlot)
         self.msexperimentWidget.addWidget(self.spectrum_widget)

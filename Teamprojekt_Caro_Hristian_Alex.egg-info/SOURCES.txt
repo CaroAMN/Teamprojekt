@@ -5,7 +5,6 @@ Teamprojekt_Caro_Hristian_Alex.egg-info/SOURCES.txt
 Teamprojekt_Caro_Hristian_Alex.egg-info/dependency_links.txt
 Teamprojekt_Caro_Hristian_Alex.egg-info/top_level.txt
 docs/__init__.py
-docs/tester.py
 docs/source/__init__.py
 docs/source/conf.py
 docs/source/_static/__init__.py
