@@ -8,7 +8,7 @@ from ScanTableWidget import ScanTableWidget, ScanTableModel
 from SequenceIonsWidget import SequenceIonsWidget
 from TICWidget import TICWidget
 from ErrorWidget import ErrorWidget
-
+from TestTable import TestTable
 import pyopenms
 import re
 import numpy as np
@@ -57,6 +57,7 @@ class ControllerWidget(QWidget):
         self.seqIons_widget = SequenceIonsWidget()
         self.error_widget = ErrorWidget()
         self.tic_widget = TICWidget()
+        self.test_table = TestTable()
         self.drawTic(scans)
 
         # connected signals
@@ -67,14 +68,14 @@ class ControllerWidget(QWidget):
         self.msexperimentWidget.addWidget(self.seqIons_widget)
         self.msexperimentWidget.addWidget(self.spectrum_widget)
         self.msexperimentWidget.addWidget(self.error_widget)
+        self.msexperimentWidget.addWidget(self.test_table)
         self.msexperimentWidget.addWidget(self.scan_widget)
-        # self.msexperimentWidget.addWidget(self.scan_widget)
         self.mainlayout.addWidget(self.msexperimentWidget)
 
         # set widget sizes, where error plot is set smaller
         widget_height = self.msexperimentWidget.sizeHint().height()
         size_list = [widget_height, widget_height,
-                     widget_height, widget_height * 0.5, widget_height]
+                     widget_height, widget_height * 0.5, widget_height, widget_height]
         self.msexperimentWidget.setSizes(size_list)
 
         # default : first row selected.
