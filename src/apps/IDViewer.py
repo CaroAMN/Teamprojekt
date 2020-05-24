@@ -1,4 +1,3 @@
-from ControllerWidget import ControllerWidget
 import sys
 import os
 from PyQt5.QtWidgets import (
@@ -18,7 +17,7 @@ from pyqtgraph import PlotWidget  # noqa: F401
 from collections import namedtuple
 
 sys.path.insert(0, "../view")
-
+from ControllerWidget import ControllerWidget
 
 # structure for annotation (here for reference)
 PeakAnnoStruct = namedtuple(
