@@ -1,6 +1,6 @@
 # Woche 4-5 (über Pfingsten)
 
-## Das repo wurde auf dem master branch bereinigt und auf den Stand vom 15. Mai zurückgesetzt, sodass es updates vom master:pyopenms-extra entgegen nehmen kann.
+Das repo wurde auf dem master branch bereinigt und auf den Stand vom 15. Mai zurückgesetzt, sodass es updates vom master:pyopenms-extra entgegen nehmen kann.
 
 ## Die Gruppe hatte die Aufgabe 1 zu erledigen 
 
