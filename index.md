@@ -5,10 +5,13 @@
 ## Die Gruppe hatte die Aufgabe 1 zu erledigen 
 
 ## Aufgabe 1
+...
 
 ## Aufgabe 2
+...
 
 ## Aufgabe 3
+...
 
 
 
