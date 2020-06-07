@@ -14,7 +14,7 @@ Bei diese Aufgabe hat sich die Gruppe entschieden Radiobuttons zu benutzen die j
 Bei diese Aufgabe hat die Gruppe die meisten Schwierigkeiten. Die Idee ist gesuchte Sequenz-Teile in der Ausgabe zu markieren(z.B durch Farbe) und zusätzlich sollte es möglich sein mit der Maus teile aus der Squenz zu markieren und zu Färben. Dabei waren die 2 Hauptprobleme
 1. Die Markerte Stelle in der Sqeuenz als information im Code zu bekommen
 2. Die Strings zu färben, es wurde zum Zeitpunkt dieser Dokumentation keine funktion gefunden , die die Strings färben kann
-
+Das 2 Problem wurde von Caro und Hristian gelöst. Die Ausgabe wird nun nicht mehr über QPlainTextedit gemacht sondern mit QTextEdit. QTextEdit hat die Methode .SetTextColot die QColor als Argument bekommt und die Textfarbe von den nächsten hinzugefügten String ändert. Somit wurde das GUI um ein weiteres Feature erweitert indem die gesuchte Proteinsequenz in der Ausgabe rot markiert wird.
 
 
 
