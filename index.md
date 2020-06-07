@@ -5,13 +5,15 @@ Das repo wurde auf dem master branch bereinigt und auf den Stand vom 15. Mai zur
 ## Die Gruppe hatte die Aufgabe 1 zu erledigen 
 
 ## Aufgabe 1
-...
-
+Hristian hat das Hauptgerüst des Mainwindows erstellt und das Layout erstellt.Danach wurden von ihm searchbars und buttons ersellt. Die Buttons wurden verbunden und implementiert mit die jeweiligen Funktionen die aus der logic Datei die Alex erstellt hat. Das Layout wurde mehmals angepsst, weil die Gruppe in laufe der 2 Wochen das Design immer wieder verbseert hat.Die ursprungliche Idee war die gesuchten Proteine in eine Tabelle zu zeigen. Dementschprechend wurde am anfang ein QGridLayout benutzt. Nach den Vorlschalg von den Tutoren wurde das Design verändert und die Tabelle wurde ersetzt durch ein Treeview der von Caro implementiert wurde. Hristian hat das Layout auf eine QVBoxLayout geändert der zusätzlich 3 QHBoxLayouts enthält. Somit wurde eine Strukturiertes Aussehen ereicht. Die Tutoren haben ebenso vorgeschlagen eine dynamische Suche zu implementieren. Das bedeutet das man auch Präfixe von Protein Accessions als Eingabe für eine Suche benutzen kann und alle Proteine zeigt die diese Präfixe haben. Nach dem Alex die Funktionen in der Logic angepasst hat wurden sie von Hristian in das UI implementiert und das Treeview wurde mit eine for Schleife erweitert. Somit werden jetzt alle Proteine auf das Fenster angezeigt.  
 ## Aufgabe 2
-...
+Bei diese Aufgabe hat sich die Gruppe entschieden Radiobuttons zu benutzen die jeweils eine Input-Möglichkeit darstellen. Die 3 Möglichkeiten sind ID(Protein accession) Sequenz und Proteinname. Zusätlich wurde ein Chekbox hinzugefügt der ermöglicht nach den Decoy Proteine zu suchen. Diese kann an und ausgemacht werden. Die Radiobuttons und das Checkbox wurden von Hristian implementiert. Zusätzlich wurden von Hrisitan Error Messages implmentiert für flasches Eingaben oder für gar keine Eingaben sowie ein Load button und eine load Funktion mit der man die Datei auswählen kann und der Pfad dazu kopiert wird.
 
 ## Aufgabe 3
 ...
+Bei diese Aufgabe hat die Gruppe die meisten Schwierigkeiten. Die Idee ist gesuchte Sequenz-Teile in der Ausgabe zu markieren(z.B durch Farbe) und zusätzlich sollte es möglich sein mit der Maus teile aus der Squenz zu markieren und zu Färben. Dabei waren die 2 Hauptprobleme
+1. Die Markerte Stelle in der Sqeuenz als information im Code zu bekommen
+2. Die Strings zu färben, es wurde zum Zeitpunkt dieser Dokumentation keine funktion gefunden , die die Strings färben kann
 
 
 
