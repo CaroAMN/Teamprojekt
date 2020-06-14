@@ -1,3 +1,17 @@
+# Woche 6
+## Aufgabe 1
+
+Hristian hat einen Label hinzugefügt der anzeigt ob eine Datei geladen wurde. Es wurde ein Bug von Alex gefunden auf Windows. Beim laden der Datei wenn man auf schließen drückt, wird das gesamte Program geschloßen. Auf Ubuntu läuft das Program weiter.
+
+## Aufgabe 2
+Hristian hat die Klasse in der Gui Dokumentiert und Kmmentiert nach den NumPy/SciPy Standard
+![alt text](Screenshots/docclass.png)
+
+[alt text](Screenshots/docmethoden.png)
+
+
+
+
 # Woche 4-5 (über Pfingsten)
 
 Das repo wurde auf dem master branch bereinigt und auf den Stand vom 15. Mai zurückgesetzt, sodass es updates vom master:pyopenms-extra entgegen nehmen kann.
