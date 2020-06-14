@@ -4,10 +4,11 @@
 Hristian hat einen Label hinzugefügt der anzeigt ob eine Datei geladen wurde. Es wurde ein Bug von Alex gefunden auf Windows. Beim laden der Datei wenn man auf schließen drückt, wird das gesamte Program geschloßen. Auf Ubuntu läuft das Program weiter.
 
 ## Aufgabe 2
-Hristian hat die Klasse in der Gui Dokumentiert und Kmmentiert nach den NumPy/SciPy Standard
+Hristian hat die Klasse in der Gui Dokumentiert und Kommentiert nach den NumPy/SciPy Standard
 ![alt text](Screenshots/docclass.png)
 
-[alt text](Screenshots/docmethoden.png)
+
+![alt text](Screenshots/docmethoden.png)
 
 
 
