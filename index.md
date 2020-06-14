@@ -7,6 +7,11 @@ Hristian hat einen Label hinzugefügt der anzeigt ob eine Datei geladen wurde. E
 Hristian hat die Klasse in der Gui Dokumentiert und Kommentiert nach den NumPy/SciPy Standard
 ![alt text](Screenshots/docclass.png)
 
+## Allgemeines
+- Logik wurde auseinandergenommen für die DECOY Sequenzen. Dadurch ist ein Fehler in der Logik selbst aufgetreten, da es Proteine ohne Proteinsequenz gibt, welche den counter für das neue Setzen des Pointers in der Datei nicht berücksichtigt haben, da der Fall eben nicht durch den if-case gelaufen ist. Daher kam es in den Listen zu Verschiebungen und darauf folgend zu falschen Ausgaben.
+
+- GUI wurde in drei Methoden umgeschrieben, entsprechend welche Auswahl getroffen wurde für die Suche. Für sowohl bessere Lesbarkeit des Codes wie auch darauf folgend besseres Debugging. 
+
 
 ![alt text](Screenshots/docmethoden.png)
 
