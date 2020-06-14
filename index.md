@@ -12,7 +12,7 @@ Hristian hat die Klasse in der Gui Dokumentiert und Kommentiert nach den NumPy/S
 
 - GUI wurde in drei Methoden umgeschrieben, entsprechend welche Auswahl getroffen wurde für die Suche. Für sowohl bessere Lesbarkeit des Codes wie auch darauf folgend besseres Debugging. 
 
-![alt text](Screenshots/docclass.png)
+![alt text](Screenshots/Fehler_mit_fileTell.png)
 
 
 ![alt text](Screenshots/docmethoden.png)
