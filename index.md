@@ -1,10 +1,11 @@
 # Woche 6
-##Veränderung am GUI
+## Veränderung am GUI
 * Es wurde ein Label hinzugefügt, welches anzeigt ob eine Datei geladen ist. (Hrisitan)
 
 ![alt text](Screenshots/Data-not-loaded-label.png)
 
 * GUI wurde in drei Methoden umgeschrieben, entsprechend welche Auswahl getroffen wurde für die Suche. Für sowohl bessere Lesbarkeit des Codes wie auch darauf folgend besseres Debugging(Hrisitan).
+
 ![alt text](Screenshots/Fehler_mit_fileTell.png)
 
 ![alt text](Screenshots/docmethoden.png)
@@ -22,7 +23,7 @@
 
 ![alt text](Screenshots/docclass.png)
 
-##Veränderungen an der Logik
+## Veränderungen an der Logik
 * Die Logik wurde überarbeitet da es Probleme gab die Decoy Sequenzen richtig auszugeben. Das Problem wurde behoben in dem es nun extra Listen für diese Sequenzen gibt und sie somit sauber von den anderen Sequenzen getrennt sind(Alex).
 
 * Es ist uns aufgefallen das die Logik noch einen größeren Fehler aufwies, der jedoch nur Sichtbar wurde bei Proteinen die weiter unten im Fasta fiel gelistet waren. Die ersten Proteine aus der Datei wurden richtig ausgegeben, bei anderen wurden die IDs falschen Namen und Sequenzen zugeordnet. Das Problem lag daran, dass es Proteine in der Datei gibt, deren Kopfzeilen nicht dem Standart entsprechen zb. werden sie nicht mit "|" getrennt und enthalten auch keine ID. Dies Proteine wurden erst Umgangen aber die Position wo man sich in der Datei befindet wurde nicht verändert und dadurch verschoben sich die Informationen.
