@@ -28,7 +28,7 @@
 
 * Es ist uns aufgefallen das die Logik noch einen größeren Fehler aufwies, der jedoch nur Sichtbar wurde bei Proteinen die weiter unten im Fasta fiel gelistet waren. Die ersten Proteine aus der Datei wurden richtig ausgegeben, bei anderen wurden die IDs falschen Namen und Sequenzen zugeordnet. Das Problem lag daran, dass es Proteine in der Datei gibt, deren Kopfzeilen nicht dem Standart entsprechen zb. werden sie nicht mit "|" getrennt und enthalten auch keine ID. Dies Proteine wurden erst Umgangen aber die Position wo man sich in der Datei befindet wurde nicht verändert und dadurch verschoben sich die Informationen.
 
-Das Problem wurde vorläufig behoben, indem diese Proteine berücksichtigt werden und die Kopfzeile etwas anders ausgelesen wird, unabhäning von einer Trennung durch "|".
+* Das Problem wurde vorläufig behoben, indem diese Proteine berücksichtigt werden und die Kopfzeile etwas anders ausgelesen wird, unabhäning von einer Trennung durch "|".
 Für diese nicht allzu häufig vorkommenden Proteine wird der Proteinname auch als ID gespeichert. Diese Lösung wird vorraussichtlich noch verbessert(Caro).
 
 ## Bugs
