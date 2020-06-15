@@ -1,23 +1,38 @@
 # Woche 6
-## Aufgabe 1
+##Veränderung am GUI
+* Es wurde ein Label hinzugefügt, welches anzeigt ob eine Datei geladen ist. (Hrisitan)
 
-Hristian hat einen Label hinzugefügt der anzeigt ob eine Datei geladen wurde. Es wurde ein Bug von Alex gefunden auf Windows. Beim laden der Datei wenn man auf schließen drückt, wird das gesamte Program geschloßen. Auf Ubuntu läuft das Program weiter.
+![alt text](Screenshots/Data-not-loaded-label.png)
 
-## Aufgabe 2
-Hristian hat die Klasse in der Gui Dokumentiert und Kommentiert nach den NumPy/SciPy Standard
-![alt text](Screenshots/docclass.png)
-
-## Allgemeines
-- Logik wurde auseinandergenommen für die DECOY Sequenzen. Dadurch ist ein Fehler in der Logik selbst aufgetreten, da es Proteine ohne Proteinsequenz gibt, welche den counter für das neue Setzen des Pointers in der Datei nicht berücksichtigt haben, da der Fall eben nicht durch den if-case gelaufen ist. Daher kam es in den Listen zu Verschiebungen und darauf folgend zu falschen Ausgaben.
-
-- GUI wurde in drei Methoden umgeschrieben, entsprechend welche Auswahl getroffen wurde für die Suche. Für sowohl bessere Lesbarkeit des Codes wie auch darauf folgend besseres Debugging. 
-
+* GUI wurde in drei Methoden umgeschrieben, entsprechend welche Auswahl getroffen wurde für die Suche. Für sowohl bessere Lesbarkeit des Codes wie auch darauf folgend besseres Debugging(Hrisitan).
 ![alt text](Screenshots/Fehler_mit_fileTell.png)
-
 
 ![alt text](Screenshots/docmethoden.png)
 
+* Die Darstellung der Daten im Treewidget wurde verändert. Wird über die ID, den Namen oder einem Peptid gesucht, werden die Ergebnisse der Suche jetzt tabellarisch dargestellt und für jedes Protein wird die ID, der Organismus und der Name des Proteins ausgegeben. Die jeweilige Protein Sequenz wird ausgeklappt(Caro).
 
+![alt text](Screenshots/Proteinsequence.png)
+
+* Sobald eine Datei geladen wird verändert sich das Label zu "Data loaded" und es werden alle Proteine angezeigt die in der Datei enthalten sind. Jedoch wird nur die ID, der Organismus und der Name des Proteins dargestellt nicht aber die jeweilige Sequenz(Caro). Das zusätzliche Laden der Sequenzen führte dazu, das sich die UI aufhing. Es wurde versucht dieses Problem über asyncio zu beheben jedoch hat dies nach mehreren Versuchen nicht funktioniert und es wurde dann auf die Ausgabe der Sequenzen verzichtet(Alex,Hristian).
+
+![alt text](Screenshots/Data-loaded.png)
+
+## Code Dokumentation
+* Der Code der GUI wurde nach dem NumPy/SciPy Standard Dokumentiert und Kommentiert() und es wurde ein Type Hint hinzugefügt(Hrisitan).  
+
+![alt text](Screenshots/docclass.png)
+
+##Veränderungen an der Logik
+* Die Logik wurde überarbeitet da es Probleme gab die Decoy Sequenzen richtig auszugeben. Das Problem wurde behoben in dem es nun extra Listen für diese Sequenzen gibt und sie somit sauber von den anderen Sequenzen getrennt sind(Alex).
+
+* Es ist uns aufgefallen das die Logik noch einen größeren Fehler aufwies, der jedoch nur Sichtbar wurde bei Proteinen die weiter unten im Fasta fiel gelistet waren. Die ersten Proteine aus der Datei wurden richtig ausgegeben, bei anderen wurden die IDs falschen Namen und Sequenzen zugeordnet. Das Problem lag daran, dass es Proteine in der Datei gibt, deren Kopfzeilen nicht dem Standart entsprechen zb. werden sie nicht mit "|" getrennt und enthalten auch keine ID. Dies Proteine wurden erst Umgangen aber die Position wo man sich in der Datei befindet wurde nicht verändert und dadurch verschoben sich die Informationen.
+
+Das Problem wurde vorläufig behoben, indem diese Proteine berücksichtigt werden und die Kopfzeile etwas anders ausgelesen wird, unabhäning von einer Trennung durch "|".
+Für diese nicht allzu häufig vorkommenden Proteine wird der Proteinname auch als ID gespeichert. Diese Lösung wird vorraussichtlich noch verbessert(Caro).
+
+## Bugs
+* Wir beobachteten unterschiede im verhalten der GUI bei Windows und Ubuntu. Ist man dabei eine Datei zu laden und bricht dies aber ab, schließt sich das Fenster in Windows jedoch bei Ubuntu nicht.
+* Sobald die Suche sehr unspezifisch wird und theoretisch jedes Protein ausgegeben wird, hängt sich das GUI auf im schlimmsten Fall oder es dauert sehr lange.
 
 
 # Woche 4-5 (über Pfingsten)
