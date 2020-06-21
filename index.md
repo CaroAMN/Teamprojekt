@@ -5,6 +5,9 @@
 ## Anwendungsbereiche Debugging
 * Wie es der Name schon sagt, nutzt man es um Fehler zu finden und somit beseitigen zu können. Da man sich an laufende Prozesse ran hängen kann, sieht man so, wo die Fehler passieren. Zudem ist es mit breakpoints an den richtigen Stellen möglich genau verfolgen zu können in welcher Reihenfolge der Code durchlaufen wird. Auch damit lassen sich Fehler finden und Optimierungen werden einfacher möglich. 
 
+* Stacktrace: 
+![alt text](Screenshots/stacktrace.png)
+
 ## Team 1 - Aufgabe der Woche 7 (Implementiert ein Feature, dass beim Klicken auf eine Protein ID (z.B. Q9UPY3) weitere Informationen im default OS-Browser darstellt / aufruft.) 
 * ...
 
