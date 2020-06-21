@@ -11,7 +11,16 @@ Beschreibt zum debuggen im Prinzip wo sich das Programm zuletzt aufgehalten hatt
 ![alt text](Screenshots/stacktrace.png)
 
 ## Team 1 - Aufgabe der Woche 7 (Implementiert ein Feature, dass beim Klicken auf eine Protein ID (z.B. Q9UPY3) weitere Informationen im default OS-Browser darstellt / aufruft.) 
-* ...
+
+Die Aufgabe wurde erfüllt in dem das GUI mit QTextBrowser erweitert wurde. Das QTextBrowser wurde mit dem QTextEdit verbunden und mit dem Befehl .insertHtml wurde den Link mit die Accsession Nummer zu jede Protein in der Schleife hinzugefügt.(Hristian)
+
+![alt text](Screenshots/linksuc.png)
+
+Diese Implementierung verursacht ein Fehler. Als Rückgabe wird "Segmentation  fault (core dumped)" zurückgegeben. Wir haben versucht das Stacklimit auf zu erhöhen aber der Fehler ist trotzdem aufgetreten.
+
+![alt text](Screenshots/linkerror.png)
+
+Zusätzlich wurde das QTreewidget mit ein Soritierungs Option erweitert. Der Befehl der benutzt wurde ist "setSortingEnabled(True)" das QTreeWidget hat eigenes Algorithmus für die Sortierung.(Hristian)
 
 
 # Woche 6
