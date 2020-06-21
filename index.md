@@ -1,6 +1,7 @@
 # Woche 7 
 ## Screenshots zu Debugging und timeit 
 ![alt text](Screenshots/debugger.png)
+![alt text](Screenshots/timeit.png)
 
 ## Anwendungsbereiche Debugging
 * Wie es der Name schon sagt, nutzt man es um Fehler zu finden und somit beseitigen zu können. Da man sich an laufende Prozesse ran hängen kann, sieht man so, wo die Fehler passieren. Zudem ist es mit breakpoints an den richtigen Stellen möglich genau verfolgen zu können in welcher Reihenfolge der Code durchlaufen wird. Auch damit lassen sich Fehler finden und Optimierungen werden einfacher möglich. 
