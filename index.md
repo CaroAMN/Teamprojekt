@@ -1,16 +1,32 @@
-# Woche 7 
-## Screenshots zu Debugging und timeit 
+# Woche 8
+
+## Aufarbeitung von Rückständen
+* Das Problem des sehr langen ladens und möglichen aufhängens des Protein Viewers
+bei einer Ausgabe von sehr vielen Proteinen wurde gelöst. Jedes TreeItem mit Proteine Accsession, organismus und Name kann angeklickt werden. Erst durch dieses Signal werden dem Item zwei neue, untergeordnete TreeItemes erstellt welche die Proteinsequenz und den Link zur Datanbank UniProt enthalten.(Caro)
+
+![alt text](Screenshots/New-Protein-Viewer.png)
+
+## Pull Request auf das Mainrepository
+
+
+## Hauptapplikation
+* Es wurde ein erstes TabWidget erstellt, welches im moment nur den eigenen Protein Viewer enthält.(Caro)
+
+
+
+# Woche 7
+## Screenshots zu Debugging und timeit
 ![alt text](Screenshots/debugger.png)
 ![alt text](Screenshots/timeit.png)
 
 ## Anwendungsbereiche Debugging
-* Wie es der Name schon sagt, nutzt man es um Fehler zu finden und somit beseitigen zu können. Da man sich an laufende Prozesse ran hängen kann, sieht man so, wo die Fehler passieren. Zudem ist es mit breakpoints an den richtigen Stellen möglich genau verfolgen zu können in welcher Reihenfolge der Code durchlaufen wird. Auch damit lassen sich Fehler finden und Optimierungen werden einfacher möglich. 
+* Wie es der Name schon sagt, nutzt man es um Fehler zu finden und somit beseitigen zu können. Da man sich an laufende Prozesse ran hängen kann, sieht man so, wo die Fehler passieren. Zudem ist es mit breakpoints an den richtigen Stellen möglich genau verfolgen zu können in welcher Reihenfolge der Code durchlaufen wird. Auch damit lassen sich Fehler finden und Optimierungen werden einfacher möglich.
 
-* Stacktrace: 
-Beschreibt zum debuggen im Prinzip wo sich das Programm zuletzt aufgehalten hatte als es zum Fehler kam. 
+* Stacktrace:
+Beschreibt zum debuggen im Prinzip wo sich das Programm zuletzt aufgehalten hatte als es zum Fehler kam.
 ![alt text](Screenshots/stacktrace.png)
 
-## Team 1 - Aufgabe der Woche 7 (Implementiert ein Feature, dass beim Klicken auf eine Protein ID (z.B. Q9UPY3) weitere Informationen im default OS-Browser darstellt / aufruft.) 
+## Team 1 - Aufgabe der Woche 7 (Implementiert ein Feature, dass beim Klicken auf eine Protein ID (z.B. Q9UPY3) weitere Informationen im default OS-Browser darstellt / aufruft.)
 
 Die Aufgabe wurde erfüllt in dem das GUI mit QTextBrowser erweitert wurde. Das QTextBrowser wurde mit dem QTextEdit verbunden und mit dem Befehl .insertHtml wurde der Link mit der Accsession Nummer zu jedem Protein in der Schleife hinzugefügt.(Hristian)
 
