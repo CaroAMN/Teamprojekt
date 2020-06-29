@@ -270,6 +270,29 @@ class Window(QMainWindow):
         self.tw.itemClicked.connect(self.clickTreeItem)
 
         # defining functions for display the protein sequence when Tree item is clicked
+    def createTreeItem(self, item, ID, Protein):
+        self.link = QLabel()
+        self.link.setTextInteractionFlags(
+            Qt.LinksAccessibleByMouse)
+        self.link.setOpenExternalLinks(True)
+        self.link.setTextFormat(Qt.RichText)
+        self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
+                          ID + ">" + "More Information"+" </a>")
+        self.textp = QTextEdit()
+        self.textp.resize(
+            self.textp.width(), self.textp.height())
+        self.textp.insertPlainText(
+            "Proteinsequenz: " + Protein + "\n")
+        self.textp.setReadOnly(True)
+        self.cgChild = QtWidgets.QTreeWidgetItem(
+            item)
+        self.cgChild2 = QtWidgets.QTreeWidgetItem(
+            item)
+        self.cgChild.setFirstColumnSpanned(True)
+        self.tw.setItemWidget(
+            self.cgChild, 0, self.textp)
+        self.tw.setItemWidget(
+            self.cgChild2, 0, self.link)
 
     def clickTreeItem(self, item):
         num = item.childCount()
@@ -277,28 +300,7 @@ class Window(QMainWindow):
             ID = item.data(0, 0)
             index = list(self.dictKeyAccession.keys()).index(ID)
             Protein = self.proteinList[index]
-            self.link = QLabel()
-            self.link.setTextInteractionFlags(
-                Qt.LinksAccessibleByMouse)
-            self.link.setOpenExternalLinks(True)
-            self.link.setTextFormat(Qt.RichText)
-            self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
-                              ID + ">" + "More Information"+" </a>")
-            self.textp = QTextEdit()
-            self.textp.resize(
-                self.textp.width(), self.textp.height())
-            self.textp.insertPlainText(
-                "Proteinsequenz: " + Protein + "\n")
-            self.textp.setReadOnly(True)
-            self.cgChild = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild2 = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild.setFirstColumnSpanned(True)
-            self.tw.setItemWidget(
-                self.cgChild, 0, self.textp)
-            self.tw.setItemWidget(
-                self.cgChild2, 0, self.link)
+            self.createTreeItem(item, ID, Protein)
 
 
     def clickTreeItemDecoy(self, item):
@@ -306,81 +308,44 @@ class Window(QMainWindow):
         if num == 0:
             ID = item.data(0, 0)
             index = list(self.dictKeyAccessionDECOY).index(ID)
-            print(index)
             Protein = self.proteinListDECOY[index]
-            self.link = QLabel()
-            self.link.setTextInteractionFlags(
-                Qt.LinksAccessibleByMouse)
-            self.link.setOpenExternalLinks(True)
-            self.link.setTextFormat(Qt.RichText)
-            self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
-                              ID + ">" + "More Information"+" </a>")
-            self.textp = QTextEdit()
-            self.textp.resize(
-                self.textp.width(), self.textp.height())
-            self.textp.insertPlainText(
-                "Proteinsequenz: " + Protein + "\n")
-            self.textp.setReadOnly(True)
-            self.cgChild = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild2 = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild.setFirstColumnSpanned(True)
-            self.tw.setItemWidget(
-                self.cgChild, 0, self.textp)
-            self.tw.setItemWidget(
-                self.cgChild2, 0, self.link)
+            self.createTreeItem(item, ID, Protein)
 
+
+    def createTreeItemSeqSearch(self, item, ID, Protein):
+        self.link = QLabel()
+        self.link.setTextInteractionFlags(
+            Qt.LinksAccessibleByMouse)
+        self.link.setOpenExternalLinks(True)
+        self.link.setTextFormat(Qt.RichText)
+        self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
+                          ID + ">" + "More Information"+" </a>")
+
+        self.cgChild = QtWidgets.QTreeWidgetItem(
+            item)
+        self.cgChild2 = QtWidgets.QTreeWidgetItem(
+            item)
+        self.cgChild.setFirstColumnSpanned(True)
+        self.tw.setItemWidget(
+            self.cgChild, 0, Protein)
+        self.tw.setItemWidget(
+            self.cgChild2, 0, self.link)
 
     def clickTreeItemSeqSearch(self, item):
         num = item.childCount()
         if num == 0:
-            print(num)
             ID = item.data(0, 0)
             ProtSeq = self.SequencSearchDict.get(ID)
-            print(ProtSeq)
-            self.link = QLabel()
-            self.link.setTextInteractionFlags(
-                Qt.LinksAccessibleByMouse)
-            self.link.setOpenExternalLinks(True)
-            self.link.setTextFormat(Qt.RichText)
-            self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
-                              ID + ">" + "More Information"+" </a>")
-
-            self.cgChild = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild2 = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild.setFirstColumnSpanned(True)
-            self.tw.setItemWidget(
-                self.cgChild, 0, ProtSeq)
-            self.tw.setItemWidget(
-                self.cgChild2, 0, self.link)
+            self.createTreeItemSeqSearch(item, ID, ProtSeq)
 
 
     def clickTreeItemSeqSearchDecoy(self, item):
         num = item.childCount()
         if num == 0:
             ID = item.data(0, 0)
-            index = list(self.dictKeyAccessionDECOY.keys()).index(ID)
-            Protein = self.proteinListDECOY[index]
-            self.link = QLabel()
-            self.link.setTextInteractionFlags(
-                Qt.LinksAccessibleByMouse)
-            self.link.setOpenExternalLinks(True)
-            self.link.setTextFormat(Qt.RichText)
-            self.link.setText("<a href =" + "https://www.uniprot.org/uniprot/" +
-                              ID + ">" + "More Information"+" </a>")
+            ProtSeq = self.SequencSearchDictDECOY.get(ID)
+            self.createTreeItemSeqSearch(item, ID, ProtSeq)
 
-            self.cgChild = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild2 = QtWidgets.QTreeWidgetItem(
-                item)
-            self.cgChild.setFirstColumnSpanned(True)
-            self.tw.setItemWidget(
-                self.cgChild, 0, Protein)
-            self.tw.setItemWidget(
-                self.cgChild2, 0, self.link)
 
 
 
