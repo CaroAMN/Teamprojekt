@@ -10,7 +10,9 @@ bei einer Ausgabe von sehr vielen Proteinen wurde gelöst. Jedes TreeItem mit Pr
 
 
 ## Hauptapplikation
-* Es wurde ein erstes TabWidget erstellt, welches im moment nur den eigenen Protein Viewer enthält.(Caro)
+* Es wurde ein erstes TabWidget erstellt, welches im Moment nur den eigenen Protein Viewer enthält.(Caro)
+
+![alt text](Screenshots/First-tabwidget.png)
 
 
 
