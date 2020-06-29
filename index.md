@@ -7,6 +7,11 @@ bei einer Ausgabe von sehr vielen Proteinen wurde gelöst. Jedes TreeItem mit Pr
 ![alt text](Screenshots/New-Protein-Viewer.png)
 
 ## Pull Request auf das Mainrepository
+* Nahezu alle "Fehler" bzw. typos und ähmliches wurden inzwischen beseitigt. Einer der Vorschläge war den Code durch regular expressions zu verkürzen. 
+Hier kommt es momentan allerdings noch zu einem etwas ungewöhnlichen Fehler, sodass dies noch nicht implementiert wurde. 
+Es entstehen nämlich weitaus mehr Einträge in der Liste (ist: 59 Einträge) als es der Fall sein sollten (soll: 2 Einträge). 
+
+![alt text](Screenshots/regex_Problem.png)
 
 
 ## Hauptapplikation
