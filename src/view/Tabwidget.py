@@ -2,6 +2,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 from GUI_FastaViewer import GUI_FastaViewer
+from ... import ... 
 
 class TabWindow(QWidget):
     def __init__(self):
@@ -10,7 +11,8 @@ class TabWindow(QWidget):
         self.setLayout(layout)
         label1 = QLabel("Widget in Tab 1.")
         label2 = QLabel("Widget in Tab 2.")
-        protein_viewer = Window()
+        protein_viewer = GUI_FastaViewer()
+        
         tabwidget = QTabWidget()
         tabwidget.addTab(protein_viewer, "Protein viewer")
         tabwidget.addTab(label2, "Tab 2")
