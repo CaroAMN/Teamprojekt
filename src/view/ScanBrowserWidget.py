@@ -1,4 +1,5 @@
 import pyopenms
+import sys
 from PyQt5.QtCore import (
     Qt,
 )
@@ -9,8 +10,9 @@ from PyQt5.QtWidgets import (
 )
 from ScanTableWidget import ScanTableWidget
 
-from src.view.SpectrumWidget import SpectrumWidget
-
+#from src.view.SpectrumWidget import SpectrumWidget
+sys.path.insert(0, "../view")
+from SpectrumWidget import SpectrumWidget
 
 class ScanBrowserWidget(QWidget):
     def __init__(self, *args, **kwargs):

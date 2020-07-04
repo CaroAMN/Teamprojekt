@@ -2,7 +2,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 from GUI_FastaViewer import GUI_FastaViewer
-from ... import ... 
+from mzMLTableView import mzMLTableView
+from ConfigView import ConfigView
+sys.path.insert(0, "../apps")
+from SpecViewer import App
+
 
 class TabWindow(QWidget):
     def __init__(self):
@@ -12,10 +16,15 @@ class TabWindow(QWidget):
         label1 = QLabel("Widget in Tab 1.")
         label2 = QLabel("Widget in Tab 2.")
         protein_viewer = GUI_FastaViewer()
+        spec_viewer = App()
+        mzml_viewer = mzMLTableView()
+        config_viewer = ConfigView()
         
         tabwidget = QTabWidget()
         tabwidget.addTab(protein_viewer, "Protein viewer")
-        tabwidget.addTab(label2, "Tab 2")
+        tabwidget.addTab(spec_viewer, "Spectrum Viewer")
+        tabwidget.addTab(mzml_viewer, "PSM/Protein Viewer")
+        tabwidget.addTab(config_viewer, "Config Viewer")
         layout.addWidget(tabwidget, 0, 0)
 
 def main():
