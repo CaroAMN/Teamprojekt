@@ -9,29 +9,36 @@ from TableEditor import TableEditor
 from XMLViewer import XMLViewer
 
 
-class TabWindow(QWidget):
+class TabWindow(QMainWindow):
     def __init__(self):
-        QWidget.__init__(self)
-        layout = QGridLayout()
-        self.setLayout(layout)
-        protein_viewer = GUI_FastaViewer()
-        spec_viewer = App()
-        experimentalDesign = TableEditor()
-        xmlViewer = XMLViewer()
-        mzmlWidget = Window()
+        super().__init__()
+        self.resize(1280, 720)
+        self.initUI()
 
-        tabwidget = QTabWidget()
-        tabwidget.addTab(protein_viewer, "Protein viewer")
-        tabwidget.addTab(spec_viewer, "Spectrum Viewer")
-        tabwidget.addTab(experimentalDesign, "Experimental Design")
-        tabwidget.addTab(xmlViewer, "XML Viewer")
-        tabwidget.addTab(mzmlWidget, "PSM/Protein Viewer")
-        layout.addWidget(tabwidget, 0, 0)
+
+    def initUI(self):
+
+        self.layout = QGridLayout()
+        self.setLayout(layout)
+
+        self.protein_viewer = GUI_FastaViewer()
+        self.spec_viewer = App()
+        self.experimentalDesign = TableEditor()
+        self.xmlViewer = XMLViewer()
+        self.mzmlWidget = Window()
+
+        self.tabwidget = QTabWidget()
+        self.tabwidget.addTab(self.protein_viewer, "Protein viewer")
+        self.tabwidget.addTab(self.spec_viewer, "Spectrum Viewer")
+        self.tabwidget.addTab(self.experimentalDesign, "Experimental Design")
+        self.tabwidget.addTab(self.xmlViewer, "XML Viewer")
+        self.tabwidget.addTab(self.mzmlWidget, "PSM/Protein Viewer")
+        self.layout.addWidget(self.tabwidget, 0, 0)
+        self.show()
 
 def main():
     app = QApplication(sys.argv)
     screen = TabWindow()
-    screen.show()
     sys.exit(app.exec_())
 
 if __name__ == '__main__':

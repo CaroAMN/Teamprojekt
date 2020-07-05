@@ -1,17 +1,19 @@
 """ 
 mzTabTableWidget
 ----------------
-This script allows the user to transfer information about proteins and psms from a mzTab file into two tables, 
+This script allows the user to transfer information about proteins and psms from a mzTab file into two tables,
 one containing the proteins, the other one containing the psms.
+
 By clicking on a row, the tables get updated regarding their listed proteins or psms.
 Once you choose a protein/psm, the table displays only those psms/proteins that are linked to one another.
-This tool is designed to accept mzTab files. It is required to save those files under '.../examples/data/' or 
+
+This tool is designed to accept mzTab files. It is required to save those files under '.../examples/data/' or
 change the path within the InitWindow.
 """
 import sys
 import webbrowser
-from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QWidget, QTableWidget, QVBoxLayout, QTableWidgetItem, QPushButton, QFileDialog
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QApplication, QWidget, QTableWidget, QVBoxLayout, QTableWidgetItem
 
 
 class Window(QWidget):
@@ -24,8 +26,6 @@ class Window(QWidget):
         self.width = 500
         self.height = 500
         self.tableRows = 5
-
-        self.fileLoaded = False
 
         self.PRTFull = []
         self.PSMFull = []
@@ -57,14 +57,19 @@ class Window(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
 
-        self.tablePRTFull.setHidden(True)
-        self.tablePSMFull.setHidden(True)
+        self.parser('../examples/data/iPRG2015.mzTab')
+
+        self.PRTColumn *= len(self.PRTFull[1])
+        self.PSMColumn *= len(self.PSMFull[1])
+
+        self.initTables()
+        self.createTable(self.tablePRTFull, self.PRTFull)
+        self.createTable(self.tablePSMFull, self.PSMFull)
         self.tablePRTFiltered.setHidden(True)
         self.tablePSMFiltered.setHidden(True)
 
-        self.loadButton = QtWidgets.QPushButton(self)
-        self.loadButton.setText("load")
-        self.loadButton.clicked.connect(self.loadFile)
+        self.hidePRTColumns()
+        self.hidePSMColumns()
 
         self.tablePRTFull.itemClicked.connect(self.PRTClicked)
         self.tablePRTFiltered.itemClicked.connect(self.PRTClicked)
@@ -75,8 +80,6 @@ class Window(QWidget):
         self.tablePRTFiltered.itemDoubleClicked.connect(self.browsePRT)
         self.tablePSMFull.itemDoubleClicked.connect(self.browsePSM)
         self.tablePSMFiltered.itemDoubleClicked.connect(self.browsePSM)
-
-        self.vBoxPRT.addWidget(self.loadButton)
 
         self.vBoxPRT.addWidget(self.tablePRTFull)
         self.vBoxPRT.addWidget(self.tablePRTFiltered)
@@ -89,50 +92,6 @@ class Window(QWidget):
 
         self.setLayout(self.outerVBox)
         self.show()
-
-    def loadFile(self):
-        if self.fileLoaded:
-            self.tablePRTFull.clear()
-            self.tablePSMFull.clear()
-            self.tablePSMFiltered.clear()
-            self.tablePRTFiltered.clear()
-
-            self.tablePRTFull.setRowCount(0)
-            self.tablePSMFull.setRowCount(0)
-            self.tablePSMFiltered.setRowCount(0)
-            self.tablePRTFiltered.setRowCount(0)
-
-            self.PRTFull.clear()
-            self.PSMFull.clear()
-
-            self.PRTFiltered.clear()
-            self.PSMFiltered.clear()
-
-            self.PRTColumn.clear()
-            self.PSMColumn.clear()
-
-            self.PRTColumn = [True]
-            self.PSMColumn = [True]
-
-        self.filename = QFileDialog.getOpenFileName()
-
-        self.parser(self.filename[0])
-
-        self.PRTColumn *= len(self.PRTFull[1])
-        self.PSMColumn *= len(self.PSMFull[1])
-
-        self.initTables()
-        self.createTable(self.tablePRTFull, self.PRTFull)
-        self.createTable(self.tablePSMFull, self.PSMFull)
-
-        self.hidePRTColumns()
-        self.hidePSMColumns()
-
-        self.tablePRTFull.setHidden(False)
-        self.tablePSMFull.setHidden(False)
-
-        self.fileLoaded = True
-
 
     def parser(self, file):
         """parses the given mzTab file and saves PRT and PSM information
@@ -200,11 +159,6 @@ class Window(QWidget):
                     k += 1
                     j = 0
                 break
-
-        self.tablePRTFull.resizeColumnsToContents()  # resize columns
-        self.tablePSMFull.resizeColumnsToContents()  # resize columns
-        self.tablePRTFiltered.resizeColumnsToContents()  # resize columns
-        self.tablePSMFiltered.resizeColumnsToContents()  # resize columns
 
     def hidePRTColumns(self):
         """hides constant columns in PRT table by default by checking if every value equals"""
