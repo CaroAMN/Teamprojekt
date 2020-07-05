@@ -7,7 +7,7 @@ beeinflussen.
 
 ## Tab-Widget
 * Merge branch master (auf aktuellen Stand gebracht) 
-* Die Dateien der anderen Teams wurden entweder vom aktualisierten master und/ oder von den repos der anderen Teams gezogen und bei auf unseren neu erstellen branch für das Tab-Widget rein kopiert. 
+* Die Dateien der anderen Teams wurden entweder vom aktualisierten master und/ oder von den repos der anderen Teams gezogen und auf unseren neu erstellen branch für das Tab-Widget rein kopiert. 
 
 ## Problem? mit Widget Gruppe 3
 
