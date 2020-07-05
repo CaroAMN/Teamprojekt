@@ -1,3 +1,21 @@
+# Woche 9
+
+## Refactoring 
+* Methoden und Klassen wurden umbennant. Code wurde angepasst und es konnten mehrere hundert Zeilen Code entfernt werden, ohne das externe Verhalten zu
+beeinflussen. 
+* Das Widget ist nun in der Größe veränderbar. 
+
+## Tab-Widget
+* Merge branch master (auf aktuellen Stand gebracht) 
+* Die Dateien der anderen Teams wurden entweder vom aktualisierten master und/ oder von den repos der anderen Teams gezogen und bei auf unseren neu erstellen branch für das Tab-Widget rein kopiert. 
+
+## Problem? mit Widget Gruppe 3
+
+## Tab-Widget Bild :) 
+
+
+
+
 # Woche 8
 
 ## Aufarbeitung von Rückständen
