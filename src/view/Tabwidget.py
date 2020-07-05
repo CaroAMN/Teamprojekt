@@ -20,6 +20,7 @@ class TabWindow(QMainWindow):
 
         self.layout = QGridLayout()
         self.setLayout(layout)
+        self.setWindowTitle("Protein Analyzer")
 
         self.protein_viewer = GUI_FastaViewer()
         self.spec_viewer = App()
