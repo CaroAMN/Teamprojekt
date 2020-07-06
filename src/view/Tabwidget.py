@@ -26,10 +26,10 @@ class AnalyzerTabWidget(QWidget):
 
         #initialize tabs
         self.TabWidget = QTabWidget()
-        self.Tab1 = QWidget()
-        self.Tab2 = QWidget()
-        self.Tab3 = QWidget()
-        self.Tab4 = QWidget()
+        self.Tab1 = GUI_FastaViewer()
+        self.Tab2 = App()
+        self.Tab3 = TableEditor()
+        self.Tab4 = XMLViewer()
         self.Tab5 = QWidget()
 
         #add tabs
@@ -38,29 +38,6 @@ class AnalyzerTabWidget(QWidget):
         self.TabWidget.addTab(self.Tab3,"Experimental Design")
         self.TabWidget.addTab(self.Tab4,"XML Viewer")
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
-
-        #Tab1
-        self.Tab1.layout = QVBoxLayout(self)
-        self.protein_viewer = GUI_FastaViewer()
-        self.Tab1.layout.addWidget(self.protein_viewer)
-        self.Tab1.setLayout(self.Tab1.layout)
-
-        self.Tab2.layout = QVBoxLayout(self)
-        self.spec_viewer = App()
-        self.Tab2.layout.addWidget(self.spec_viewer)
-        self.Tab2.setLayout(self.Tab2.layout)
-
-        self.Tab3.layout = QVBoxLayout(self)
-        self.experimentalDesign = TableEditor()
-        self.Tab3.layout.addWidget(self.experimentalDesign)
-        self.Tab3.setLayout(self.Tab3.layout)
-
-        self.Tab4.layout = QVBoxLayout(self)
-        self.xmlViewer = XMLViewer()
-        self.Tab4.layout.addWidget(self.xmlViewer)
-        self.Tab4.setLayout(self.Tab4.layout)
-
-
 
 
         #add tabs
