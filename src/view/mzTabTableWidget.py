@@ -133,7 +133,6 @@ class Window(QWidget):
 
         self.fileLoaded = True
 
-
     def parser(self, file):
         """parses the given mzTab file and saves PRT and PSM information
         Parameters
@@ -156,8 +155,6 @@ class Window(QWidget):
 
         for item in self.PSMFull:
             item.pop(0)
-
-
 
     def initTables(self):
         """draws protein and psm tables with headers"""
@@ -200,10 +197,11 @@ class Window(QWidget):
                     k += 1
                     j = 0
                 break
-        self.tablePRTFull.resizeColumnsToContents() # resize columns
-        self.tablePSMFull.resizeColumnsToContents() # resize columns
-        self.tablePRTFiltered.resizeColumnsToContents() # resize columns
-        self.tablePSMFiltered.resizeColumnsToContents() # resize columns
+        self.tablePRTFull.resizeColumnsToContents()  # resize columns
+        self.tablePSMFull.resizeColumnsToContents()  # resize columns
+        self.tablePRTFiltered.resizeColumnsToContents()  # resize columns
+        self.tablePSMFiltered.resizeColumnsToContents()  # resize columns
+
     def hidePRTColumns(self):
         """hides constant columns in PRT table by default by checking if every value equals"""
         i = 0
@@ -319,6 +317,8 @@ class Window(QWidget):
         webbrowser.open("https://www.uniprot.org/uniprot/" + accession)
 
 
+"""
 App = QApplication(sys.argv)
 window = Window()
 sys.exit(App.exec())
+"""

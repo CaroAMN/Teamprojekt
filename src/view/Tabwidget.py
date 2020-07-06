@@ -2,11 +2,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 from GUI_FastaViewer import GUI_FastaViewer
-#from mzTabTableWidget import Window
+from mzTabTableWidget import Window
 sys.path.insert(0, "../apps")
-from SpecViewer import App
-from TableEditor import TableEditor
 from XMLViewer import XMLViewer
+from TableEditor import TableEditor
+from SpecViewer import App
 
 
 class TabWindow(QMainWindow):
@@ -20,37 +20,35 @@ class TabWindow(QMainWindow):
 
 
 class AnalyzerTabWidget(QWidget):
-    def __init__(self,parent):
+    def __init__(self, parent):
         super(QWidget, self).__init__(parent)
         self.layout = QVBoxLayout(self)
 
-        #initialize tabs
+        # initialize tabs
         self.TabWidget = QTabWidget()
         self.Tab1 = GUI_FastaViewer()
         self.Tab2 = App()
         self.Tab3 = TableEditor()
         self.Tab4 = XMLViewer()
-        self.Tab5 = QWidget()
+        self.Tab5 = Window()
 
-        #add tabs
-        self.TabWidget.addTab(self.Tab1,"Proteinsequence Viewer")
-        self.TabWidget.addTab(self.Tab2,"Spectrum Viewer")
-        self.TabWidget.addTab(self.Tab3,"Experimental Design")
-        self.TabWidget.addTab(self.Tab4,"XML Viewer")
+        # add tabs
+        self.TabWidget.addTab(self.Tab1, "Proteinsequence Viewer")
+        self.TabWidget.addTab(self.Tab2, "Spectrum Viewer")
+        self.TabWidget.addTab(self.Tab3, "Experimental Design")
+        self.TabWidget.addTab(self.Tab4, "XML Viewer")
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
 
-
-        #add tabs
+        # add tabs
         self.layout.addWidget(self.TabWidget)
         self.setLayout(self.layout)
-
-
 
 
 def main():
     app = QApplication(sys.argv)
     screen = TabWindow()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()
