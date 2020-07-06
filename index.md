@@ -9,11 +9,13 @@ beeinflussen.
 * Merge branch master (auf aktuellen Stand gebracht)
 * Die Dateien der anderen Teams wurden entweder vom aktualisierten master und/ oder von den repos der anderen Teams gezogen und auf unseren neu erstellen branch für das Tab-Widget rein kopiert.
 
-## Problem? mit Widget Gruppe 3
-* Beim Ausführen des Widgets von Team 3 kam ein "index out of bounds" Fehler. Vielleicht wurde eine veraltete Datei von uns benutzt.
-* Das einfügen des Widgets von Team 3 funktionierte ebenso wenig.
-## Tab-Widget Bild :)
+![alt text][Protein-Analyzer.png]
 
+### Problem mit Widget Gruppe 3
+* Beim Ausführen des Widgets von Team 3 kam ein "index out of range" Fehler.
+* Das einfügen des Widgets von Team 3 funktionierte ebenso wenig auf grund des Errors.
+
+![alt text][Team3-indexoutofrange-mitLoadFile.png]
 
 
 
