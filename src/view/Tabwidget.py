@@ -56,10 +56,8 @@ class AnalyzerTabWidget(QWidget):
         self.layout.addWidget(self.TabWidget)
         self.setLayout(self.layout)
     
-    # launch pyopenms-mztab.py 
+    # launch ProteomicsLFQ and run in cmd 
     def runProteomicsLFQ(self):
-        # TODO: entweder hier direkt ausführen oder in der anderen Methode.        
-        
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
 
 
