@@ -59,6 +59,7 @@ class AnalyzerTabWidget(QWidget):
     # launch ProteomicsLFQ and run in cmd 
     def runProteomicsLFQ(self):
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
+    
 
 
 def main():
