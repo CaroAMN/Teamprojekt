@@ -31,11 +31,7 @@ class AnalyzerTabWidget(QWidget):
         super(QWidget, self).__init__(parent)
         self.layout = QVBoxLayout(self)
 
-        # add load Button for ProteomicsLFQ
-        self.pushButton = QtWidgets.QPushButton(self)
-        self.pushButton.setText("Load ProteomicsLFQ")
-        self.pushButton.clicked.connect(self.runProteomicsLFQ)
-        self.layout.addWidget(self.pushButton)
+
 
         # initialize tabs
         self.TabWidget = QTabWidget()
@@ -52,14 +48,28 @@ class AnalyzerTabWidget(QWidget):
         self.TabWidget.addTab(self.Tab4, "XML Viewer")
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
 
+
         # add tabs
         self.layout.addWidget(self.TabWidget)
+
+        # add load Button for ProteomicsLFQ
+        self.hboxlayout = QHBoxLayout()
+        #putting the button on the right side corner with a Stretch
+        self.hboxlayout.addStretch(1)
+        self.pushButton = QtWidgets.QPushButton(self)
+        self.pushButton.setText("Load ProteomicsLFQ")
+        self.hboxlayout.addWidget(self.pushButton)
+        self.pushButton.clicked.connect(self.runProteomicsLFQ)
+
+        self.layout.addLayout(self.hboxlayout)
+
+
         self.setLayout(self.layout)
-    
-    # launch ProteomicsLFQ and run in cmd 
+
+    # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
-    
+
 
 
 def main():
