@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 from GUI_FastaViewer import GUI_FastaViewer
-from mzTabTableWidget import Window
+from mzTabLoadWidget import Window
 sys.path.insert(0, "../apps")
 from XMLViewer import XMLViewer
 from TableEditor import TableEditor
@@ -52,6 +52,7 @@ class AnalyzerTabWidget(QWidget):
         # add tabs
         self.layout.addWidget(self.TabWidget)
 
+
         # add load Button for ProteomicsLFQ
         self.hboxlayout = QHBoxLayout()
         #putting the button on the right side corner with a Stretch
@@ -69,6 +70,9 @@ class AnalyzerTabWidget(QWidget):
     # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
+        self.TabWidget.removeTab(5)
+        self.Tab5 = Window()
+        self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
 
 
 

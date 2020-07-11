@@ -3,6 +3,8 @@ import webbrowser
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QTableWidget, QVBoxLayout, QTableWidgetItem, QPushButton, QFileDialog
 from mzTabTableWidget import Window as mz
+sys.path.insert(0, "../FRACTIONS")
+from ProteomicsLFQ_command import ProteomicsLFQ_command
 
 class Window(QWidget):
     def __init__(self):
@@ -25,19 +27,24 @@ class Window(QWidget):
 
         self.mzTabTableWidget = mz()
 
-        self.loadButton = QtWidgets.QPushButton(self)
-        self.loadButton.setText("load")
-        self.loadButton.clicked.connect(self.loadFile)
+        #self.loadButton = QtWidgets.QPushButton(self)
+        #self.loadButton.setText("load")
+        #self.loadButton.clicked.connect(self.loadFile)
 
-        self.vBox.addWidget(self.loadButton)
+        #self.vBox.addWidget(self.loadButton)
         self.vBox.addWidget(self.mzTabTableWidget)
 
         self.setLayout(self.vBox)
-        self.show()
+        
 
-    def loadFile(self):
-        self.filename = QFileDialog.getOpenFileName()
-        self.mzTabTableWidget.readFile(self.filename[0])
+        #def loadFile(self):
+        self.filename = ProteomicsLFQ_command.file_path_mzTab()
+
+        if self.filename == "error":
+            self.show()
+        else:
+            self.show()
+            self.mzTabTableWidget.readFile(self.filename)
 
 # the following is here to test the widget on its own, leave it commented if you want to use it elsewhere
 """
