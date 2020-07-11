@@ -70,7 +70,7 @@ class AnalyzerTabWidget(QWidget):
     # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
-        self.TabWidget.removeTab(5)
+        self.TabWidget.removeTab(4)
         self.Tab5 = Window()
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
 
