@@ -80,20 +80,11 @@ class AnalyzerTabWidget(QWidget):
 
     # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
-        # intialize "loading Widget"
-        #print('bevor')
-        #self.Loadlabel.setText("")
+        
         self.Loadlabel.setText("loading")
-        #self.Loadlabel.show()
-        #print('after')
-
 
         # launch cmd
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
-
-        # close "loading Widget"
-        #self.TabWidget.removeTab(5)
-
 
         self.TabWidget.removeTab(4)
         self.Tab5 = Window()
