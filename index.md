@@ -1,3 +1,10 @@
+# Woche 10
+
+## ProteomicsLFQ
+
+* Es wurde eine neue Klasse definiert "ProteomicsLFQ_command". In diese Klasse wird ProteomicsLFQ in der Konsole ausgeführt mit den vorgegebenen Daten in den neuen Ordner FRACTIONS. Als Ausgabe gibt es die Inforation auf der Konsole und 3 Dateien. Zu der GUI würd eine Ladeknopf hinzugefügt, sobald der Knopf gedrückt wird, kann man die Information von den ProteomicsLFQ in der Gui auf dem Tab PSM/Protein Viewer anschauen. Es gab schwierigkeiten bei der Bonus Aufgabe, weil unsere Gruppe kein Zugang zu der pyopenms Dokumentation hatte und somit könnten wir nicht die Dateien, die durch ProteomicsLFQ entstanden sind, nicht bearbeiten bzw nicht die gewünschte Information raus holen.
+
+
 # Woche 9
 
 ## Refactoring
