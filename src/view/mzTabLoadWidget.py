@@ -36,7 +36,6 @@ class Window(QWidget):
 
         self.setLayout(self.vBox)
         
-
         #def loadFile(self):
         self.filename = ProteomicsLFQ_command.file_path_mzTab()
 

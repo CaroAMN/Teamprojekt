@@ -67,6 +67,7 @@ class AnalyzerTabWidget(QWidget):
         self.pushButton = QtWidgets.QPushButton(self)
         self.pushButton.setText("Load ProteomicsLFQ")
         self.pushButton.setFixedWidth(200)
+        
 
         self.hboxlayout.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.runProteomicsLFQ)
@@ -77,11 +78,10 @@ class AnalyzerTabWidget(QWidget):
         self.setLayout(self.layout)
 
 
-
-    # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
-        
-        self.Loadlabel.setText("loading")
+        """launch proteomicsLFQ and add output to PSM/ ProteinViewer Tab"""
+
+        self.Loadlabel.setText("loading...")
 
         # launch cmd
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
