@@ -17,7 +17,7 @@ from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QGridLayout, QScrollArea, QPlainTextEdit,
                              QDesktopWidget, QLabel, QRadioButton,
                              QGroupBox, QSizePolicy, QCheckBox, QFileDialog,
-                             QTextEdit, QTextBrowser)
+                             QTextEdit, QTextBrowser, QProgressBar)
 
 
 class LoadingWindow(QWidget):
@@ -27,8 +27,8 @@ class LoadingWindow(QWidget):
         self.title = "loading"
         self.top = 100
         self.left = 100
-        self.width = 100
-        self.height = 100
+        self.width = 200
+        self.height = 200
 
         self.vBox = QVBoxLayout()
 
@@ -38,11 +38,15 @@ class LoadingWindow(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.top, self.left, self.width, self.height)
 
+        #progress bar
+        #self.progressBar = QProgressBar()
+        #self.progressBar.setValue(0)
+        #self.vBox.addWidget(self.progressBar)
+
         self.datalabel = QLabel()
         self.datalabel.setText("Loading...")
 
-        self.vBox.addWidget(self.datalabel)
+        #self.vBox.addWidget(self.datalabel)
 
         self.setLayout(self.vBox)
         self.show()
-

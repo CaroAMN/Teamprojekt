@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import sys
 import time
-from LoadingWidget import LoadingWindow 
+from LoadingWidget import LoadingWindow
 from GUI_FastaViewer import GUI_FastaViewer
 from mzTabLoadWidget import Window
 sys.path.insert(0, "../apps")
@@ -59,9 +59,15 @@ class AnalyzerTabWidget(QWidget):
         # add load Button for ProteomicsLFQ
         self.hboxlayout = QHBoxLayout()
         #putting the button on the right side corner with a Stretch
-        self.hboxlayout.addStretch(1)
+        #self.hboxlayout.addStretch(0)
+        self.Loadlabel = QLabel()
+        self.Loadlabel.setText("no data loaded")
+        self.hboxlayout.addWidget(self.Loadlabel)
+
         self.pushButton = QtWidgets.QPushButton(self)
         self.pushButton.setText("Load ProteomicsLFQ")
+        self.pushButton.setFixedWidth(200)
+
         self.hboxlayout.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.runProteomicsLFQ)
 
@@ -70,14 +76,21 @@ class AnalyzerTabWidget(QWidget):
 
         self.setLayout(self.layout)
 
+
+
     # launch ProteomicsLFQ and run in cmd
     def runProteomicsLFQ(self):
         # intialize "loading Widget"
-        self.load()
+        #print('bevor')
+        #self.Loadlabel.setText("")
+        self.Loadlabel.setText("loading")
+        #self.Loadlabel.show()
+        #print('after')
 
-        # launch cmd 
+
+        # launch cmd
         ProteomicsLFQ_command.run_console_ProteomicsLFQ()
-        
+
         # close "loading Widget"
         #self.TabWidget.removeTab(5)
 
@@ -85,9 +98,9 @@ class AnalyzerTabWidget(QWidget):
         self.TabWidget.removeTab(4)
         self.Tab5 = Window()
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
-    
-    def load(self):
-        self.Tab6 = LoadingWindow()
+        self.Loadlabel.setText("data loaded")
+
+
 
 
 
