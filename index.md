@@ -2,7 +2,8 @@
 
 ## ProteomicsLFQ
 
-* Es wurde eine neue Klasse definiert "ProteomicsLFQ_command". In diese Klasse wird ProteomicsLFQ in der Konsole ausgeführt mit den vorgegebenen Daten in den neuen Ordner FRACTIONS. Als Ausgabe gibt es die Inforation auf der Konsole und 3 Dateien. Zu der GUI würde einen neuen Ladeknopf hinzugefügt, sobald der Knopf gedrückt wird, kann man die Information von ProteomicsLFQ in der Gui auf dem Tab PSM/Protein Viewer sehen. Es gab Schwierigkeiten bei der Bonus Aufgabe, weil unsere Gruppe kein Zugang zu der pyopenms Dokumentation hatte und somit könnten wir nicht die Dateien, die durch ProteomicsLFQ entstanden sind, bearbeiten bzw nicht die gewünschte Information raus holen.
+* Es wurde eine neue Klasse definiert "ProteomicsLFQ_command". In diese Klasse wird ProteomicsLFQ in der Konsole ausgeführt mit den vorgegebenen Daten in den neuen Ordner FRACTIONS. Als Ausgabe gibt es die Informationen auf der Konsole und 3 Dateien. Zu der GUI wurde ein neuer Ladeknopf hinzugefügt. Sobald dieser gedrückt wird, kann man die Informationen von ProteomicsLFQ in der Gui auf dem Tab PSM/Protein Viewer ansehen. 
+Es gab Schwierigkeiten bei der Bonus Aufgabe, weil unsere Gruppe kein Zugang zu der pyopenms Dokumentation hatte und somit könnten wir nicht die Dateien, die durch ProteomicsLFQ entstanden sind, bearbeiten bzw nicht die gewünschte Information raus holen.
 
 ![alt text](Screenshots/week10_screenshot.png)
 
