@@ -2,6 +2,9 @@
 
 ## ProteomicsLFQ
 
+* Es kam zu Schwierigkeiten mit dem Verständnis der Aufgabe. Auch nach dem groben Verstehen, funktionierte der Aufruf von ProteomicsLFQ NICHT mit den vorgegebenen vier Dateien, sondern erst nach Hinzufügen des gesamten FRACTIONS Ordners. Nun kam am Ende u.a. auch eine mzTab.tmp Datei herau, welch wir dann für das Lösen den Hauptaufgabe verwenden konnten. 
+* Zur Zeit ist die Aufgabe selbst noch nicht so generisch wie wir uns das wünschen würden, da uns die Eingabe und Ausgabe, und wo die id, mz, fasta und tsv Dateien genau rein kommen sollen, nicht genau bekannt ist. Daher konnte das noch nicht perfekt angepasst werden. Somit läuft der Code in der cmd (Konsole) zur Zeit noch hard-coded, an FRACTIONS angepasst. 
+* Der Pfad zur Datei selbst wurde hingegen schon auf die Generik hin agepasst, kann allerdings auch nach entsprechenden Vorstellungen nochmals weiter angepasst werden, damit jeder Ordner (und nicht nur FRACTIONS) verwendet werden kann. 
 * Es wurde eine neue Klasse definiert "ProteomicsLFQ_command". In diese Klasse wird ProteomicsLFQ in der Konsole ausgeführt mit den vorgegebenen Daten in den neuen Ordner FRACTIONS. Als Ausgabe gibt es die Informationen auf der Konsole und 3 Dateien. Zu der GUI wurde ein neuer Ladeknopf hinzugefügt. Sobald dieser gedrückt wird, kann man die Informationen von ProteomicsLFQ in der Gui auf dem Tab PSM/Protein Viewer ansehen.
 * Es gab Schwierigkeiten bei der Bonus Aufgabe, weil wir kein Zugang zu der kompletten pyopenms Dokumentation hatte und die help Funktion von pyopenms uns auch nicht weiter gebracht hat. Der Zugriff auf die Informationen über die Kommandozeile mit OpenMS war ebenso Erfolglos, zwar wurden in der OpenMS Dokumentation mögliche Funktionen gefunden um die Informationen zu bekommen, jedoch war unklar wie genau man einen Abruf gestaltet.
 
