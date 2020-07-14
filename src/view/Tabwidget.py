@@ -18,7 +18,6 @@ import os
 sys.path.insert(0, '../FRACTIONS')
 from ProteomicsLFQ_command import ProteomicsLFQ_command
 
-
 class TabWindow(QMainWindow):
     def __init__(self):
         super().__init__()
