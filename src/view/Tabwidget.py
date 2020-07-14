@@ -6,10 +6,12 @@ import time
 from LoadingWidget import LoadingWindow
 from GUI_FastaViewer import GUI_FastaViewer
 from mzTabLoadWidget import Window
+from GUI_Welcome_Tab import GUI_Welcome_Tab
 sys.path.insert(0, "../apps")
 from XMLViewer import XMLViewer
 from TableEditor import TableEditor
 from SpecViewer import App
+
 
 
 import os
@@ -37,6 +39,7 @@ class AnalyzerTabWidget(QWidget):
 
         # initialize tabs
         self.TabWidget = QTabWidget()
+        self.Tab0 = GUI_Welcome_Tab()
         self.Tab1 = GUI_FastaViewer()
         self.Tab2 = App()
         self.Tab3 = TableEditor()
@@ -44,6 +47,7 @@ class AnalyzerTabWidget(QWidget):
         self.Tab5 = Window()
 
         # add tabs
+        self.TabWidget.addTab(self.Tab0,"Welcome")
         self.TabWidget.addTab(self.Tab1, "Proteinsequence Viewer")
         self.TabWidget.addTab(self.Tab2, "Spectrum Viewer")
         self.TabWidget.addTab(self.Tab3, "Experimental Design")
@@ -66,7 +70,7 @@ class AnalyzerTabWidget(QWidget):
         self.pushButton = QtWidgets.QPushButton(self)
         self.pushButton.setText("Load ProteomicsLFQ")
         self.pushButton.setFixedWidth(200)
-        
+
 
         self.hboxlayout.addWidget(self.pushButton)
         self.pushButton.clicked.connect(self.runProteomicsLFQ)
