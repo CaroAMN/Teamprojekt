@@ -105,7 +105,10 @@ class GUI_Welcome_Tab(QMainWindow):
 
 
     def Load_ExperimentalData(self):
-        #TODO: load select scrreen to select a Folder
+        #TODO: mabye have to make the arrays global var to be able to use them
+        #for further iplementation
+        #the file that the user chose is always going to be on the index 0 in
+        #its correspinding array
         fasta_files = []
         tsv_files = []
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
@@ -147,6 +150,10 @@ class GUI_Welcome_Tab(QMainWindow):
     #opens QFileDialog and user must select file if file wrong type display
     #error message
     def Select_Fasta_File(self,File_Array):
+        #TODO make it recursive so if the User selects the wrong file it
+        #shows the error message and open Select_Fasta_File again until the
+        #user makes the right choice
+        #PROBLEM if user presses Cancel it still stays in recursion
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
         if ExperimentalData_File_Path.endswith(".fasta"):
@@ -161,6 +168,10 @@ class GUI_Welcome_Tab(QMainWindow):
 
 
     def Select_Tsv_File(self,File_Array):
+        #TODO make it recursive so if the User selects the wrong file it
+        #shows the error message and open Select_Tsv_File again until the 
+        #user makes the right choice
+        #PROBLEM if user presses Cancel it still stays in recursion
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
         if ExperimentalData_File_Path.endswith(".tsv"):

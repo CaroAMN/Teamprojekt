@@ -26,6 +26,7 @@ class Files_Number_Handler():
             if file.endswith(".tsv"):
                 tsv_files.append(file)
         return fasta_files,tsv_files
+        
     #checks if array contains only on element, it is important because if
     #more than 1 user needs to select the on file he wants to use
     def Check_If_More_Than_One(arraytotest):
