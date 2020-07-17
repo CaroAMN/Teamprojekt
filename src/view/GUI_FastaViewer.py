@@ -114,7 +114,7 @@ class GUI_FastaViewer(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        """Gets self and creates creates the User Interface
+        """Gets self and creates the User Interface
 
         Parameters
         ----------
@@ -133,7 +133,7 @@ class GUI_FastaViewer(QMainWindow):
 
         self.loadbutton = QtWidgets.QPushButton(self)
         self.loadbutton.setText("load")
-        self.loadbutton.clicked.connect(self.loadFile)
+        self.loadbutton.clicked.connect(self.loadPath)
 
         # creating testboxes for the buttons
         self.boxPro = QLineEdit(self)
@@ -233,7 +233,12 @@ class GUI_FastaViewer(QMainWindow):
         return cut
     # defining the function for load button to get path of database
 
-    def loadFile(self):
+    def loadPath(self):
+        self.filename = QFileDialog.getOpenFileName()
+        self.loadFile(self.filename[0])
+
+
+    def loadFile(self, fasta_path):
         """Gets QMainWindow and opens a QFileDialog and loads path
 
     Parameters
@@ -247,12 +252,12 @@ class GUI_FastaViewer(QMainWindow):
     nothing , it changes the QMainWindow so that the user can see that a file
     has been loaded
     """
-        self.filename = QFileDialog.getOpenFileName()
-        self.path = self.filename[0]
+        #self.filename = QFileDialog.getOpenFileName()
+        #self.path = path_array[0]
         self.fileloaded = 1
         # loading the lists before searching in order to make the search faster
         self.dictKeyAccession, self.proteinList, self.proteinNameList, self.proteinOSList, self.dictKeyAccessionDECOY, self.proteinListDECOY, self.proteinNameListDECOY, self.proteinOSListDECOY = LoadFasta_FastaViewer.protein_dictionary(
-            self.path)
+            fasta_path)
         self.datalabel.setText("Data loaded")
         for i in range(len(self.dictKeyAccession)):
             ID = list(self.dictKeyAccession.keys())[i]

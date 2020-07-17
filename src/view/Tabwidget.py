@@ -7,6 +7,7 @@ from LoadingWidget import LoadingWindow
 from GUI_FastaViewer import GUI_FastaViewer
 from mzTabLoadWidget import Window
 from GUI_Welcome_Tab import GUI_Welcome_Tab
+from Welcome_Tab_Logic import *
 sys.path.insert(0, "../apps")
 from XMLViewer import XMLViewer
 from TableEditor import TableEditor
@@ -47,7 +48,7 @@ class AnalyzerTabWidget(QWidget):
         self.Tab5 = Window()
 
         # add tabs
-        self.TabWidget.addTab(self.Tab0,"Welcome")
+        self.TabWidget.addTab(self.Tab0, "Welcome")
         self.TabWidget.addTab(self.Tab1, "Proteinsequence Viewer")
         self.TabWidget.addTab(self.Tab2, "Spectrum Viewer")
         self.TabWidget.addTab(self.Tab3, "Experimental Design")
@@ -73,12 +74,20 @@ class AnalyzerTabWidget(QWidget):
 
 
         self.hboxlayout.addWidget(self.pushButton)
-        self.pushButton.clicked.connect(self.runProteomicsLFQ)
+        self.pushButton.clicked.connect(self.loadFastaAndTSVButton)
 
         self.layout.addLayout(self.hboxlayout)
 
 
         self.setLayout(self.layout)
+
+
+    # global load button
+    def loadFastaAndTSVButton(self):
+        fasta_path, tsv_path = Welcome_Tab_Logic.Load_ExperimentalData(self.Tab0)
+        self.Tab1.loadFile(fasta_path)
+        # ab hier würden wir den tsv_path nutzen, aber mzMLTableView.py ist buggy
+        #self.Tab3.
 
 
     def runProteomicsLFQ(self):
