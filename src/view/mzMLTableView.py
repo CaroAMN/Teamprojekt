@@ -134,21 +134,50 @@ class mzMLTableView(QWidget):
             print("Starttime of drawTable : ", starttime)
 
         tabledf = Tdf.getTable(self)
-        # print(tabledf)  # For debugging
+        print(tabledf)  # For debugging
         rowcount = len(tabledf.index)
         colcount = len(tabledf.columns)
         self.table.setRowCount(rowcount)
+
+        counter = 0
+
         for r in range(rowcount):
             row = tabledf.index[r]
             for c in range(colcount):
                 col = tabledf.columns[c]
                 if col == 'Spectra_Filepath':
-                    path = tabledf.at[row, col].split("/")
-                    name = path[len(path)-1]
-                    self.table.setItem(r, c, QTableWidgetItem(name))
+                    
+                    #input_array_FRACTIONS = tabledf.at[row, col]
+
+                    # if split works (for our own experimental table .csv file)
+
+                    # Kurze Erklärung zum counter:
+                    # Wenn der "try" nicht klappt, dann gehts in das "except" und 
+                    # somit haben wir andauernd ein Array an der Hand. Das wollen wir aber nicht 
+                    # Daher nehmen wir uns immer entsprechend unserem counter das entsprechende Element 
+                    # Wenn wir am Ende des Arrays angekommen sind, kann es in der selben Spalte noch
+                    # ein weiteres Array geben. Wir setzen den counter daher wieder auf 0 und starten 
+                    # von vorn. 
+                    try: 
+                        path = tabledf.at[row, col].split("/")
+                        name = path[len(path)-1]
+                        self.table.setItem(r, c, QTableWidgetItem(name))
+                    except:
+                        spectraFile = tabledf.at[row, col]
+
+                        if counter != len(spectraFile) - 1:
+                            self.table.setItem(r, c, QTableWidgetItem(spectraFile[counter]))
+                            counter += 1
+                        else:
+                            self.table.setItem(r, c, QTableWidgetItem(spectraFile[counter]))
+                            counter = 0
+
+
                 else:
-                    item = str(tabledf.at[row, col])
-                    self.table.setItem(r, c, QTableWidgetItem(item))
+                    item = tabledf.at[row, col]
+
+                    if len(item) != 1:
+                        self.table.setItem(r, c, QTableWidgetItem(str(item[counter])))
 
         self.drawtableactive = False
 
