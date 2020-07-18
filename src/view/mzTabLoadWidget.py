@@ -3,6 +3,7 @@ import webbrowser
 from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QWidget, QTableWidget, QVBoxLayout, QTableWidgetItem, QPushButton, QFileDialog
 from mzTabTableWidget import Window as mz
+from Welcome_Tab_Logic import Welcome_Tab_Logic as wtl
 sys.path.insert(0, "../FRACTIONS")
 from ProteomicsLFQ_command import ProteomicsLFQ_command
 
@@ -35,9 +36,9 @@ class Window(QWidget):
         self.vBox.addWidget(self.mzTabTableWidget)
 
         self.setLayout(self.vBox)
-        
+
         #def loadFile(self):
-        self.filename = ProteomicsLFQ_command.file_path_mzTab()
+        self.filename = wtl.file_path_mzTab()
 
         if self.filename == "error":
             self.show()

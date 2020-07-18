@@ -18,15 +18,29 @@ class Files_Number_Handler():
     def Identify_Files_Numbers(folder_path):
         fasta_files=[]
         tsv_files = []
-        fileslist = os.listdir(folder_path)
+        mzML_files = []
+        idXML_files= []
+        ini_files = []
+        fileslist = sorted(os.listdir(folder_path))
+        #print(sorted(fileslist))
         for file in fileslist:
             if file.endswith(".fasta"):
                 fasta_files.append(file)
 
             if file.endswith(".tsv"):
                 tsv_files.append(file)
-        return fasta_files,tsv_files
-        
+
+            if file.endswith(".mzML"):
+                mzML_files.append(file)
+
+            if file.endswith(".idXML"):
+                idXML_files.append(file)
+
+            if file.endswith(".ini"):
+                ini_files.append(file)
+
+        return fasta_files,tsv_files,mzML_files,idXML_files,ini_files
+
     #checks if array contains only on element, it is important because if
     #more than 1 user needs to select the on file he wants to use
     def Check_If_More_Than_One(arraytotest):
