@@ -9,6 +9,7 @@ from GUI_FastaViewer import GUI_FastaViewer
 from mzTabTableWidget import Window
 from GUI_Welcome_Tab import GUI_Welcome_Tab
 from Welcome_Tab_Logic import *
+from ConfigView import ConfigView
 sys.path.insert(0, "../apps")
 from XMLViewer import XMLViewer
 from TableEditor import TableEditor
@@ -47,7 +48,7 @@ class AnalyzerTabWidget(QWidget):
         self.Tab2 = App()
         #self.Tab3 = TableEditor()
         self.Tab3 = mzMLTableView()
-        self.Tab4 = XMLViewer()
+        self.Tab4 = ConfigView()
         self.Tab5 = Window()
 
         # add tabs
@@ -83,7 +84,7 @@ class AnalyzerTabWidget(QWidget):
         self.runButton.clicked.connect(self.runProteomicsLFQ)
 
         self.hboxlayout.addWidget(self.loadButton)
-        self.loadButton.clicked.connect(self.loadFastaAndTSVButton)
+        self.loadButton.clicked.connect(self.clickedLoadData)
 
         self.layout.addLayout(self.hboxlayout)
 
@@ -95,19 +96,55 @@ class AnalyzerTabWidget(QWidget):
         self.idXML_files = []
         self.tsv_path = ''
         self.fasta_path = ''
+        self.ini_path = ''
+
+        self.fastaLoaded = 0
+        self.tsvLoaded = 0
+        self.mzMLLoaded = 0
+        self.idXMLLoaded = 0
+        self.iniLoaded = 0
 
 
     # global load button
-    def loadFastaAndTSVButton(self):
-        fasta_path, tsv_path, data_path, mzML, idXML = Welcome_Tab_Logic.Load_ExperimentalData(self.Tab0)
-        self.Tab1.loadFile(data_path+'/'+fasta_path)
-        # ab hier würden wir den tsv_path nutzen, aber mzMLTableView.py ist buggy
-        self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
+    def clickedLoadData(self):
+        #when new data is loaded all previous loaded data is cleared
+        self.Tab5.clearmzTabTable()# new method to clear table
+        self.Tab1.clearFastaViewer()# new methode to clear fasta viewer
+
+        self.Tab3.SelectAllBtn()#first seltect all
+        self.Tab3.RemoveBtn()#then clear all selected
+
+        self.Tab4.clearConfigView()
+
+        fasta_path, tsv_path, data_path, mzML, idXML, ini_path, fastaLoaded, tsvLoaded, mzMLLoaded, idXMLLoaded, iniLoaded = Welcome_Tab_Logic.Load_ExperimentalData(self)
+
+        if len(fasta_path.split('/')) == 1: # if one fasta file comes from working directory only file name is saved in an array
+            self.Tab1.loadFile(data_path+'/'+fasta_path)# for loading working directoy needs to be added for complete path
+        else:
+            self.Tab1.loadFile(fasta_path)# fasta file comes from other directory or more than one file in working directory , complete path is saved
+        if len(tsv_path.split('/')) == 1:
+            self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
+        else:
+            self.Tab3.loadExperimentalDesign(tsv_path)
+        if len(ini_path.split('/')) == 1:
+            self.Tab4.generateTreeModel(data_path+ '/'+ini_path)
+        else:
+            self.Tab4.generateTreeModel(ini_path)
+
         self.data_path = data_path
         self.mzML_files = mzML
         self.idXML_files = idXML
         self.fasta_path = fasta_path
         self.tsv_path = tsv_path
+        self.ini_path
+
+        self.fastaLoaded = fastaLoaded
+        self.tsvLoaded = tsvLoaded
+        self.mzMLLoaded = mzMLLoaded
+        self.idXMLLoaded = idXMLLoaded
+        self.iniLoaded = iniLoaded
+
+        self.Loadlabel.setText("data loaded")
         print(mzML)
         print(idXML)
 
@@ -115,19 +152,54 @@ class AnalyzerTabWidget(QWidget):
 
     def runProteomicsLFQ(self):
         """launch proteomicsLFQ and add output to PSM/ ProteinViewer Tab"""
+        if not bool(self.fastaLoaded):
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("Fasta file is missing")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+        elif not bool(self.tsvLoaded):
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("tsv file is missing")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
 
-        self.Loadlabel.setText("loading...")
+        elif not bool(self.mzMLLoaded):
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("mzML files are missing")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
 
-        # launch cmd
-        #ProteomicsLFQ_command.run_console_ProteomicsLFQ()
-        mzTab_file = Welcome_Tab_Logic.Run_ProteomicsLFQ(Welcome_Tab_Logic,self.data_path, self.mzML_files, self.idXML_files, self.fasta_path, self.tsv_path)
-        complete_path = self.data_path + '/' + mzTab_file
-        self.Tab5.readFile(complete_path)
+        elif not bool(self.idXMLLoaded):
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("idXML files are missing")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
 
-        #self.TabWidget.removeTab(4)
-        #self.Tab5 = Window()
-        #self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
-        self.Loadlabel.setText("data loaded")
+
+        elif not bool(self.iniLoaded):
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("config file is missing")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+
+        elif bool(self.fastaLoaded) and bool(self.tsvLoaded) and bool(self.mzMLLoaded) and bool(self.idXMLLoaded) and bool(self.iniLoaded):
+            # runs with init
+            
+            self.Loadlabel.setText("loading...")
+
+            mzTab_file = Welcome_Tab_Logic.Run_ProteomicsLFQ(Welcome_Tab_Logic,self.data_path, self.mzML_files, self.idXML_files, self.fasta_path, self.tsv_path, self.ini_path)
+            complete_path = self.data_path + '/' + mzTab_file
+            self.Tab5.readFile(complete_path)
+            self.Loadlabel.setText("Job completed")
+
+
+
+
 
 
 

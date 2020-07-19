@@ -21,6 +21,8 @@ class Files_Number_Handler():
         mzML_files = []
         idXML_files= []
         ini_files = []
+        mzMLLoaded = 0
+        idXMLLoaded = 0
         fileslist = sorted(os.listdir(folder_path))
         #print(sorted(fileslist))
         for file in fileslist:
@@ -39,7 +41,39 @@ class Files_Number_Handler():
             if file.endswith(".ini"):
                 ini_files.append(file)
 
-        return fasta_files,tsv_files,mzML_files,idXML_files,ini_files
+        if len(mzML_files) == 0 and len(idXML_files) == 0:
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("No mzML and idXML files found. Pleas select another folder.")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+            mzMLLoaded = 0
+            idXMLLoaded =0
+
+        if  len(mzML_files) == 0 and len(idXML_files) != 0:
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("No mzML files found. Pleas select another folder.")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+            mzMLLoaded = 0
+            idXMLLoaded = 1
+
+        if len(mzML_files) != 0 and len(idXML_files) == 0:
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("No idXML files found. Pleas select another folder.")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+            mzMLLoaded = 1
+            idXMLLoaded = 0
+        if len(mzML_files) != 0 and len(idXML_files) != 0:
+            mzMLLoaded = 1
+            idXMLLoaded = 1
+
+
+
+        return fasta_files,tsv_files,mzML_files,idXML_files,ini_files, mzMLLoaded, idXMLLoaded
 
     #checks if array contains only on element, it is important because if
     #more than 1 user needs to select the on file he wants to use
@@ -54,3 +88,8 @@ class Files_Number_Handler():
             return True
         else :
             return False
+    def Check_If_One(arraytotest) :
+        if len(arraytotest) == 1:
+            return True
+        else:
+            return False           

@@ -232,7 +232,9 @@ class GUI_FastaViewer(QMainWindow):
         cut = oldstring.split(proteinseq)
         return cut
     # defining the function for load button to get path of database
-
+    def clearFastaViewer(self):
+        self.tw.clear()
+        
     def loadPath(self):
         self.filename = QFileDialog.getOpenFileName()
         self.loadFile(self.filename[0])

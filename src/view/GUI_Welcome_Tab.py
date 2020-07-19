@@ -45,7 +45,7 @@ class GUI_Welcome_Tab(QMainWindow):
         Tabs_Explination = """
         This Application offers the folowing Options:
 
-        Proteinsequence Viewer: Check the loaded Proteins with all their informations from a .fasta file. 
+        Proteinsequence Viewer: Check the loaded Proteins with all their informations from a .fasta file.
 
         Spectrum Viewer.......
 
@@ -64,6 +64,12 @@ class GUI_Welcome_Tab(QMainWindow):
         Once you have selected your data you
         can run the ProteomicsLFQ Algorithm with the Run ProteomicsLFQ Button """
         #assignt Strings to Label as Text
+
+        #TODO Creat select folder button
+        #TODO creat text line for coosing output name
+        #TODO data load label needs to show which files are missing, data loaded when all files are provided
+        
+
         self.Weclome_Title_Label.setText(welcome_Title)
         self.Tabs_Explination_Label.setText(Tabs_Explination)
         self.proteomicsLFQ_Title_Label.setText(proteomicsLFQ_Title)

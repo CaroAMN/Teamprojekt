@@ -126,6 +126,7 @@ class ConfigView(QWidget):
         self.drawTreeInit()
         self.header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
+
     def generateTreeWidgetItem(self, item: ET.Element) -> QTreeWidgetItem:
         """
         generates a QTreeWidgetItem with each column for an
@@ -389,3 +390,6 @@ class ConfigView(QWidget):
             if len(temp) < 2:
                 file = file + ".ini"
             self.tree.write(file)
+
+    def clearConfigView(self):
+        self.treeWidget.clear()

@@ -1,11 +1,11 @@
-""" 
+"""
 mzTabTableWidget
 ----------------
-This script allows the user to transfer information about proteins and psms from a mzTab file into two tables, 
+This script allows the user to transfer information about proteins and psms from a mzTab file into two tables,
 one containing the proteins, the other one containing the psms.
 By clicking on a row, the tables get updated regarding their listed proteins or psms.
 Once you choose a protein/psm, the table displays only those psms/proteins that are linked to one another.
-This tool is designed to accept mzTab files. It is required to save those files under '.../examples/data/' or 
+This tool is designed to accept mzTab files. It is required to save those files under '.../examples/data/' or
 change the path within the InitWindow.
 """
 import sys
@@ -311,3 +311,26 @@ class Window(QWidget):
             accession = self.PSMFull[item.row()][2].split("|", 2)[1]
 
         webbrowser.open("https://www.uniprot.org/uniprot/" + accession)
+
+    def clearmzTabTable(self):
+        self.tablePRTFull.clear()
+        self.tablePSMFull.clear()
+        self.tablePSMFiltered.clear()
+        self.tablePRTFiltered.clear()
+
+        self.tablePRTFull.setRowCount(0)
+        self.tablePSMFull.setRowCount(0)
+        self.tablePSMFiltered.setRowCount(0)
+        self.tablePRTFiltered.setRowCount(0)
+
+        self.PRTFull.clear()
+        self.PSMFull.clear()
+
+        self.PRTFiltered.clear()
+        self.PSMFiltered.clear()
+
+        self.PRTColumn.clear()
+        self.PSMColumn.clear()
+
+        self.PRTColumn = [True]
+        self.PSMColumn = [True]
