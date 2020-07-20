@@ -41,24 +41,23 @@ class GUI_Welcome_Tab(QMainWindow):
         self.proteomicsLFQ_Load_Explination_Label = QLabel()
         self.proteomicsLFQ_Run_Explination_Label = QLabel()
 
-        welcome_Title = "Welcome to the Experimental Viewer"
+        welcome_Title = "OpenMS ProteomicsLFQ QApplication  "
         Tabs_Explination = """
         This Application offers the folowing Options:
 
-        Proteinsequence Viewer: Check the loaded Proteins with all their informations from a .fasta file.
+        Proteinsequence Viewer: Displays all information of the loaded Fasta file.
 
-        Spectrum Viewer.......
+        Spectrum Viewer: Displays the identified spectra.
 
-        Experimental Design.......
+        Experimental Design: Display and edit the content of your tsv or csv file or load your mzML files to creat a tsv and csv file.
 
-        XML Viewer................
+        XML Viewer: Displays a provided configuration file.
 
-        PSM/Protein Viewer..............
+        PSM/Protein Viewer: Displays the output mzTab file after successful running the ProteomicsLFQ.
                         """
         proteomicsLFQ_Title =   " ProteomicsLFQ "
         proteomicsLFQ_Load_Explination="""
-        If you have experimental Data saved on this Hardware
-        please select the Folder in which the Data is saved
+        Load a folder containing your experimental Data(.mzML, .idXML, .tsv, .fasta, .ini).
         """
         proteomicsLFQ_Run_Explination ="""
         Once you have selected your data you
@@ -68,7 +67,7 @@ class GUI_Welcome_Tab(QMainWindow):
         #TODO Creat select folder button
         #TODO creat text line for coosing output name
         #TODO data load label needs to show which files are missing, data loaded when all files are provided
-        
+
 
         self.Weclome_Title_Label.setText(welcome_Title)
         self.Tabs_Explination_Label.setText(Tabs_Explination)

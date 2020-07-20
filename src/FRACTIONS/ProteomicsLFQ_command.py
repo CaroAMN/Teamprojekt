@@ -10,6 +10,7 @@ class ProteomicsLFQ_command:
 
         # extract file path
         path_for_mzTab = os.getcwd()[2:]
+        
         # reverse string
         path_for_mzTab = path_for_mzTab[::-1]
         # remove last entry of the path for the directoy, to replace later on with "FRACTIONS"
