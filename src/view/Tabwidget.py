@@ -136,7 +136,7 @@ class AnalyzerTabWidget(QWidget):
         self.idXML_files = idXML
         self.fasta_path = fasta_path
         self.tsv_path = tsv_path
-        self.ini_path
+        self.ini_path = ini_path
 
         self.fastaLoaded = fastaLoaded
         self.tsvLoaded = tsvLoaded
@@ -189,7 +189,7 @@ class AnalyzerTabWidget(QWidget):
 
         elif bool(self.fastaLoaded) and bool(self.tsvLoaded) and bool(self.mzMLLoaded) and bool(self.idXMLLoaded) and bool(self.iniLoaded):
             # runs with init
-            
+
             self.Loadlabel.setText("loading...")
 
             mzTab_file = Welcome_Tab_Logic.Run_ProteomicsLFQ(Welcome_Tab_Logic,self.data_path, self.mzML_files, self.idXML_files, self.fasta_path, self.tsv_path, self.ini_path)
