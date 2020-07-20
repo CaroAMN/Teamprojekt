@@ -1,10 +1,24 @@
+# Woche 11
+
+* Die Hauptapplikation wurde um ein Tab erweitert(Welcome Tab). Dieses beinhaltet momentan nur allgemeine Informationen zur Applikation.
+* Über den Button 'Run ProteomicsLFQ' wird der Kommandozeilenaufruf gestartet. Anstatt der Parameter wird die ini Datei verwendet. Der Command wird nur ausgeführt sobald alle notwenidigen Dateien geladen wurden. Sobald Dateien Fehlen wird der User darauf Aufmerksam gemacht welche Datei fehlt.
+
+* Die Daten erden im Moment über den 'Load Data' Button geladen. Dabei soll ein kompletter Ordner mit allen benötigten Dateien ausgewählt werden. Für die Fasta, TSV, und ini Dateien wird der User informiert ob es zu viele oder zu wenige Dateien in dem Ordner gibt und er wird direkt aufgefordert eine der jeweiligen Dateien auszuwählen in dem sich der OpenfileDialog öffnet. Wählt der user keine oder die falsche Datei aus wird dieser informiert. Beinhaltet der Ordner keine mzML oder idXML Dateien wird der User darauf hingewiesen einen neuen Ordner auszuwählen. So lange die mzML und die idXML Dateien Vorhanden sind kann der User die anderen Dateien noch manuel auswählen und es ist egal aus welcher Directory diese Stammen.
+
+* Die zwei Beispielbilder zeigen jeweils eine Fehlermeldung wenn zu viele Dateien vorhanden sind (Bild 1) und die Fehlermeldung die dem User zeigt welche Dateien fehlen wenn man versucht 'Run ProteomicsLFQ' auszuführen.
+
+![alt text](Screenshots/ToManyFastaFiles.png)
+![alt text](Screenshots/FASTAmissing.png)
+
+* Die .fasta, .tsv, .ini Dateien werden in den einzelnen Tabs angezeigt sobald sie rein geladen werden. Die mzTab wird nach dem ausgeführten Programm im letzten Tab angezeigt
+
 # Woche 10
 
 ## ProteomicsLFQ
 
-* Es kam zu Schwierigkeiten mit dem Verständnis der Aufgabe. Auch nach dem groben Verstehen, funktionierte der Aufruf von ProteomicsLFQ NICHT mit den vorgegebenen vier Dateien, sondern erst nach Hinzufügen des gesamten FRACTIONS Ordners. Nun kam am Ende u.a. auch eine mzTab.tmp Datei herau, welch wir dann für das Lösen den Hauptaufgabe verwenden konnten. 
-* Zur Zeit ist die Aufgabe selbst noch nicht so generisch wie wir uns das wünschen würden, da uns die Eingabe und Ausgabe, und wo die id, mz, fasta und tsv Dateien genau rein kommen sollen, nicht genau bekannt ist. Daher konnte das noch nicht perfekt angepasst werden. Somit läuft der Code in der cmd (Konsole) zur Zeit noch hard-coded, an FRACTIONS angepasst. 
-* Der Pfad zur Datei selbst wurde hingegen schon auf die Generik hin agepasst, kann allerdings auch nach entsprechenden Vorstellungen nochmals weiter angepasst werden, damit jeder Ordner (und nicht nur FRACTIONS) verwendet werden kann. 
+* Es kam zu Schwierigkeiten mit dem Verständnis der Aufgabe. Auch nach dem groben Verstehen, funktionierte der Aufruf von ProteomicsLFQ NICHT mit den vorgegebenen vier Dateien, sondern erst nach Hinzufügen des gesamten FRACTIONS Ordners. Nun kam am Ende u.a. auch eine mzTab.tmp Datei herau, welch wir dann für das Lösen den Hauptaufgabe verwenden konnten.
+* Zur Zeit ist die Aufgabe selbst noch nicht so generisch wie wir uns das wünschen würden, da uns die Eingabe und Ausgabe, und wo die id, mz, fasta und tsv Dateien genau rein kommen sollen, nicht genau bekannt ist. Daher konnte das noch nicht perfekt angepasst werden. Somit läuft der Code in der cmd (Konsole) zur Zeit noch hard-coded, an FRACTIONS angepasst.
+* Der Pfad zur Datei selbst wurde hingegen schon auf die Generik hin agepasst, kann allerdings auch nach entsprechenden Vorstellungen nochmals weiter angepasst werden, damit jeder Ordner (und nicht nur FRACTIONS) verwendet werden kann.
 * Es wurde eine neue Klasse definiert "ProteomicsLFQ_command". In diese Klasse wird ProteomicsLFQ in der Konsole ausgeführt mit den vorgegebenen Daten in den neuen Ordner FRACTIONS. Als Ausgabe gibt es die Informationen auf der Konsole und 3 Dateien. Zu der GUI wurde ein neuer Ladeknopf hinzugefügt. Sobald dieser gedrückt wird, kann man die Informationen von ProteomicsLFQ in der Gui auf dem Tab PSM/Protein Viewer ansehen.
 * Es gab Schwierigkeiten bei der Bonus Aufgabe, weil wir kein Zugang zu der kompletten pyopenms Dokumentation hatte und die help Funktion von pyopenms uns auch nicht weiter gebracht hat. Der Zugriff auf die Informationen über die Kommandozeile mit OpenMS war ebenso Erfolglos, zwar wurden in der OpenMS Dokumentation mögliche Funktionen gefunden um die Informationen zu bekommen, jedoch war unklar wie genau man einen Abruf gestaltet.
 
