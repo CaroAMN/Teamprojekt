@@ -128,7 +128,15 @@ class Welcome_Tab_Logic:
         return  self.fasta_path, self.tsv_path, Working_directory, mzML_files, idXML_files, self.ini_path, self.fastaLoaded, self.tsvLoaded, self.mzMLLoaded, self.idXMLLoaded, self.iniLoaded
 
 
+    #this method is to load the idXML,mzML and Folder path for manualy option
+    def Load_ExperimentalData_Manualy(self):
+        ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
+        idXML_files,mzML_files = Files_Number_Handler.Identify_Files_Numbers_Manualy(ExperimentalData_Folder_Path)
+        Working_directory = ExperimentalData_Folder_Path
 
+
+
+        return idXML_files,mzML_files,Working_directory
 
     def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv): # maybe use as default setting when no ini file is provieded ?
 

@@ -12,6 +12,7 @@ sys.path.append(os.getcwd() + '/../controller')
 from filehandler import FileHandler as fh  # noqa E402
 sys.path.append(os.getcwd() + '/../model')
 from tableDataFrame import TableDataFrame as Tdf  # noqa E402
+from FilesNumberHandler import Files_Number_Handler
 
 
 class mzMLTableView(QWidget):
@@ -180,6 +181,8 @@ class mzMLTableView(QWidget):
         file, _ = QFileDialog.getOpenFileName(
             self, "QFileDialog.getOpenFileName()", "",
             "All Files (*);;tsv (*.tsv);; csv (*.csv)", options=options)
+        Files_Number_Handler.Dictionary_Change_File("tsv",file)
+        Files_Number_Handler.Dictionary_Change_Boolean("tsv")
 
         if file:
             df = fh.importTable(self, file)
@@ -200,6 +203,8 @@ class mzMLTableView(QWidget):
         file, _ = QFileDialog.getSaveFileName(
             self, "QFileDialog.getSaveFileName()", "",
             "All Files (*);;tsv (*.tsv);; csv (*.csv)", options=options)
+        Files_Number_Handler.Dictionary_Change_File("tsv",file)
+        Files_Number_Handler.Dictionary_Change_Boolean("tsv")
 
         if file:
             df = Tdf.getTable(self)
@@ -244,6 +249,8 @@ class mzMLTableView(QWidget):
             file, _ = QFileDialog.getOpenFileName(
                 self, "QFileDialog.getOpenFileName()", "",
                 "All Files (*);;mzML Files (*.mzML)", options=options)
+        Files_Number_Handler.Dictionary_Change_File("mzML",file)
+        Files_Number_Handler.Dictionary_Change_Boolean("mzML")
 
         if file:
             cdf = Tdf.getTable(self)

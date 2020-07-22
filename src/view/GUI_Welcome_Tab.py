@@ -28,7 +28,7 @@ class GUI_Welcome_Tab(QMainWindow):
     def initUI(self):
         #creating the Layout, QVBoxLayout with hboxlayout in it fot the
         #different levels
-
+        
         self.mainwidget = QWidget(self)
         self.main_layout = QVBoxLayout(self.mainwidget)
         self.Hboxlevel1 = QHBoxLayout()

@@ -14,6 +14,8 @@ from PyQt5.QtCore import Qt, QUrl
 # from dictionaries import Dict
 sys.path.insert(0, '../examples')
 from LoadFasta_FastaViewer import LoadFasta_FastaViewer  # NOQA: E402
+from FilesNumberHandler import Files_Number_Handler
+
 
 
 class GUI_FastaViewer(QMainWindow):
@@ -234,9 +236,12 @@ class GUI_FastaViewer(QMainWindow):
     # defining the function for load button to get path of database
     def clearFastaViewer(self):
         self.tw.clear()
-        
+
     def loadPath(self):
         self.filename = QFileDialog.getOpenFileName()
+        #saving the file path in the dictionary
+        Files_Number_Handler.Dictionary_Change_File("fasta",self.filename[0])
+        Files_Number_Handler.Dictionary_Change_Boolean("fasta")
         self.loadFile(self.filename[0])
 
 

@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 import xml.etree.ElementTree as ET
 from defusedxml.ElementTree import parse
 from functools import partial
-
+from FilesNumberHandler import Files_Number_Handler
 
 class ConfigView(QWidget):
     def __init__(self, *args):
@@ -113,6 +113,9 @@ class ConfigView(QWidget):
         file, _ = QFileDialog.getOpenFileName(
             self, "QFileDialog.getOpenFileName()", "",
             "All Files (*);;ini (*.ini)")
+        #saving data in to dictionary
+        Files_Number_Handler.Dictionary_Change_File("ini_path",file)
+        Files_Number_Handler.Dictionary_Change_Boolean("ini_path")
         if file:
             self.generateTreeModel(file)
 

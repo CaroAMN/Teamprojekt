@@ -16,6 +16,7 @@ from TableEditor import TableEditor
 from SpecViewer import App
 sys.path.append(os.getcwd()+'/../view')
 from mzMLTableView import mzMLTableView
+from FilesNumberHandler import Files_Number_Handler
 
 
 import os
@@ -23,7 +24,7 @@ import os
 # TODO: eventuell im Nachhinein anderer Ordner (oder generisch)
 sys.path.insert(0, '../FRACTIONS')
 from ProteomicsLFQ_command import ProteomicsLFQ_command
-
+Option_selected = "manualy"
 class TabWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -103,10 +104,38 @@ class AnalyzerTabWidget(QWidget):
         self.mzMLLoaded = 0
         self.idXMLLoaded = 0
         self.iniLoaded = 0
+        x = Files_Number_Handler.Dictionary_Return_Value("fasta")
+        y = Files_Number_Handler.Dictionary_Return_Value("tsv")
+        print(x)
+        print(y)
+
+        #creates an user dialog and asks him to choose on option
+    def user_Dialog(self):
+        messagebox = QMessageBox()
+        messagebox.setWindowTitle("Information")
+        messagebox.setIcon(QMessageBox.Question)
+        messagebox.setText("Please choose on of the following Options")
+        messagebox.addButton("automatically", QtWidgets.QMessageBox.YesRole)
+        messagebox.addButton("manualy", QtWidgets.QMessageBox.NoRole)
+        messagebox.setDetailedText("If you choose automatically than all"+
+            "manualy selected Files will be overwritten with the files in "+
+            "the folder you select. If you choose manualy than they will be "+
+            "used instead")
+        messagebox.buttonClicked.connect(self.option_selected)
+        messagebox.exec_()
+
+    def option_selected(self,button):
+        global Option_selected
+        Option_selected = button.text()
 
 
-    # global load button
+
+
+
     def clickedLoadData(self):
+        self.user_Dialog()
+        global Option_selected
+        print(Option_selected)
         #when new data is loaded all previous loaded data is cleared
         self.Tab5.clearmzTabTable()# new method to clear table
         self.Tab1.clearFastaViewer()# new methode to clear fasta viewer
@@ -115,21 +144,59 @@ class AnalyzerTabWidget(QWidget):
         self.Tab3.RemoveBtn()#then clear all selected
 
         self.Tab4.clearConfigView()
+        #if user has selected automatically than load everything from Directory
+        if Option_selected == "automatically":
 
-        fasta_path, tsv_path, data_path, mzML, idXML, ini_path, fastaLoaded, tsvLoaded, mzMLLoaded, idXMLLoaded, iniLoaded = Welcome_Tab_Logic.Load_ExperimentalData(self)
+            fasta_path, tsv_path, data_path, mzML, idXML, ini_path, fastaLoaded, tsvLoaded, mzMLLoaded, idXMLLoaded, iniLoaded = Welcome_Tab_Logic.Load_ExperimentalData(self)
 
-        if len(fasta_path.split('/')) == 1: # if one fasta file comes from working directory only file name is saved in an array
-            self.Tab1.loadFile(data_path+'/'+fasta_path)# for loading working directoy needs to be added for complete path
-        else:
-            self.Tab1.loadFile(fasta_path)# fasta file comes from other directory or more than one file in working directory , complete path is saved
-        if len(tsv_path.split('/')) == 1:
-            self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
-        else:
-            self.Tab3.loadExperimentalDesign(tsv_path)
-        if len(ini_path.split('/')) == 1:
-            self.Tab4.generateTreeModel(data_path+ '/'+ini_path)
-        else:
-            self.Tab4.generateTreeModel(ini_path)
+            if len(fasta_path.split('/')) == 1: # if one fasta file comes from working directory only file name is saved in an array
+                self.Tab1.loadFile(data_path+'/'+fasta_path)# for loading working directoy needs to be added for complete path
+            else:
+                self.Tab1.loadFile(fasta_path)# fasta file comes from other directory or more than one file in working directory , complete path is saved
+            if len(tsv_path.split('/')) == 1:
+                self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
+            else:
+                self.Tab3.loadExperimentalDesign(tsv_path)
+            if len(ini_path.split('/')) == 1:
+                self.Tab4.generateTreeModel(data_path+ '/'+ini_path)
+            else:
+                self.Tab4.generateTreeModel(ini_path)
+        #If User has selected manualy than take files from dictionary
+        if Option_selected == "manualy":
+            idXML,mzML,data_path = Welcome_Tab_Logic.Load_ExperimentalData_Manualy(self)
+            Files_Number_Handler.Dictionary_Change_File("idXML",idXML)
+            Files_Number_Handler.Dictionary_Change_File("mzML",mzML)
+            Files_Number_Handler.Dictionary_Change_File("data",data_path)
+            Files_Number_Handler.Dictionary_Change_Boolean("idXML")
+            Files_Number_Handler.Dictionary_Change_Boolean("mzML")
+            Files_Number_Handler.Dictionary_Change_Boolean("data")
+
+            fasta_path = Files_Number_Handler.Dictionary_Return_Value("fasta")
+            mzML = Files_Number_Handler.Dictionary_Return_Value("mzML")
+            idXML = Files_Number_Handler.Dictionary_Return_Value("idXML")
+            tsv_path = Files_Number_Handler.Dictionary_Return_Value("tsv")
+            ini_path = Files_Number_Handler.Dictionary_Return_Value("ini_path")
+
+            fastaLoaded = Files_Number_Handler.Dictionary_Return_Boolean("fasta")
+            tsvLoaded = Files_Number_Handler.Dictionary_Return_Boolean("tsv")
+            mzMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean("mzML")
+            idXMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean("idXML")
+            iniLoaded = Files_Number_Handler.Dictionary_Return_Boolean("idXML")
+
+            if len(fasta_path.split('/')) == 1: # if one fasta file comes from working directory only file name is saved in an array
+                self.Tab1.loadFile(data_path+'/'+fasta_path)# for loading working directoy needs to be added for complete path
+            else:
+                self.Tab1.loadFile(fasta_path)# fasta file comes from other directory or more than one file in working directory , complete path is saved
+            if len(tsv_path.split('/')) == 1:
+                self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
+            else:
+                self.Tab3.loadExperimentalDesign(tsv_path)
+            if len(ini_path.split('/')) == 1:
+                self.Tab4.generateTreeModel(data_path+ '/'+ini_path)
+            else:
+                self.Tab4.generateTreeModel(ini_path)
+
+
 
         self.data_path = data_path
         self.mzML_files = mzML
