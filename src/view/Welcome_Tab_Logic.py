@@ -28,6 +28,9 @@ class Welcome_Tab_Logic:
     #mzML_files = []
     #idXML_files= []
 
+
+
+
     def Load_ExperimentalData(self):
         """load .tsv and .fasta files (part-automatically)"""
 
@@ -35,29 +38,19 @@ class Welcome_Tab_Logic:
         #for further iplementation
         #the file that the user chose is always going to be on the index 0 in
         #its correspinding array
-        fasta_files = []
-        tsv_files = []
-        #mzML_files = []
-        #idXML_files= []
-        ini_files = []
+
 
         # declaration before setting those values
-        self.fasta_path = ''
-        self.tsv_path = ''
-        self.ini_path = ''
 
-        self.fastaLoaded = 0
-        self.tsvLoaded = 0
-        self.mzMLLoaded = 0
-        self.idXMLLoaded = 0
-        self.iniLoaded = 0
+
+
 
         #TODO ask user to select tsv fasta ini know or if he wants to select it manualy through the widgets -> evry load button on widget needs to be conneted to update filepaths for run lfq
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
-        fasta_files, tsv_files, mzML_files, idXML_files, ini_files, mzMLLoaded, idXMLLoaded = Files_Number_Handler.Identify_Files_Numbers(ExperimentalData_Folder_Path)
+        fasta_files, tsv_files, mzML_files, idXML_files, ini_files = Files_Number_Handler.Identify_Files_Numbers(ExperimentalData_Folder_Path)
         Working_directory = ExperimentalData_Folder_Path
-        self.mzMLLoaded = mzMLLoaded
-        self.idXMLLoaded = idXMLLoaded
+
+
 
         if Files_Number_Handler.Check_If_Less_Than_One(fasta_files):
             self.error = QMessageBox()
@@ -66,7 +59,7 @@ class Welcome_Tab_Logic:
             self.error.setWindowTitle("Error")
             error = self.error.exec_()
             Welcome_Tab_Logic.Select_Fasta_File(self)
-            print(self.fasta_path)
+
 
         if Files_Number_Handler.Check_If_Less_Than_One(tsv_files):
             self.error = QMessageBox()
@@ -93,8 +86,10 @@ class Welcome_Tab_Logic:
             Welcome_Tab_Logic.Select_Fasta_File(self)
 
         if Files_Number_Handler.Check_If_One(fasta_files):
-            self.fasta_path = fasta_files[0]
-            self.fastaLoaded = 1
+            Files_Number_Handler.Dictionary_Change_File('fasta', Working_directory+'/'+fasta_files[0])
+            Files_Number_Handler.Dictionary_Change_Boolean('fasta')
+            #self.fasta_path = fasta_files[0]
+            #self.fastaLoaded = 1
 
         if Files_Number_Handler.Check_If_More_Than_One(tsv_files):
             User_Warning = QMessageBox()
@@ -105,8 +100,10 @@ class Welcome_Tab_Logic:
             Welcome_Tab_Logic.Select_Tsv_File(self)
 
         if Files_Number_Handler.Check_If_One(tsv_files):
-            self.tsv_path = tsv_files[0]
-            self.tsvLoaded = 1
+            Files_Number_Handler.Dictionary_Change_File('tsv', Working_directory+'/'+tsv_files[0])
+            Files_Number_Handler.Dictionary_Change_Boolean('tsv')
+            #self.tsv_path = tsv_files[0]
+            #self.tsvLoaded = 1
 
         if  Files_Number_Handler.Check_If_More_Than_One(ini_files):
             User_Warning = QMessageBox()
@@ -117,15 +114,17 @@ class Welcome_Tab_Logic:
             Welcome_Tab_Logic.Select_ini_File(self)
 
         if Files_Number_Handler.Check_If_One(ini_files):
-            self.ini_path = ini_files[0]
-            self.iniLoaded = 1
+            Files_Number_Handler.Dictionary_Change_File('ini_path', Working_directory+'/'+ini_files[0])
+            Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
+            #self.ini_path = ini_files[0]
+            #self.iniLoaded = 1
 
 
 
 
         # TODO: make experimental data visible in fasta and experimental viewer
         print(Working_directory)
-        return  self.fasta_path, self.tsv_path, Working_directory, mzML_files, idXML_files, self.ini_path, self.fastaLoaded, self.tsvLoaded, self.mzMLLoaded, self.idXMLLoaded, self.iniLoaded
+        return   Working_directory, mzML_files, idXML_files
 
 
     #this method is to load the idXML,mzML and Folder path for manualy option
@@ -156,7 +155,8 @@ class Welcome_Tab_Logic:
         print("""ProteomicsLFQ -in BSA1_F1.mzML BSA1_F2.mzML BSA2_F1.mzML BSA2_F2.mzML BSA3_F1.mzML BSA3_F2.mzML -ids BSA1_F1.idXML BSA1_F2.idXML BSA2_F1.idXML BSA2_F2.idXML BSA3_F1.idXML BSA3_F2.idXML     -design BSA_design.tsv    -fasta 18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta -Alignment:max_rt_shift 0 -targeted_only true -transfer_ids false -mass_recalibration false -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3""")
         mzTab_file = 'BSA.mzTab.tmp'
         return mzTab_file
-    def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv, ini): # runs with ini file
+
+    def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv, ini, output_name, threads, fdr): # runs with ini file
 
         os.chdir(Working_directory)
         LFQ_command = """ProteomicsLFQ -in """
@@ -169,7 +169,7 @@ class Welcome_Tab_Logic:
 
         LFQ_command += """    -design """ + tsv + """    -fasta """ + fasta
         LFQ_command += """ -ini """ + ini
-        LFQ_command += """ -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3"""
+        LFQ_command += """ -out_cxml """ + output_name + """.consensusXML.tmp -out_msstats """ + output_name + """.csv.tmp -out """ + output_name + """.mzTab.tmp -threads """ + threads + """ -proteinFDR """ + fdr
         os.system(LFQ_command)
         print(LFQ_command)
         print("""ProteomicsLFQ -in BSA1_F1.mzML BSA1_F2.mzML BSA2_F1.mzML BSA2_F2.mzML BSA3_F1.mzML BSA3_F2.mzML -ids BSA1_F1.idXML BSA1_F2.idXML BSA2_F1.idXML BSA2_F2.idXML BSA3_F1.idXML BSA3_F2.idXML     -design BSA_design.tsv    -fasta 18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta -Alignment:max_rt_shift 0 -targeted_only true -transfer_ids false -mass_recalibration false -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3""")
@@ -201,8 +201,9 @@ class Welcome_Tab_Logic:
         Fasta_File_Path = Fasta_File[0]
 
         if Fasta_File_Path.endswith(".fasta"):
-            self.fasta_path = Fasta_File_Path
-            self.fastaLoaded = 1
+            #self.fasta_path = Fasta_File_Path
+            Files_Number_Handler.Dictionary_Change_File('fasta', Fasta_File_Path)
+            Files_Number_Handler.Dictionary_Change_Boolean('fasta')
 
         else:
             self.error = QMessageBox()
@@ -210,7 +211,7 @@ class Welcome_Tab_Logic:
             self.error.setText("You have selected wrong File, File must be fasta file")
             self.error.setWindowTitle("Error")
             error = self.error.exec_()
-            self.fastaLoaded = 0
+
 
 
 
@@ -225,27 +226,27 @@ class Welcome_Tab_Logic:
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
         if ExperimentalData_File_Path.endswith(".tsv"):
-            self.tsv_path = ExperimentalData_File_Path
-            self.tsvLoaded = 1
+            Files_Number_Handler.Dictionary_Change_File('tsv', ExperimentalData_File_Path)
+            #self.tsv_path = ExperimentalData_File_Path
+            Files_Number_Handler.Dictionary_Change_Boolean('tsv')
         else:
             self.error = QMessageBox()
             self.error.setIcon(QMessageBox.Information)
             self.error.setText("You have selected worng File, File must be tsv file")
             self.error.setWindowTitle("Error")
             error = self.error.exec_()
-            self.tsvLoaded = 0
 
     def Select_ini_File(self):
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
         if ExperimentalData_File_Path.endswith(".ini"):
-            self.ini_path = ExperimentalData_File_Path
-            self.iniLoaded = 1
+            #self.ini_path = ExperimentalData_File_Path
+            Files_Number_Handler.Dictionary_Change_File('ini_path', ExperimentalData_File_Path)
+            Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
         else:
             self.error = QMessageBox()
             self.error.setIcon(QMessageBox.Information)
             self.error.setText("You have selected worng File, File must be ini file")
             self.error.setWindowTitle("Error")
             error = self.error.exec_()
-            self.iniLoaded = 0

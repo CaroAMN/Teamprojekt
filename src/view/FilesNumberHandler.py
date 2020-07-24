@@ -39,8 +39,7 @@ class Files_Number_Handler():
         mzML_files = []
         idXML_files= []
         ini_files = []
-        mzMLLoaded = 0
-        idXMLLoaded = 0
+
         fileslist = sorted(os.listdir(folder_path))
         #print(sorted(fileslist))
         for file in fileslist:
@@ -65,8 +64,7 @@ class Files_Number_Handler():
             User_Warning.setText("No mzML and idXML files found. Pleas select another folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
-            mzMLLoaded = 0
-            idXMLLoaded =0
+
 
         if  len(mzML_files) == 0 and len(idXML_files) != 0:
             User_Warning = QMessageBox()
@@ -74,8 +72,7 @@ class Files_Number_Handler():
             User_Warning.setText("No mzML files found. Pleas select another folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
-            mzMLLoaded = 0
-            idXMLLoaded = 1
+            Files_Number_Handler.Dictionary_Change_Boolean('idXML')
 
         if len(mzML_files) != 0 and len(idXML_files) == 0:
             User_Warning = QMessageBox()
@@ -83,15 +80,16 @@ class Files_Number_Handler():
             User_Warning.setText("No idXML files found. Pleas select another folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
-            mzMLLoaded = 1
-            idXMLLoaded = 0
+            Files_Number_Handler.Dictionary_Change_Boolean('mzML')
+
         if len(mzML_files) != 0 and len(idXML_files) != 0:
-            mzMLLoaded = 1
-            idXMLLoaded = 1
+            Files_Number_Handler.Dictionary_Change_Boolean('mzML')
+            Files_Number_Handler.Dictionary_Change_Boolean('idXML')
+            
 
 
 
-        return fasta_files,tsv_files,mzML_files,idXML_files,ini_files, mzMLLoaded, idXMLLoaded
+        return fasta_files,tsv_files,mzML_files,idXML_files,ini_files
 
     #works just Identify_Files_Numbers but for the manualy option
     def Identify_Files_Numbers_Manualy(folder_path):
@@ -115,8 +113,8 @@ class Files_Number_Handler():
                 User_Warning.setText("No mzML and idXML files found. Pleas select another folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
-                mzMLLoaded = 0
-                idXMLLoaded =0
+
+
 
             if  len(mzML_files) == 0 and len(idXML_files) != 0:
                 User_Warning = QMessageBox()
@@ -124,8 +122,8 @@ class Files_Number_Handler():
                 User_Warning.setText("No mzML files found. Pleas select another folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
-                mzMLLoaded = 0
-                idXMLLoaded = 1
+                Files_Number_Handler.Dictionary_Change_Boolean('idXML')
+
 
             if len(mzML_files) != 0 and len(idXML_files) == 0:
                 User_Warning = QMessageBox()
@@ -133,11 +131,12 @@ class Files_Number_Handler():
                 User_Warning.setText("No idXML files found. Pleas select another folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
-                mzMLLoaded = 1
-                idXMLLoaded = 0
+                Files_Number_Handler.Dictionary_Change_Boolean('mzML')
+
             if len(mzML_files) != 0 and len(idXML_files) != 0:
-                mzMLLoaded = 1
-                idXMLLoaded = 1
+                Files_Number_Handler.Dictionary_Change_Boolean('mzML')
+                Files_Number_Handler.Dictionary_Change_Boolean('idXML')
+
 
 
             return idXML_files,mzML_files
