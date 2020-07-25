@@ -50,14 +50,25 @@ class GUI_Welcome_Tab(QMainWindow):
         self.loadButton.setFixedWidth(200)
         #self.loadButton.clicked.connect(AnalyzerTabWidget.clickedLoadData)
 
+        """
         self.LineEdit = QLineEdit(self)
         self.RenameButton = QtWidgets.QPushButton(self)
         self.RenameButton.clicked.connect(lambda: self.get_Output_FileName(self.LineEdit))
-        self.RenameButton.setText('set Name')
+        self.RenameButton.setText('Set Name')
         self.hbox = QHBoxLayout()
         self.hbox.setSpacing(10)
         self.hbox.addWidget(self.LineEdit)
         self.hbox.addWidget(self.RenameButton)
+        self.hbox.addStretch(1)"""
+
+        self.OutputName = QLineEdit(self)
+        #self.OutputName.setText("")
+        self.OutputName_Label = QLabel(self)
+        self.OutputName_Label.setText('Name for Output Files')
+        self.hbox = QHBoxLayout()
+        self.hbox.setSpacing(10)
+        self.hbox.addWidget(self.OutputName)
+        self.hbox.addWidget(self.OutputName_Label)
         self.hbox.addStretch(1)
 
         self.Threads = QLineEdit(self)
@@ -89,7 +100,7 @@ class GUI_Welcome_Tab(QMainWindow):
 
         Spectrum Viewer: Displays the identified spectra.
 
-        Experimental Design: Display and edit the content of your tsv or csv file or load your mzML files to creat a tsv and csv file.
+        Experimental Design: Display and edit the content of your tsv or csv file or load your mzML files to create a tsv and csv file.
 
         XML Viewer: Displays a provided configuration file.
 

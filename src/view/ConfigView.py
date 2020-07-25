@@ -349,7 +349,7 @@ class ConfigView(QWidget):
         Adds new Item to a ItemList parent, both in etree model and QTreeWidget
         """
         newdata, ok = QInputDialog.getText(self, "Add new row to List",
-                                           "Please input the new Parameter," +
+                                           "Please input the new Parameter " +
                                            "which should be added.")
         if ok:
             if newdata != "":
@@ -373,11 +373,11 @@ class ConfigView(QWidget):
                             itemlist.append(newelement)
                         elif typechecked and not reschecked:
                             QMessageBox.about(
-                                self, "Warning", "Please only, " +
+                                self, "Warning", "Please only " +
                                 "modify according to Restrictions")
                         else:
                             QMessageBox.about(
-                                self, "Warning", "Please only, " +
+                                self, "Warning", "Please only " +
                                 "modify according to Typerestrictions")
                 self.drawTreeInit()
 
@@ -393,6 +393,9 @@ class ConfigView(QWidget):
             if len(temp) < 2:
                 file = file + ".ini"
             self.tree.write(file)
+
+        Files_Number_Handler.Dictionary_Change_File("idXML",file)
+        Files_Number_Handler.Dictionary_Change_Boolean("idXML")
 
     def clearConfigView(self):
         self.treeWidget.clear()

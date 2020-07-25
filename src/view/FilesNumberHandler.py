@@ -21,6 +21,7 @@ files_dictionary = {
     "idXML": "",
     "ini_path" : ""
     }
+
 booleans_dictionary = {
 
         "fasta": False,
@@ -30,6 +31,7 @@ booleans_dictionary = {
         "idXML": False,
         "ini_path" : False
         }
+
 class Files_Number_Handler():
     #gets a folder path as an argument and searches for files that end with
     #.fasta or .tsv and saves them in the corresponding Array
@@ -61,7 +63,7 @@ class Files_Number_Handler():
         if len(mzML_files) == 0 and len(idXML_files) == 0:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
-            User_Warning.setText("No mzML and idXML files found. Pleas select another folder.")
+            User_Warning.setText("No mzML and idXML files found. Please select a different folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
 
@@ -69,7 +71,7 @@ class Files_Number_Handler():
         if  len(mzML_files) == 0 and len(idXML_files) != 0:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
-            User_Warning.setText("No mzML files found. Pleas select another folder.")
+            User_Warning.setText("No mzML files found. Please select a different folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
             Files_Number_Handler.Dictionary_Change_Boolean('idXML')
@@ -77,7 +79,7 @@ class Files_Number_Handler():
         if len(mzML_files) != 0 and len(idXML_files) == 0:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
-            User_Warning.setText("No idXML files found. Pleas select another folder.")
+            User_Warning.setText("No idXML files found. Please select a different folder.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
             Files_Number_Handler.Dictionary_Change_Boolean('mzML')
@@ -110,7 +112,7 @@ class Files_Number_Handler():
             if len(mzML_files) == 0 and len(idXML_files) == 0:
                 User_Warning = QMessageBox()
                 User_Warning.setIcon(QMessageBox.Information)
-                User_Warning.setText("No mzML and idXML files found. Pleas select another folder.")
+                User_Warning.setText("No mzML and idXML files found. Pleas select a different folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
 
@@ -119,7 +121,7 @@ class Files_Number_Handler():
             if  len(mzML_files) == 0 and len(idXML_files) != 0:
                 User_Warning = QMessageBox()
                 User_Warning.setIcon(QMessageBox.Information)
-                User_Warning.setText("No mzML files found. Pleas select another folder.")
+                User_Warning.setText("No mzML files found. Pleas select a different folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
                 Files_Number_Handler.Dictionary_Change_Boolean('idXML')
@@ -128,7 +130,7 @@ class Files_Number_Handler():
             if len(mzML_files) != 0 and len(idXML_files) == 0:
                 User_Warning = QMessageBox()
                 User_Warning.setIcon(QMessageBox.Information)
-                User_Warning.setText("No idXML files found. Pleas select another folder.")
+                User_Warning.setText("No idXML files found. Pleas select a different folder.")
                 User_Warning.setWindowTitle("Information")
                 Information = User_Warning.exec_()
                 Files_Number_Handler.Dictionary_Change_Boolean('mzML')

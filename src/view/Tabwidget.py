@@ -195,12 +195,19 @@ class AnalyzerTabWidget(QWidget):
         mzMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('mzML')
         idXMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('idXML')
 
+        # user input for the run 
+        self.Tab0.get_Threads(self.Tab0.Threads)
+        self.Tab0.get_Output_FileName(self.Tab0.OutputName)
+        self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
+        #self.Tab0.get_Output_FileName(self.Tab0.OutputName)
+
         if not fastaLoaded:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
             User_Warning.setText("Fasta file is missing")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
+
         elif not tsvLoaded:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
@@ -222,7 +229,6 @@ class AnalyzerTabWidget(QWidget):
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
 
-
         elif not iniLoaded:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
@@ -233,15 +239,29 @@ class AnalyzerTabWidget(QWidget):
         elif self.Tab0.Output_Name == '':
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
-            User_Warning.setText("No name for output files. Please name first the output files.")
+            User_Warning.setText("No name for the output files. Please first add a name for the output files.")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+        
+        elif self.Tab0.Threads_Number == '':
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("No information for Threads was found. Please first insert Threads information. Default is 1.")
+            User_Warning.setWindowTitle("Information")
+            Information = User_Warning.exec_()
+
+        elif self.Tab0.ProteiFDR_Number == '':
+            User_Warning = QMessageBox()
+            User_Warning.setIcon(QMessageBox.Information)
+            User_Warning.setText("No information for ProteinFDR was found. Please first insert ProteinFDR information. Default is 0.3.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
 
 
         elif fastaLoaded and tsvLoaded and mzMLLoaded and idXMLLoaded and iniLoaded:
-            self.Tab0.get_Threads(self.Tab0.Threads)
-            self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
-            print(self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)
+            #self.Tab0.get_Threads(self.Tab0.Threads)
+            #self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
+            #print(self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)
             # runs with init
 
             self.Loadlabel.setText("loading...")
