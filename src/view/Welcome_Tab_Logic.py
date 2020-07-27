@@ -70,12 +70,21 @@ class Welcome_Tab_Logic:
             Welcome_Tab_Logic.Select_Tsv_File(self)
 
         if Files_Number_Handler.Check_If_Less_Than_One(ini_files):
+            run = 'ProteomicsLFQ -write_ini Config.ini'
+            os.chdir(Working_directory)
+            os.system(run)
+            Files_Number_Handler.Dictionary_Change_File('ini_path', Working_directory + '/Config.ini')
+            Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
+            iniLoaded = Files_Number_Handler.Dictionary_Return_Boolean('ini_path')
+            ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
+            print(ini,iniLoaded)
+            '''
             self.error = QMessageBox()
             self.error.setIcon(QMessageBox.Information)
             self.error.setText("There is no ini file in your selected foler. Pleas try again with a different folder")
             self.error.setWindowTitle("Error")
             error = self.error.exec_()
-            Welcome_Tab_Logic.Select_ini_File(self)
+            Welcome_Tab_Logic.Select_ini_File(self)'''
 
         if Files_Number_Handler.Check_If_More_Than_One(fasta_files):
             User_Warning = QMessageBox()

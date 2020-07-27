@@ -28,7 +28,7 @@ Option_selected = "manualy"
 class TabWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.resize(1280, 720)
+        #self.resize(1280, 720)
         self.setWindowTitle("Protein Analyzer")
         self.tab_widget = AnalyzerTabWidget(self)
         self.setCentralWidget(self.tab_widget)
@@ -179,6 +179,7 @@ class AnalyzerTabWidget(QWidget):
 
 
     def runProteomicsLFQ(self):
+        self.Loadlabel.setText("loading...")
         """launch proteomicsLFQ and add output to PSM/ ProteinViewer Tab"""
 
         fasta = Files_Number_Handler.Dictionary_Return_Value('fasta')
@@ -195,7 +196,7 @@ class AnalyzerTabWidget(QWidget):
         mzMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('mzML')
         idXMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('idXML')
 
-        # user input for the run 
+        # user input for the run
         self.Tab0.get_Threads(self.Tab0.Threads)
         self.Tab0.get_Output_FileName(self.Tab0.OutputName)
         self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
@@ -230,11 +231,21 @@ class AnalyzerTabWidget(QWidget):
             Information = User_Warning.exec_()
 
         elif not iniLoaded:
+            run = 'ProteomicsLFQ -write_ini Config.ini'
+            os.chdir(data_path)
+            os.system(run)
+            Files_Number_Handler.Dictionary_Change_File('ini_path', data_path + '/Config.ini')
+            Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
+            iniLoaded = Files_Number_Handler.Dictionary_Return_Boolean('ini_path')
+            ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
+            print(ini,iniLoaded)
+            self.Tab4.generateTreeModel(Files_Number_Handler.Dictionary_Return_Value('ini_path'))
+            '''
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
             User_Warning.setText("config file is missing")
             User_Warning.setWindowTitle("Information")
-            Information = User_Warning.exec_()
+            Information = User_Warning.exec_()'''
 
         elif self.Tab0.Output_Name == '':
             User_Warning = QMessageBox()
@@ -242,7 +253,7 @@ class AnalyzerTabWidget(QWidget):
             User_Warning.setText("No name for the output files. Please first add a name for the output files.")
             User_Warning.setWindowTitle("Information")
             Information = User_Warning.exec_()
-        
+
         elif self.Tab0.Threads_Number == '':
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)
@@ -259,12 +270,13 @@ class AnalyzerTabWidget(QWidget):
 
 
         elif fastaLoaded and tsvLoaded and mzMLLoaded and idXMLLoaded and iniLoaded:
+            self.Loadlabel.setText('starting job')
             #self.Tab0.get_Threads(self.Tab0.Threads)
             #self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
             #print(self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)
             # runs with init
 
-            self.Loadlabel.setText("loading...")
+            
 
 
             mzTab_file = Welcome_Tab_Logic.Run_ProteomicsLFQ(Welcome_Tab_Logic, data_path, mzML, idXML, fasta, tsv, ini, self.Tab0.Output_Name, self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)

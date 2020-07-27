@@ -8,8 +8,8 @@ from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QGridLayout, QPlainTextEdit,
                              QDesktopWidget, QLabel, QRadioButton,
                              QGroupBox, QSizePolicy, QCheckBox, QFileDialog,
-                             QTextEdit, QTextBrowser)
-from PyQt5.QtGui import QFont, QColor
+                             QTextEdit, QTextBrowser, QFrame)
+from PyQt5.QtGui import QFont, QColor, QPixmap
 from FilesNumberHandler import Files_Number_Handler
 from GUI_FastaViewer import *
 from Welcome_Tab_Logic import Welcome_Tab_Logic
@@ -34,21 +34,29 @@ class GUI_Welcome_Tab(QMainWindow):
         self.ProteiFDR_Number = ''
         self.mainwidget = QWidget(self)
         self.main_layout = QVBoxLayout(self.mainwidget)
-        self.main_layout.setSpacing(10)
+        #self.main_layout.setSpacing(10)
         self.Hboxlevel1 = QHBoxLayout()
 
         #Creating QLabel with welcome Text to display on first Tab
 
-        self.Weclome_Title_Label = QLabel()
+        self.Welcome_Title_Label = QLabel()
+        self.Hline_Welcome = QLabel()
         self.Tabs_Explination_Label = QLabel()
+        self.HLine_LFQ = QLabel()
         self.proteomicsLFQ_Title_Label = QLabel()
         self.proteomicsLFQ_Load_Explination_Label = QLabel()
         self.proteomicsLFQ_Run_Explination_Label = QLabel()
 
+        '''
         self.loadButton = QtWidgets.QPushButton(self)
         self.loadButton.setText("Load Data")
-        self.loadButton.setFixedWidth(200)
+
+        self.hboxLoadBtn = QHBoxLayout()
+        self.hboxLoadBtn.addWidget(self.loadButton)
+        self.hboxLoadBtn.setContentsMargins(25, 11, 11, 11)
+        self.hboxLoadBtn.addStretch(1)
         #self.loadButton.clicked.connect(AnalyzerTabWidget.clickedLoadData)
+        '''
 
         """
         self.LineEdit = QLineEdit(self)
@@ -70,6 +78,17 @@ class GUI_Welcome_Tab(QMainWindow):
         self.hbox.addWidget(self.OutputName)
         self.hbox.addWidget(self.OutputName_Label)
         self.hbox.addStretch(1)
+        self.hbox.setContentsMargins(25, 2, 11, 2)
+
+        self.loadButton = QtWidgets.QPushButton(self)
+        self.loadButton.setText("Load Data")
+        self.loadButton.setFixedWidth(140)
+
+        self.hboxLoadBtn = QHBoxLayout()
+        self.hboxLoadBtn.addWidget(self.loadButton)
+        self.hboxLoadBtn.setContentsMargins(25, 2, 11, 2)
+        self.hboxLoadBtn.addStretch(1)
+
 
         self.Threads = QLineEdit(self)
         self.Threads.setText('1')
@@ -80,6 +99,7 @@ class GUI_Welcome_Tab(QMainWindow):
         self.hbox2.addWidget(self.Threads)
         self.hbox2.addWidget(self.Threads_Label)
         self.hbox2.addStretch(1)
+        self.hbox2.setContentsMargins(25, 2, 11, 2)
 
         self.ProteinFDR = QLineEdit(self)
         self.ProteinFDR.setText('0.3')
@@ -90,28 +110,78 @@ class GUI_Welcome_Tab(QMainWindow):
         self.hbox3.addWidget(self.ProteinFDR)
         self.hbox3.addWidget(self.ProteinFDR_Label)
         self.hbox3.addStretch(1)
+        self.hbox3.setContentsMargins(25, 2, 11, 2)
 
 
-        welcome_Title = "OpenMS ProteomicsLFQ QApplication  "
-        Tabs_Explination = """
-        This Application offers the folowing Options:
 
-        Proteinsequence Viewer: Displays all information of the loaded Fasta file.
+        self.ExplenationLayout = QGridLayout()
 
-        Spectrum Viewer: Displays the identified spectra.
+        normalFont = QFont("Sanserif",11)
+        boldFont = QFont("Sanserif", 11, QFont.Bold)
 
-        Experimental Design: Display and edit the content of your tsv or csv file or load your mzML files to create a tsv and csv file.
 
-        XML Viewer: Displays a provided configuration file.
+        self.Explenation = QLabel()
+        self.Explenation.setText('This Application offers the folowing Options:')
+        self.Explenation.setFont(boldFont)
 
-        PSM/Protein Viewer: Displays the output mzTab file after successful running the ProteomicsLFQ.
-                        """
+        self.FastaView = QLabel()
+        self.FastaView.setText('Proteinsequence Viewer:')
+        self.FastaView.setFont(boldFont)
+        self.FastaView_expl = QLabel()
+        self.FastaView_expl.setText('Displays all information of the loaded Fasta file.')
+        self.FastaView_expl.setFont(normalFont)
+
+        self.Spectrum = QLabel()
+        self.Spectrum.setText('Spectrum Viewer:')
+        self.Spectrum.setFont(boldFont)
+        self.Spectrum_expl = QLabel()
+        self.Spectrum_expl.setText('Displays the identified spectra.')
+        self.Spectrum_expl.setFont(normalFont)
+
+        self.ExperimentalD = QLabel()
+        self.ExperimentalD.setText('Experimental Design:')
+        self.ExperimentalD.setFont(boldFont)
+        self.ExperimentalD_expl = QLabel()
+        self.ExperimentalD_expl.setText('Display or create and edit the content of a provided experimental design')
+        self.ExperimentalD_expl.setFont(normalFont)
+
+        self.XmlV = QLabel()
+        self.XmlV.setText('XML Viewer:')
+        self.XmlV.setFont(boldFont)
+        self.XmlV_expl = QLabel()
+        self.XmlV_expl.setText('Display and edit a provided configuration file.')
+        self.XmlV_expl.setFont(normalFont)
+
+        self.Mztab = QLabel()
+        self.Mztab.setText('PSM/Protein Viewer:')
+        self.Mztab.setFont(boldFont)
+        self.Mztab_expl = QLabel()
+        self.Mztab_expl.setText('Displays the output mzTab file after successfulrunning the ProteomicsLFQ.')
+        self.Mztab_expl.setFont(normalFont)
+
+        self.ExplenationLayout.addWidget(self.Explenation,0,0)
+        self.ExplenationLayout.addWidget(self.FastaView,1,0)
+        self.ExplenationLayout.addWidget(self.FastaView_expl,2,0)
+        self.ExplenationLayout.addWidget(self.Spectrum,3,0)
+        self.ExplenationLayout.addWidget(self.Spectrum_expl,4,0)
+        self.ExplenationLayout.addWidget(self.ExperimentalD,5,0)
+        self.ExplenationLayout.addWidget(self.ExperimentalD_expl,6,0)
+        self.ExplenationLayout.addWidget(self.XmlV,7,0)
+        self.ExplenationLayout.addWidget(self.XmlV_expl,8,0)
+        self.ExplenationLayout.addWidget(self.Mztab,9,0)
+        self.ExplenationLayout.addWidget(self.Mztab_expl,10,0)
+        self.ExplenationLayout.setContentsMargins(25, 11, 11, 11)
+
+
+        welcome_Title = "OpenMS ProteomicsLFQ Application  "
+
         proteomicsLFQ_Title =   " ProteomicsLFQ "
         proteomicsLFQ_Load_Explination ="""You can load your data automatically by selecting a folder containing all necessary files (.fasta, .ini, .tsv/.csv, .mzML, .idXML)
         or load your data and select the other files manually ( .fasta, .ini, .tsv/csv) through the different tabs"""
         proteomicsLFQ_Run_Explination ="""
         Once you have selected your data you
         can run the ProteomicsLFQ Algorithm with the Run ProteomicsLFQ Button """
+
         #assignt Strings to Label as Text
 
         #TODO Creat select folder button
@@ -119,18 +189,24 @@ class GUI_Welcome_Tab(QMainWindow):
         #TODO data load label needs to show which files are missing, data loaded when all files are provided
 
 
-        self.Weclome_Title_Label.setText(welcome_Title)
-        self.Tabs_Explination_Label.setText(Tabs_Explination)
+        self.Welcome_Title_Label.setText(welcome_Title)
+        self.Hline_Welcome.setFrameStyle(QFrame.HLine | QFrame.Plain)
+        self.Hline_Welcome.setLineWidth(2)
+
+        self.Welcome_Title_Label.setLineWidth(2)
+        #self.Tabs_Explination_Label.setText(Tabs_Explination)
 
         self.proteomicsLFQ_Title_Label.setText(proteomicsLFQ_Title)
+        self.HLine_LFQ.setFrameStyle(QFrame.HLine | QFrame.Plain)
+        self.HLine_LFQ.setLineWidth(2)
         self.proteomicsLFQ_Load_Explination_Label.setText(proteomicsLFQ_Load_Explination)
         self.proteomicsLFQ_Run_Explination_Label.setText(proteomicsLFQ_Run_Explination)
         # seting font for Labels
-        self.Weclome_Title_Label.setFont(QFont("Sanserif",20))
-        self.Tabs_Explination_Label.setFont(QFont("Sanserif",10))
-        self.proteomicsLFQ_Title_Label.setFont(QFont("Sanserif",13))
+        self.Welcome_Title_Label.setFont(QFont("Sanserif",20))
+        #self.Tabs_Explination_Label.setFont(QFont("Sanserif",12))
+        self.proteomicsLFQ_Title_Label.setFont(QFont("Sanserif",20))
         self.proteomicsLFQ_Load_Explination_Label.setFont(QFont("Sanserif",10))
-        self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",13))
+        self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",10))
         #creating Buttons
 
         #Button to load experimental Data
@@ -142,14 +218,24 @@ class GUI_Welcome_Tab(QMainWindow):
         #self.Run_ProteomicsLFQ_Button = QPushButton()
         #self.Run_ProteomicsLFQ_Button.setText("Run ProteomicsLFQ")
         #self.Run_ProteomicsLFQ_Button.clicked.connect(Welcome_Tab_Logic.Run_ProteomicsLFQ)
+        self.pixmap = QPixmap('/home/caro/openMS.png')
+        self.newpixmap = self.pixmap.scaledToWidth(300)
+        self.Picture = QLabel()
+        self.Picture.setPixmap(self.newpixmap)
+        self.hboxExplenation = QHBoxLayout()
+        self.hboxExplenation.addLayout(self.ExplenationLayout)
+        self.hboxExplenation.addWidget(self.Picture)
 
         #adding everything to Layouts
-        self.main_layout.addWidget(self.Weclome_Title_Label)
-        self.main_layout.addWidget(self.Tabs_Explination_Label)
+        self.main_layout.addWidget(self.Welcome_Title_Label)
+        self.main_layout.addWidget(self.Hline_Welcome)
+        #self.main_layout.addWidget(self.Explenation)
+        self.main_layout.addLayout(self.hboxExplenation)
 
         self.main_layout.addWidget(self.proteomicsLFQ_Title_Label)
+        self.main_layout.addWidget(self.HLine_LFQ)
         self.main_layout.addWidget(self.proteomicsLFQ_Load_Explination_Label)
-        self.main_layout.addWidget(self.loadButton)
+        self.main_layout.addLayout(self.hboxLoadBtn)
         self.main_layout.addLayout(self.hbox)
         self.main_layout.addLayout(self.hbox2)
         self.main_layout.addLayout(self.hbox3)
