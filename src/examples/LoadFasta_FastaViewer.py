@@ -42,14 +42,20 @@ class LoadFasta_FastaViewer:
                     # index shifting
                     indexToStartReadingFrom_InFastaFile = indexToStartReadingFrom_InFastaFile + len(protein_declaration) + 1
 
-                    check_if_reverse = protein_declaration.find('rev')
+                    check_if_reverse = protein_declaration.find('_rev')
 
                     # find upper and lower index of Protein Accession (ID)
                     bounds = [m.start() for m in re.finditer(r'\|', seqs)]
 
                     # if a Protein Accesion (ID) was found
-                    if len(bounds) >= 2:
-                        key = (seqs[bounds[0]+1:bounds[1]])
+                    if len(bounds) >= 1:
+
+                        # if = 1, then the protein accession start at character 1 
+                        if len(bounds) == 1:
+                            key = (seqs[1:bounds[0]])
+                        else:
+                            key = (seqs[bounds[0]+1:bounds[1]])
+
                         descr_upper_index = seqs.find('OS=')
 
                         os_upper_index = -1
@@ -70,17 +76,21 @@ class LoadFasta_FastaViewer:
                                 os = listOfAllWordsTillEndOfLine[0] + ' ' + listOfAllWordsTillEndOfLine[1]
 
                         name = 'not found'
-                        if descr_upper_index != -1:
-                            name = (seqs[bounds[1]+1:descr_upper_index])
 
-                        stringValue = ""
+                        if descr_upper_index != -1:
+                            if len(bounds) == 1:
+                                name = (seqs[bounds[0]+1:descr_upper_index])
+                            else:
+                                name = (seqs[bounds[1]+1:descr_upper_index])
+                            
+                        protein_sequence_string = ""
                         nextLine = next(file_content)
 
                         # read file line by line, till new protein (begins with '>')
                         while not nextLine.startswith('>'):
                             # index shifting
                             indexToStartReadingFrom_InFastaFile = indexToStartReadingFrom_InFastaFile + len(nextLine) + 1
-                            stringValue += nextLine[:-1]
+                            protein_sequence_string += nextLine[:-1]
                             try:
                                 nextLine = next(file_content)
                             except Exception:
@@ -91,8 +101,8 @@ class LoadFasta_FastaViewer:
                         # set the values inside of the dictionary and the lists
                         # is decoy or reverse(!=-1) -> use seperate List to safe informations
                         if protein_declaration.startswith('>DECOY') or check_if_reverse != -1:
-                            dictKeyAccessionDECOY[key] = stringValue
-                            proteinListDECOY.append(stringValue)
+                            dictKeyAccessionDECOY[key] = protein_sequence_string
+                            proteinListDECOY.append(protein_sequence_string)
                             proteinNameListDECOY.append(name)
 
                             if (os_upper_index == -1 or descr_upper_index == -1):
@@ -102,8 +112,8 @@ class LoadFasta_FastaViewer:
 
                         # regular protein -> use regular list 
                         else:
-                            dictKeyAccession[key] = stringValue
-                            proteinList.append(stringValue)
+                            dictKeyAccession[key] = protein_sequence_string
+                            proteinList.append(protein_sequence_string)
                             proteinNameList.append(name)
 
                             if (os_upper_index == -1 or descr_upper_index == -1):
@@ -141,14 +151,14 @@ class LoadFasta_FastaViewer:
                                 listOfAllWordsTillEndOfLine = stringFrom_OS_TillEndOfLine.split()
                                 os = listOfAllWordsTillEndOfLine[0] + ' ' + listOfAllWordsTillEndOfLine[1]
 
-                        stringValue = ""
+                        protein_sequence_string = ""
                         nextLine = next(file_content)
 
                         # read file line by line, till new protein (begins with '>')
                         while not nextLine.startswith('>'):
                             # index shifting
                             indexToStartReadingFrom_InFastaFile = indexToStartReadingFrom_InFastaFile + len(nextLine) + 1
-                            stringValue += nextLine[:-1]
+                            protein_sequence_string += nextLine[:-1]
                             try:
                                 nextLine = next(file_content)
                             except Exception:
@@ -159,8 +169,8 @@ class LoadFasta_FastaViewer:
                         # set the values inside of the dictionary and the lists
                         # is decoy -> use seperate List to safe informations
                         if protein_declaration.startswith('>DECOY') or check_if_reverse != -1:
-                            dictKeyAccessionDECOY[key] = stringValue
-                            proteinListDECOY.append(stringValue)
+                            dictKeyAccessionDECOY[key] = protein_sequence_string
+                            proteinListDECOY.append(protein_sequence_string)
                             proteinNameListDECOY.append(name)
 
                             if (os_upper_index == -1 or descr_upper_index == -1):
@@ -169,8 +179,8 @@ class LoadFasta_FastaViewer:
                                 proteinOSListDECOY.append((seqs[descr_upper_index+3:os_upper_index]))
 
                         else:
-                            dictKeyAccession[key] = stringValue
-                            proteinList.append(stringValue)
+                            dictKeyAccession[key] = protein_sequence_string
+                            proteinList.append(protein_sequence_string)
                             proteinNameList.append(name)
 
                             if (os_upper_index == -1 or descr_upper_index == -1):
@@ -186,7 +196,7 @@ def main():
     # for testing purposes only
     # use your own path for it
     dictKeyAccession, proteinList, proteinNameList, proteinOSList, dictKeyAccessionDECOY, proteinListDECOY, proteinNameListDECOY, proteinOSListDECOY = LoadFasta_FastaViewer.protein_dictionary(
-        "C:/Users/Alex/Desktop/iPRG2015_target_decoy_nocontaminants.fasta")
+        "path/to/file.fasta")
 
     proteinnameSub = input("Name: ")
 
