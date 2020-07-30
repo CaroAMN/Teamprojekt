@@ -4,7 +4,7 @@ import re
 class LoadFasta_FastaViewer:
 
     # Compilation for the ProteinId_dictionary and the lists with its values for each Protein
-    def protein_dictionary(fastaFile):
+    def protein_dictionary(fastaFile, extra_pattern):
         """Gets fasta File Path and saves all informations about the proteins 
         in separate lists 
 
@@ -43,6 +43,11 @@ class LoadFasta_FastaViewer:
                     indexToStartReadingFrom_InFastaFile = indexToStartReadingFrom_InFastaFile + len(protein_declaration) + 1
 
                     check_if_reverse = protein_declaration.find('_rev')
+
+                    # check for extra pattern if used
+                    check_for_extra_pattern = -1
+                    if extra_pattern != '':
+                        check_for_extra_pattern = protein_declaration.find(extra_pattern)
 
                     # find upper and lower index of Protein Accession (ID)
                     bounds = [m.start() for m in re.finditer(r'\|', seqs)]
@@ -100,7 +105,7 @@ class LoadFasta_FastaViewer:
 
                         # set the values inside of the dictionary and the lists
                         # is decoy or reverse(!=-1) -> use seperate List to safe informations
-                        if protein_declaration.startswith('>DECOY') or check_if_reverse != -1:
+                        if protein_declaration.startswith('>DECOY') or check_if_reverse != -1 or check_for_extra_pattern != -1:
                             dictKeyAccessionDECOY[key] = protein_sequence_string
                             proteinListDECOY.append(protein_sequence_string)
                             proteinNameListDECOY.append(name)
@@ -168,7 +173,7 @@ class LoadFasta_FastaViewer:
 
                         # set the values inside of the dictionary and the lists
                         # is decoy -> use seperate List to safe informations
-                        if protein_declaration.startswith('>DECOY') or check_if_reverse != -1:
+                        if protein_declaration.startswith('>DECOY') or check_if_reverse != -1 or check_for_extra_pattern != -1:
                             dictKeyAccessionDECOY[key] = protein_sequence_string
                             proteinListDECOY.append(protein_sequence_string)
                             proteinNameListDECOY.append(name)

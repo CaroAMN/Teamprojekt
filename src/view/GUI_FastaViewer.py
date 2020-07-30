@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QGridLayout, QScrollArea, QPlainTextEdit,
                              QDesktopWidget, QLabel, QRadioButton,
                              QGroupBox, QSizePolicy, QCheckBox, QFileDialog,
-                             QTextEdit, QTextBrowser)
+                             QTextEdit, QTextBrowser, QInputDialog)
 from PyQt5.QtGui import QFont, QColor, QTextCharFormat, QTextCursor
 from PyQt5.QtCore import Qt, QUrl
 # from dictionaries import Dict
@@ -127,15 +127,19 @@ class GUI_FastaViewer(QMainWindow):
         -------
         nothing
         """
-        # creating Buttons
 
+        # creating Buttons
         self.searchButtonP = QtWidgets.QPushButton(self)
-        self.searchButtonP.setText("search")
+        self.searchButtonP.setText("Search")
         self.searchButtonP.clicked.connect(self.searchClicked)
 
         self.loadbutton = QtWidgets.QPushButton(self)
-        self.loadbutton.setText("load")
+        self.loadbutton.setText("Load")
         self.loadbutton.clicked.connect(self.loadPath)
+
+        self.changeReversePattern = QtWidgets.QPushButton(self)
+        self.changeReversePattern.setText("Add Reverse Pattern")
+        self.changeReversePattern.clicked.connect(self.user_Dialog_ChangeReversePattern)
 
         # creating testboxes for the buttons
         self.boxPro = QLineEdit(self)
@@ -160,15 +164,16 @@ class GUI_FastaViewer(QMainWindow):
         self.set2 = QHBoxLayout()
         self.radioname = QRadioButton("Name")
         self.radioid = QRadioButton("ID")
-        self.radioseq = QRadioButton("sequence")
+        self.radioseq = QRadioButton("Sequence")
         self.radioname.setChecked(True)
-        self.decoycheck = QCheckBox("Decoy search", self)
+        self.decoycheck = QCheckBox("Decoy search", self) 
         self.datalabel = QLabel()
         self.datalabel.setText("Data not loaded")
         self.set2.addWidget(self.radioname)
         self.set2.addWidget(self.radioid)
         self.set2.addWidget(self.radioseq)
         self.set2.addWidget(self.decoycheck)
+        self.set2.addWidget(self.changeReversePattern)
         self.set2.addWidget(self.datalabel)
 
         # set 3 contains the table and the result box
@@ -183,6 +188,8 @@ class GUI_FastaViewer(QMainWindow):
         self.mainwidget.setLayout(self.main_layout)
         self.setCentralWidget(self.mainwidget)
         self.setWindowTitle('Protein Viewer')
+
+        self.extra_pattern = ''
 
         # defining some colors to marked searched sequences
         self.color = QColor(255, 0, 0)
@@ -240,9 +247,21 @@ class GUI_FastaViewer(QMainWindow):
     def loadPath(self):
         self.filename = QFileDialog.getOpenFileName()
         #saving the file path in the dictionary
-        Files_Number_Handler.Dictionary_Change_File("fasta",self.filename[0])
+        Files_Number_Handler.Dictionary_Change_File("fasta", self.filename[0])
         Files_Number_Handler.Dictionary_Change_Boolean("fasta")
         self.loadFile(self.filename[0])
+
+
+    # creates a user dialog to change default reverse pattern 
+    def user_Dialog_ChangeReversePattern(self):
+        text, okPressed = QInputDialog.getText(self, "Add reverse pattern", "Add:", QLineEdit.Normal, "")
+        if okPressed and text != '':
+            self.extra_pattern = text
+    
+
+    def option_selected(self,button):
+        global Option_selected
+        Option_selected = button.text()
 
 
     def loadFile(self, fasta_path):
@@ -264,7 +283,7 @@ class GUI_FastaViewer(QMainWindow):
         self.fileloaded = 1
         # loading the lists before searching in order to make the search faster
         self.dictKeyAccession, self.proteinList, self.proteinNameList, self.proteinOSList, self.dictKeyAccessionDECOY, self.proteinListDECOY, self.proteinNameListDECOY, self.proteinOSListDECOY = LoadFasta_FastaViewer.protein_dictionary(
-            fasta_path)
+            fasta_path, self.extra_pattern)
         self.datalabel.setText("Data loaded")
         for i in range(len(self.dictKeyAccession)):
             ID = list(self.dictKeyAccession.keys())[i]

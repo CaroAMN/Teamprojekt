@@ -101,17 +101,17 @@ class AnalyzerTabWidget(QWidget):
 
 
 
-        #creates an user dialog and asks him to choose on option
+        #creates a user dialog and asks him to choose on option
     def user_Dialog(self):
         messagebox = QMessageBox()
         messagebox.setWindowTitle("Information")
         messagebox.setIcon(QMessageBox.Question)
-        messagebox.setText("Please choose on of the following Options")
+        messagebox.setText("Please choose one of the following Options")
         messagebox.addButton("automatically", QtWidgets.QMessageBox.YesRole)
         messagebox.addButton("manualy", QtWidgets.QMessageBox.NoRole)
         messagebox.setDetailedText("If you choose automatically than all"+
-            "manualy selected Files will be overwritten with the files in "+
-            "the folder you select. If you choose manualy than they will be "+
+            "manually selected Files will be overwritten with the files in "+
+            "the folder you select. If you choose manually than they will be "+
             "used instead")
         messagebox.buttonClicked.connect(self.option_selected)
         messagebox.exec_()
