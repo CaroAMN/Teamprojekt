@@ -111,7 +111,7 @@ class AnalyzerTabWidget(QWidget):
     def clickedLoadData(self):
         self.user_Dialog()
         global Option_selected
-        print(Option_selected)
+
 
         #when new data is loaded, clear all previous loaded data
 
@@ -132,23 +132,9 @@ class AnalyzerTabWidget(QWidget):
             Files_Number_Handler.Dictionary_Change_File("mzML",mzML)
             Files_Number_Handler.Dictionary_Change_File("data",data_path)
             self.Tab1.loadFile(Files_Number_Handler.Dictionary_Return_Value('fasta'))
-            print(Files_Number_Handler.Dictionary_Return_Value('tsv'))
             self.Tab3.loadExperimentalDesign(Files_Number_Handler.Dictionary_Return_Value('tsv'))
             self.Tab4.generateTreeModel(Files_Number_Handler.Dictionary_Return_Value('ini_path'))
-            '''
-            if len(fasta_path.split('/')) == 1: # if one fasta file comes from working directory only file name is saved in an array
-                self.Tab1.loadFile(data_path+'/'+fasta_path)# for loading working directoy needs to be added for complete path
-            else:
-                self.Tab1.loadFile(fasta_path)# fasta file comes from other directory or more than one file in working directory , complete path is saved
-            if len(tsv_path.split('/')) == 1:
-                self.Tab3.loadExperimentalDesign(data_path+'/'+tsv_path)
-            else:
-                self.Tab3.loadExperimentalDesign(tsv_path)
-            if len(ini_path.split('/')) == 1:
-                self.Tab4.generateTreeModel(data_path+ '/'+ini_path)
-            else:
-                self.Tab4.generateTreeModel(ini_path)
-                '''
+
 
         #If User has selected manualy, than take files from dictionary
 
@@ -172,7 +158,6 @@ class AnalyzerTabWidget(QWidget):
         ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
         mzML = Files_Number_Handler.Dictionary_Return_Value('mzML')
         idXML = Files_Number_Handler.Dictionary_Return_Value('idXML')
-        print(Files_Number_Handler.Dictionary_Return_Value('mzML'),Files_Number_Handler.Dictionary_Return_Value('idXML'))
         data_path = Files_Number_Handler.Dictionary_Return_Value('data')
 
         fastaLoaded = Files_Number_Handler.Dictionary_Return_Boolean('fasta')
@@ -224,7 +209,6 @@ class AnalyzerTabWidget(QWidget):
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
             iniLoaded = Files_Number_Handler.Dictionary_Return_Boolean('ini_path')
             ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
-            print(ini,iniLoaded)
             self.Tab4.generateTreeModel(Files_Number_Handler.Dictionary_Return_Value('ini_path'))
 
 
