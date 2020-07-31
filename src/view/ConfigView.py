@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 import xml.etree.ElementTree as ET
 from defusedxml.ElementTree import parse
 from functools import partial
-from FilesNumberHandler import Files_Number_Handler
+
 
 class ConfigView(QWidget):
     def __init__(self, *args):
@@ -113,11 +113,6 @@ class ConfigView(QWidget):
         file, _ = QFileDialog.getOpenFileName(
             self, "QFileDialog.getOpenFileName()", "",
             "All Files (*);;ini (*.ini)")
-
-        #saving data in to dictionary
-        
-        Files_Number_Handler.Dictionary_Change_File("ini_path",file)
-        Files_Number_Handler.Dictionary_Change_Boolean("ini_path")
         if file:
             self.generateTreeModel(file)
 
@@ -130,7 +125,6 @@ class ConfigView(QWidget):
         self.root = self.tree.getroot()
         self.drawTreeInit()
         self.header.setSectionResizeMode(QHeaderView.ResizeToContents)
-
 
     def generateTreeWidgetItem(self, item: ET.Element) -> QTreeWidgetItem:
         """
@@ -329,18 +323,21 @@ class ConfigView(QWidget):
         Checks if the edit is corresponding to the type
         """
         if types != "":
-            try:
-                float(newvalue)
-                if len(newvalue.split('.')) == 2:
-                    valtype = "double"
-                else:
-                    valtype = "int"
-            except ValueError:
-                valtype = "string"
-            if valtype not in types:
-                typechecked = False
-            else:
+            if "-file" in types:
                 typechecked = True
+            else:
+                try:
+                    float(newvalue)
+                    if len(newvalue.split('.')) == 2:
+                        valtype = "double"
+                    else:
+                        valtype = "int"
+                except ValueError:
+                    valtype = "string"
+                if valtype not in types:
+                    typechecked = False
+                else:
+                    typechecked = True
         else:
             typechecked = True
 
@@ -351,7 +348,7 @@ class ConfigView(QWidget):
         Adds new Item to a ItemList parent, both in etree model and QTreeWidget
         """
         newdata, ok = QInputDialog.getText(self, "Add new row to List",
-                                           "Please input the new Parameter " +
+                                           "Please input the new Parameter," +
                                            "which should be added.")
         if ok:
             if newdata != "":
@@ -375,11 +372,11 @@ class ConfigView(QWidget):
                             itemlist.append(newelement)
                         elif typechecked and not reschecked:
                             QMessageBox.about(
-                                self, "Warning", "Please only " +
+                                self, "Warning", "Please only, " +
                                 "modify according to Restrictions")
                         else:
                             QMessageBox.about(
-                                self, "Warning", "Please only " +
+                                self, "Warning", "Please only, " +
                                 "modify according to Typerestrictions")
                 self.drawTreeInit()
 
@@ -395,9 +392,3 @@ class ConfigView(QWidget):
             if len(temp) < 2:
                 file = file + ".ini"
             self.tree.write(file)
-
-        Files_Number_Handler.Dictionary_Change_File("idXML",file)
-        Files_Number_Handler.Dictionary_Change_Boolean("idXML")
-
-    def clearConfigView(self):
-        self.treeWidget.clear()

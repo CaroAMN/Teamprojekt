@@ -64,6 +64,9 @@ class Files_Number_Handler():
             if file.endswith(".ini"):
                 ini_files.append(file)
 
+            if file.endswith(".csv"):
+                tsv_files.append(file)
+
         if len(mzML_files) == 0 and len(idXML_files) == 0:
             User_Warning = QMessageBox()
             User_Warning.setIcon(QMessageBox.Information)

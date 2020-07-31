@@ -101,12 +101,6 @@ class Welcome_Tab_Logic:
             Files_Number_Handler.Dictionary_Change_File('ini_path', Working_directory+'/'+ini_files[0])
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
 
-
-
-
-
-
-
         return   Working_directory, mzML_files, idXML_files
 
 
@@ -116,29 +110,8 @@ class Welcome_Tab_Logic:
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
         idXML_files,mzML_files = Files_Number_Handler.Identify_Files_Numbers_Manualy(ExperimentalData_Folder_Path)
         Working_directory = ExperimentalData_Folder_Path
-
-
-
         return idXML_files,mzML_files,Working_directory
 
-    def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv):
-
-        os.chdir(Working_directory)
-        LFQ_command = "ProteomicsLFQ -in "
-        for i in mzML:
-            LFQ_command += str(i) + " "
-
-        LFQ_command += "-ids "
-        for i in idXML:
-            LFQ_command += str(i)+" "
-
-        LFQ_command += "    -design " + tsv + "    -fasta"  + fasta
-        LFQ_command += " -Alignment:max_rt_shift 0 -targeted_only true -transfer_ids false -mass_recalibration false -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3"
-        os.system(LFQ_command)
-        print(LFQ_command)
-        print("ProteomicsLFQ -in BSA1_F1.mzML BSA1_F2.mzML BSA2_F1.mzML BSA2_F2.mzML BSA3_F1.mzML BSA3_F2.mzML -ids BSA1_F1.idXML BSA1_F2.idXML BSA2_F1.idXML BSA2_F2.idXML BSA3_F1.idXML BSA3_F2.idXML     -design BSA_design.tsv    -fasta 18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta -Alignment:max_rt_shift 0 -targeted_only true -transfer_ids false -mass_recalibration false -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3")
-        mzTab_file = 'BSA.mzTab.tmp'
-        return mzTab_file
 
     def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv, ini, output_name, threads, fdr): # runs with ini file
 
@@ -155,8 +128,6 @@ class Welcome_Tab_Logic:
         LFQ_command += " -ini " + ini
         LFQ_command += " -out_cxml " + output_name + ".consensusXML.tmp -out_msstats " + output_name + ".csv.tmp -out " + output_name + ".mzTab.tmp -threads " + threads + " -proteinFDR " + fdr
         os.system(LFQ_command)
-        print(LFQ_command)
-        print("ProteomicsLFQ -in BSA1_F1.mzML BSA1_F2.mzML BSA2_F1.mzML BSA2_F2.mzML BSA3_F1.mzML BSA3_F2.mzML -ids BSA1_F1.idXML BSA1_F2.idXML BSA2_F1.idXML BSA2_F2.idXML BSA3_F1.idXML BSA3_F2.idXML     -design BSA_design.tsv    -fasta 18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta -Alignment:max_rt_shift 0 -targeted_only true -transfer_ids false -mass_recalibration false -out_cxml BSA.consensusXML.tmp -out_msstats BSA.csv.tmp -out BSA.mzTab.tmp -threads 1 -proteinFDR 0.3")
         mzTab_file = 'BSA.mzTab.tmp'
         return mzTab_file
 
@@ -220,7 +191,7 @@ class Welcome_Tab_Logic:
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
         if ExperimentalData_File_Path.endswith(".ini"):
-            
+
             Files_Number_Handler.Dictionary_Change_File('ini_path', ExperimentalData_File_Path)
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
         else:

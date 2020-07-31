@@ -153,11 +153,9 @@ class GUI_Welcome_Tab(QMainWindow):
         welcome_Title = "OpenMS ProteomicsLFQ Application  "
 
         proteomicsLFQ_Title =   " ProteomicsLFQ "
-        proteomicsLFQ_Load_Explination ="""You can load your data automatically by selecting a folder containing all necessary files (.fasta, .ini, .tsv/.csv, .mzML, .idXML)
-        or load your data and select the other files manually ( .fasta, .ini, .tsv/csv) through the different tabs"""
-        proteomicsLFQ_Run_Explination ="""
-        Once you have selected your data you
-        can run the ProteomicsLFQ Algorithm with the Run ProteomicsLFQ Button """
+
+        proteomicsLFQ_Load_Explination ="""Load a folder with your data containing at least mzML and idXML files.\nOther files can be also loaded automatically or manually via the different tools."""
+        proteomicsLFQ_Run_Explination ="""Analyze your data with Run ProteomicsLFQ"""
 
         #assignt Strings to Label as Text
 
@@ -169,24 +167,33 @@ class GUI_Welcome_Tab(QMainWindow):
         self.HLine_LFQ.setFrameStyle(QFrame.HLine | QFrame.Plain)
         self.HLine_LFQ.setLineWidth(2)
         self.proteomicsLFQ_Load_Explination_Label.setText(proteomicsLFQ_Load_Explination)
+        self.hboxLoadExp = QHBoxLayout()
+        self.hboxLoadExp.addWidget(self.proteomicsLFQ_Load_Explination_Label)
+        self.hboxLoadExp.setContentsMargins(25, 11, 11, 11)
         self.proteomicsLFQ_Run_Explination_Label.setText(proteomicsLFQ_Run_Explination)
+        self.hboxRunExp = QHBoxLayout()
+        self.hboxRunExp.addWidget(self.proteomicsLFQ_Run_Explination_Label)
+        self.hboxRunExp.setContentsMargins(25, 11, 11, 11)
 
         # setting font for Labels
 
         self.Welcome_Title_Label.setFont(QFont("Sanserif",20))
         self.proteomicsLFQ_Title_Label.setFont(QFont("Sanserif",20))
-        self.proteomicsLFQ_Load_Explination_Label.setFont(QFont("Sanserif",10))
-        self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",10))
+        self.proteomicsLFQ_Load_Explination_Label.setFont(QFont("Sanserif",11))
+        self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",11))
 
 
 
-        self.pixmap = QPixmap('/home/caro/openMS.png')
+        self.pixmap = QPixmap('/home/caro/OpenMS2.png')
         self.newpixmap = self.pixmap.scaledToWidth(300)
         self.Picture = QLabel()
         self.Picture.setPixmap(self.newpixmap)
         self.hboxExplenation = QHBoxLayout()
         self.hboxExplenation.addLayout(self.ExplenationLayout)
+        self.hboxExplenation.addStretch(1)
         self.hboxExplenation.addWidget(self.Picture)
+        self.hboxExplenation.addStretch(1)
+
 
         #adding everything to Layouts
 
@@ -195,12 +202,14 @@ class GUI_Welcome_Tab(QMainWindow):
         self.main_layout.addLayout(self.hboxExplenation)
         self.main_layout.addWidget(self.proteomicsLFQ_Title_Label)
         self.main_layout.addWidget(self.HLine_LFQ)
-        self.main_layout.addWidget(self.proteomicsLFQ_Load_Explination_Label)
+        #self.main_layout.addWidget(self.proteomicsLFQ_Load_Explination_Label)
+        self.main_layout.addLayout(self.hboxLoadExp)
         self.main_layout.addLayout(self.hboxLoadBtn)
         self.main_layout.addLayout(self.hbox)
         self.main_layout.addLayout(self.hbox2)
         self.main_layout.addLayout(self.hbox3)
-        self.main_layout.addWidget(self.proteomicsLFQ_Run_Explination_Label)
+        self.main_layout.addLayout(self.hboxRunExp)
+        #self.main_layout.addWidget(self.proteomicsLFQ_Run_Explination_Label)
         self.Hboxlevel1.addStretch(1)
         self.main_layout.addLayout(self.Hboxlevel1)
 
