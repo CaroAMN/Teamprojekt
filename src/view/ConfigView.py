@@ -113,7 +113,9 @@ class ConfigView(QWidget):
         file, _ = QFileDialog.getOpenFileName(
             self, "QFileDialog.getOpenFileName()", "",
             "All Files (*);;ini (*.ini)")
+
         #saving data in to dictionary
+        
         Files_Number_Handler.Dictionary_Change_File("ini_path",file)
         Files_Number_Handler.Dictionary_Change_Boolean("ini_path")
         if file:

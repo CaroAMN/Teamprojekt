@@ -24,28 +24,11 @@ from tableDataFrame import TableDataFrame as Tdf  # noqa E402
 class Welcome_Tab_Logic:
 
 
-
-    #mzML_files = []
-    #idXML_files= []
-
-
-
-
     def Load_ExperimentalData(self):
         """load .tsv and .fasta files (part-automatically)"""
 
-        #TODO: mabye have to make the arrays global var to be able to use them
-        #for further iplementation
-        #the file that the user chose is always going to be on the index 0 in
-        #its correspinding array
 
 
-        # declaration before setting those values
-
-
-
-
-        #TODO ask user to select tsv fasta ini know or if he wants to select it manualy through the widgets -> evry load button on widget needs to be conneted to update filepaths for run lfq
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
         fasta_files, tsv_files, mzML_files, idXML_files, ini_files = Files_Number_Handler.Identify_Files_Numbers(ExperimentalData_Folder_Path)
         Working_directory = ExperimentalData_Folder_Path
@@ -77,14 +60,8 @@ class Welcome_Tab_Logic:
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
             iniLoaded = Files_Number_Handler.Dictionary_Return_Boolean('ini_path')
             ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
-            print(ini,iniLoaded)
-            '''
-            self.error = QMessageBox()
-            self.error.setIcon(QMessageBox.Information)
-            self.error.setText("There is no ini file in your selected foler. Pleas try again with a different folder")
-            self.error.setWindowTitle("Error")
-            error = self.error.exec_()
-            Welcome_Tab_Logic.Select_ini_File(self)'''
+
+
 
         if Files_Number_Handler.Check_If_More_Than_One(fasta_files):
             User_Warning = QMessageBox()
@@ -97,8 +74,7 @@ class Welcome_Tab_Logic:
         if Files_Number_Handler.Check_If_One(fasta_files):
             Files_Number_Handler.Dictionary_Change_File('fasta', Working_directory+'/'+fasta_files[0])
             Files_Number_Handler.Dictionary_Change_Boolean('fasta')
-            #self.fasta_path = fasta_files[0]
-            #self.fastaLoaded = 1
+
 
         if Files_Number_Handler.Check_If_More_Than_One(tsv_files):
             User_Warning = QMessageBox()
@@ -111,8 +87,7 @@ class Welcome_Tab_Logic:
         if Files_Number_Handler.Check_If_One(tsv_files):
             Files_Number_Handler.Dictionary_Change_File('tsv', Working_directory+'/'+tsv_files[0])
             Files_Number_Handler.Dictionary_Change_Boolean('tsv')
-            #self.tsv_path = tsv_files[0]
-            #self.tsvLoaded = 1
+
 
         if  Files_Number_Handler.Check_If_More_Than_One(ini_files):
             User_Warning = QMessageBox()
@@ -125,18 +100,18 @@ class Welcome_Tab_Logic:
         if Files_Number_Handler.Check_If_One(ini_files):
             Files_Number_Handler.Dictionary_Change_File('ini_path', Working_directory+'/'+ini_files[0])
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
-            #self.ini_path = ini_files[0]
-            #self.iniLoaded = 1
 
 
 
 
-        # TODO: make experimental data visible in fasta and experimental viewer
-        print(Working_directory)
+
+
+
         return   Working_directory, mzML_files, idXML_files
 
 
-    #this method is to load the idXML,mzML and Folder path for manualy option
+    #this method is to load the idXML,mzML and Folder path for the manualy option
+
     def Load_ExperimentalData_Manualy(self):
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
         idXML_files,mzML_files = Files_Number_Handler.Identify_Files_Numbers_Manualy(ExperimentalData_Folder_Path)
@@ -146,7 +121,7 @@ class Welcome_Tab_Logic:
 
         return idXML_files,mzML_files,Working_directory
 
-    def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv): # maybe use as default setting when no ini file is provieded ?
+    def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv):
 
         os.chdir(Working_directory)
         LFQ_command = "ProteomicsLFQ -in "
@@ -193,6 +168,7 @@ class Welcome_Tab_Logic:
     def file_path_mzTab():
         try:
             # generic path to just created mzTab
+
             path_to_mzTab = os.getcwd()[2:]
             open(path_to_mzTab + r"\BSA.mzTab.tmp")
             path = path_to_mzTab + r"\BSA.mzTab.tmp"
@@ -202,15 +178,12 @@ class Welcome_Tab_Logic:
 
 
     def Select_Fasta_File(self):
-        #TODO make it recursive so if the User selects the wrong file it
-        #shows the error message and open Select_Fasta_File again until the
-        #user makes the right choice
-        #PROBLEM if user presses Cancel it still stays in recursion
+
         Fasta_File =  QFileDialog.getOpenFileName()
         Fasta_File_Path = Fasta_File[0]
 
         if Fasta_File_Path.endswith(".fasta"):
-            #self.fasta_path = Fasta_File_Path
+
             Files_Number_Handler.Dictionary_Change_File('fasta', Fasta_File_Path)
             Files_Number_Handler.Dictionary_Change_Boolean('fasta')
 
@@ -227,16 +200,13 @@ class Welcome_Tab_Logic:
 
 
     def Select_Tsv_File(self):
-        #TODO make it recursive so if the User selects the wrong file it
-        #shows the error message and open Select_Tsv_File again until the
-        #user makes the right choice
-        #PROBLEM if user presses Cancel it still stays in recursion
+
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
         if ExperimentalData_File_Path.endswith(".tsv"):
             Files_Number_Handler.Dictionary_Change_File('tsv', ExperimentalData_File_Path)
-            #self.tsv_path = ExperimentalData_File_Path
+
             Files_Number_Handler.Dictionary_Change_Boolean('tsv')
         else:
             self.error = QMessageBox()
@@ -250,7 +220,7 @@ class Welcome_Tab_Logic:
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
         if ExperimentalData_File_Path.endswith(".ini"):
-            #self.ini_path = ExperimentalData_File_Path
+            
             Files_Number_Handler.Dictionary_Change_File('ini_path', ExperimentalData_File_Path)
             Files_Number_Handler.Dictionary_Change_Boolean('ini_path')
         else:

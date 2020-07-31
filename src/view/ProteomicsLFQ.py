@@ -5,7 +5,7 @@ from pyopenms import *
 
 class ProteomicsLFQ:
 
-    # TODO: man gebe hier die Dateien in die Funktion mit. Also Aufruf von ProteomicsLFQ generisch machen
+    
     def run_console_ProteomicsLFQ():
         designer = "/home/caro/Documents/Teamprojekt/src/FRACTIONS/BSA_design.tsv"
         fasta_file = "/home/caro/Desktop/18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta"

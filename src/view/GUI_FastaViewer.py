@@ -138,8 +138,9 @@ class GUI_FastaViewer(QMainWindow):
         self.loadbutton.clicked.connect(self.loadPath)
 
         self.changeReversePattern = QtWidgets.QPushButton(self)
-        self.changeReversePattern.setText("Add Reverse Pattern")
+        self.changeReversePattern.setText("Add Decoy Pattern")
         self.changeReversePattern.clicked.connect(self.user_Dialog_ChangeReversePattern)
+        self.changeReversePattern.setFixedWidth(166)
 
         # creating testboxes for the buttons
         self.boxPro = QLineEdit(self)
@@ -166,15 +167,15 @@ class GUI_FastaViewer(QMainWindow):
         self.radioid = QRadioButton("ID")
         self.radioseq = QRadioButton("Sequence")
         self.radioname.setChecked(True)
-        self.decoycheck = QCheckBox("Decoy search", self) 
+        self.decoycheck = QCheckBox("Decoy search", self)
         self.datalabel = QLabel()
-        self.datalabel.setText("Data not loaded")
+        self.datalabel.setText("Fasta not loaded")
         self.set2.addWidget(self.radioname)
         self.set2.addWidget(self.radioid)
         self.set2.addWidget(self.radioseq)
         self.set2.addWidget(self.decoycheck)
+        self.set2.addStretch(1)
         self.set2.addWidget(self.changeReversePattern)
-        self.set2.addWidget(self.datalabel)
 
         # set 3 contains the table and the result box
         self.set3 = QHBoxLayout()
@@ -184,6 +185,7 @@ class GUI_FastaViewer(QMainWindow):
         self.main_layout.addLayout(self.set1)
         self.main_layout.addLayout(self.set2)
         self.main_layout.addLayout(self.set3)
+        self.main_layout.addWidget(self.datalabel)
 
         self.mainwidget.setLayout(self.main_layout)
         self.setCentralWidget(self.mainwidget)
@@ -252,12 +254,12 @@ class GUI_FastaViewer(QMainWindow):
         self.loadFile(self.filename[0])
 
 
-    # creates a user dialog to change default reverse pattern 
+    # creates a user dialog to change default reverse pattern
     def user_Dialog_ChangeReversePattern(self):
         text, okPressed = QInputDialog.getText(self, "Add reverse pattern", "Add:", QLineEdit.Normal, "")
         if okPressed and text != '':
             self.extra_pattern = text
-    
+
 
     def option_selected(self,button):
         global Option_selected
@@ -278,13 +280,14 @@ class GUI_FastaViewer(QMainWindow):
     nothing , it changes the QMainWindow so that the user can see that a file
     has been loaded
     """
-        #self.filename = QFileDialog.getOpenFileName()
-        #self.path = path_array[0]
+
         self.fileloaded = 1
+
         # loading the lists before searching in order to make the search faster
+
         self.dictKeyAccession, self.proteinList, self.proteinNameList, self.proteinOSList, self.dictKeyAccessionDECOY, self.proteinListDECOY, self.proteinNameListDECOY, self.proteinOSListDECOY = LoadFasta_FastaViewer.protein_dictionary(
             fasta_path, self.extra_pattern)
-        self.datalabel.setText("Data loaded")
+        self.datalabel.setText("Fasta loaded")
         for i in range(len(self.dictKeyAccession)):
             ID = list(self.dictKeyAccession.keys())[i]
             Proteinname = self.proteinNameList[i]
@@ -342,7 +345,7 @@ class GUI_FastaViewer(QMainWindow):
         self.tw.setItemWidget(
             self.cgChild2, 0, self.link)
 
-    # methode when TreeItem was cklicked
+    # method when TreeItem was cklicked
 
     def clickTreeItem(self, item):
         '''Gets a QTreeWidgetItem and its ID data of the first
@@ -581,7 +584,9 @@ class GUI_FastaViewer(QMainWindow):
         """
         atLeastOneProteinFound = False
         protein_sub_sequence = self.boxPro.text()
+
         # dictionaries with ID as key and corresponding QTextEdit with protein sequence as value
+
         self.SequencSearchDict = {}
         self.SequencSearchDictDECOY = {}
 
@@ -612,14 +617,14 @@ class GUI_FastaViewer(QMainWindow):
                     )
 
                     for i in range(len(cuts)):
-                        # sofern wir ganz am Anfang der Liste sind
+                        # while we are at the beginning of the list
                         if (cuts[i] == '' and i == 0):
                             self.textp.setTextColor(self.color)
                             self.textp.insertPlainText(
                                 protein_sub_sequence)
                             self.textp.setTextColor(
                                 self.colorblack)
-                        # sofern wir mitten drin sind und der sub_string mehrfach auftaucht
+                        # if we are in the middle of the list and the sub_string appears more than once
                         elif (cuts[i] == ''):
                             self.textp.setTextColor(self.color)
                             self.textp.insertPlainText(
@@ -674,14 +679,17 @@ class GUI_FastaViewer(QMainWindow):
                     )
 
                     for i in range(len(cuts)):
-                        # sofern wir ganz am Anfang der Liste sind
+                        # while we are at the beginning of the list
+
                         if (cuts[i] == '' and i == 0):
                             self.textp.setTextColor(self.color)
                             self.textp.insertPlainText(
                                 protein_sub_sequence)
                             self.textp.setTextColor(
                                 self.colorblack)
-                        # sofern wir mitten drin oder am Ende sind sind
+
+                        # while we are in the middle of the list
+
                         elif (cuts[i] == ''):
                             self.textp.setTextColor(self.color)
                             self.textp.insertPlainText(

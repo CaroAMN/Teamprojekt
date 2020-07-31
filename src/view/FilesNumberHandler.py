@@ -11,7 +11,9 @@ from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QGroupBox, QSizePolicy, QCheckBox, QFileDialog,
                              QTextEdit, QTextBrowser)
 from PyQt5.QtGui import QFont, QColor
+
 #making a files dictionary that is going to be a global variable
+
 files_dictionary = {
 
     "fasta": "",
@@ -33,8 +35,10 @@ booleans_dictionary = {
         }
 
 class Files_Number_Handler():
+
     #gets a folder path as an argument and searches for files that end with
     #.fasta or .tsv and saves them in the corresponding Array
+
     def Identify_Files_Numbers(folder_path):
         fasta_files=[]
         tsv_files = []
@@ -43,7 +47,7 @@ class Files_Number_Handler():
         ini_files = []
 
         fileslist = sorted(os.listdir(folder_path))
-        #print(sorted(fileslist))
+
         for file in fileslist:
             if file.endswith(".fasta"):
                 fasta_files.append(file)
@@ -87,13 +91,14 @@ class Files_Number_Handler():
         if len(mzML_files) != 0 and len(idXML_files) != 0:
             Files_Number_Handler.Dictionary_Change_Boolean('mzML')
             Files_Number_Handler.Dictionary_Change_Boolean('idXML')
-            
+
 
 
 
         return fasta_files,tsv_files,mzML_files,idXML_files,ini_files
 
-    #works just Identify_Files_Numbers but for the manualy option
+    #works just like  Identify_Files_Numbers but for the manualy option
+
     def Identify_Files_Numbers_Manualy(folder_path):
 
             mzML_files = []
@@ -144,7 +149,8 @@ class Files_Number_Handler():
             return idXML_files,mzML_files
 
     #checks if array contains only on element, it is important because if
-    #more than 1 user needs to select the on file he wants to use
+    #more than 1 file exists user needs to select the file he wants to use
+
     def Check_If_More_Than_One(arraytotest):
         if len(arraytotest)>1:
             return True
@@ -164,19 +170,27 @@ class Files_Number_Handler():
 
 
         #used to save paths of files when loaded manually from a tab widget
+
     def Dictionary_Change_File(file_type,file_path):
         global files_dictionary
         files_dictionary[file_type] = file_path
+
         #used to return the values of the dictionary
+
     def Dictionary_Return_Value(file_type):
         global files_dictionary
         return files_dictionary[file_type]
-        #changes the value to true if , should be used whenever loading data
+
+        #changes the value to true if file loaded,
+        #should be used whenever loading data
         #in to the dictionary manually
+
     def Dictionary_Change_Boolean(file_type):
         global booleans_dictionary
         booleans_dictionary[file_type] = True
-        #returns the boolean
+
+        #returns the boolean for the file
+
     def Dictionary_Return_Boolean(file_type):
         global booleans_dictionary
         return booleans_dictionary[file_type]

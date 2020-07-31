@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import *
 import sys
 import time
 import os
-from LoadingWidget import LoadingWindow
 from GUI_FastaViewer import GUI_FastaViewer
 from mzTabTableWidget import Window
 from GUI_Welcome_Tab import GUI_Welcome_Tab
@@ -21,14 +20,14 @@ from FilesNumberHandler import Files_Number_Handler
 
 import os
 
-# TODO: eventuell im Nachhinein anderer Ordner (oder generisch)
+
 sys.path.insert(0, '../FRACTIONS')
 from ProteomicsLFQ_command import ProteomicsLFQ_command
 Option_selected = "manualy"
 class TabWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        #self.resize(1280, 720)
+        self.resize(1200,720)
         self.setWindowTitle("Protein Analyzer")
         self.tab_widget = AnalyzerTabWidget(self)
         self.setCentralWidget(self.tab_widget)
@@ -38,44 +37,38 @@ class TabWindow(QMainWindow):
 class AnalyzerTabWidget(QWidget):
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
+
         self.layout = QVBoxLayout(self)
 
-
-
         # initialize tabs
+
         self.TabWidget = QTabWidget()
         self.Tab0 = GUI_Welcome_Tab()
         self.Tab1 = GUI_FastaViewer()
         self.Tab2 = App()
-        #self.Tab3 = TableEditor()
         self.Tab3 = mzMLTableView()
         self.Tab4 = ConfigView()
         self.Tab5 = Window()
 
         # add tabs
+
         self.TabWidget.addTab(self.Tab0, "Welcome")
         self.TabWidget.addTab(self.Tab1, "Proteinsequence Viewer")
         self.TabWidget.addTab(self.Tab2, "Spectrum Viewer")
         self.TabWidget.addTab(self.Tab3, "Experimental Design")
         self.TabWidget.addTab(self.Tab4, "XML Viewer")
         self.TabWidget.addTab(self.Tab5, "PSM/Protein Viewer")
-
-
-        # add tabs
         self.layout.addWidget(self.TabWidget)
 
 
-        # add load Button for ProteomicsLFQ
+
         self.hboxlayout = QHBoxLayout()
-        #putting the button on the right side corner with a Stretch
-        #self.hboxlayout.addStretch(0)
         self.Loadlabel = QLabel()
         self.Loadlabel.setText("no data loaded")
         self.hboxlayout.addWidget(self.Loadlabel)
 
-        #self.loadButton = QtWidgets.QPushButton(self)
-        #self.loadButton.setText("Load Data")
-        #self.loadButton.setFixedWidth(200)
+        #creating Run Button for the ProteimicsLFQ Algorithm
+
         self.Output_Name = ''
         self.runButton = QtWidgets.QPushButton(self)
         self.runButton.setText("Run ProteomicsLFQ")
@@ -84,24 +77,12 @@ class AnalyzerTabWidget(QWidget):
         self.hboxlayout.addWidget(self.runButton)
         self.runButton.clicked.connect(self.runProteomicsLFQ)
 
-        #self.hboxlayout.addWidget(self.loadButton)
         self.Tab0.loadButton.clicked.connect(self.clickedLoadData)
-        #print(self.Tab0.LineEdit)
-        #self.Tab0.RenameButton.clicked.connect(self.get_Output_FileName(self.Tab0.LineEdit)
-
         self.layout.addLayout(self.hboxlayout)
-
-
         self.setLayout(self.layout)
 
-        x = Files_Number_Handler.Dictionary_Return_Value("fasta")
-        y = Files_Number_Handler.Dictionary_Return_Value("tsv")
-        print(x)
-        print(y)
+        #creates a user dialog and ask the user to choose on option
 
-
-
-        #creates a user dialog and asks him to choose on option
     def user_Dialog(self):
         messagebox = QMessageBox()
         messagebox.setWindowTitle("Information")
@@ -131,7 +112,9 @@ class AnalyzerTabWidget(QWidget):
         self.user_Dialog()
         global Option_selected
         print(Option_selected)
-        #when new data is loaded all previous loaded data is cleared
+
+        #when new data is loaded, clear all previous loaded data
+
         self.Tab5.clearmzTabTable()# new method to clear table
         self.Tab1.clearFastaViewer()# new methode to clear fasta viewer
 
@@ -139,7 +122,9 @@ class AnalyzerTabWidget(QWidget):
         self.Tab3.RemoveBtn()#then clear all selected
 
         self.Tab4.clearConfigView()
+
         #if user has selected automatically than load everything from Directory
+
         if Option_selected == "automatically":
 
             data_path, mzML, idXML = Welcome_Tab_Logic.Load_ExperimentalData(self)
@@ -164,14 +149,14 @@ class AnalyzerTabWidget(QWidget):
             else:
                 self.Tab4.generateTreeModel(ini_path)
                 '''
-        #If User has selected manualy than take files from dictionary
+
+        #If User has selected manualy, than take files from dictionary
+
         if Option_selected == "manualy":
             idXML,mzML,data_path = Welcome_Tab_Logic.Load_ExperimentalData_Manualy(self)
             Files_Number_Handler.Dictionary_Change_File("idXML",idXML)
             Files_Number_Handler.Dictionary_Change_File("mzML",mzML)
             Files_Number_Handler.Dictionary_Change_File("data",data_path)
-            #Files_Number_Handler.Dictionary_Change_Boolean("idXML")
-            #Files_Number_Handler.Dictionary_Change_Boolean("mzML")
             Files_Number_Handler.Dictionary_Change_Boolean("data")
 
         self.Loadlabel.setText("data loaded")
@@ -196,11 +181,12 @@ class AnalyzerTabWidget(QWidget):
         mzMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('mzML')
         idXMLLoaded = Files_Number_Handler.Dictionary_Return_Boolean('idXML')
 
-        # user input for the run
+        # user input for the run ProteomicsLFQ Algorithm
+
         self.Tab0.get_Threads(self.Tab0.Threads)
         self.Tab0.get_Output_FileName(self.Tab0.OutputName)
         self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
-        #self.Tab0.get_Output_FileName(self.Tab0.OutputName)
+
 
         if not fastaLoaded:
             User_Warning = QMessageBox()
@@ -240,12 +226,7 @@ class AnalyzerTabWidget(QWidget):
             ini = Files_Number_Handler.Dictionary_Return_Value('ini_path')
             print(ini,iniLoaded)
             self.Tab4.generateTreeModel(Files_Number_Handler.Dictionary_Return_Value('ini_path'))
-            '''
-            User_Warning = QMessageBox()
-            User_Warning.setIcon(QMessageBox.Information)
-            User_Warning.setText("config file is missing")
-            User_Warning.setWindowTitle("Information")
-            Information = User_Warning.exec_()'''
+
 
         elif self.Tab0.Output_Name == '':
             User_Warning = QMessageBox()
@@ -271,12 +252,9 @@ class AnalyzerTabWidget(QWidget):
 
         elif fastaLoaded and tsvLoaded and mzMLLoaded and idXMLLoaded and iniLoaded:
             self.Loadlabel.setText('starting job')
-            #self.Tab0.get_Threads(self.Tab0.Threads)
-            #self.Tab0.get_ProteinFDR(self.Tab0.ProteinFDR)
-            #print(self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)
-            # runs with init
 
-            
+
+
 
 
             mzTab_file = Welcome_Tab_Logic.Run_ProteomicsLFQ(Welcome_Tab_Logic, data_path, mzML, idXML, fasta, tsv, ini, self.Tab0.Output_Name, self.Tab0.Threads_Number, self.Tab0.ProteiFDR_Number)

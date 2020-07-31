@@ -13,7 +13,7 @@ from PyQt5.QtGui import QFont, QColor, QPixmap
 from FilesNumberHandler import Files_Number_Handler
 from GUI_FastaViewer import *
 from Welcome_Tab_Logic import Welcome_Tab_Logic
-#from Tabwidget import AnalyzerTabWidget
+
 
 
 class GUI_Welcome_Tab(QMainWindow):
@@ -27,14 +27,13 @@ class GUI_Welcome_Tab(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        #creating the Layout, QVBoxLayout with hboxlayout in it fot the
-        #different levels
+        #creating the Layout, QVBoxLayout with hboxlayout
+
         self.Output_Name = ''
         self.Threads_Number = ''
         self.ProteiFDR_Number = ''
         self.mainwidget = QWidget(self)
         self.main_layout = QVBoxLayout(self.mainwidget)
-        #self.main_layout.setSpacing(10)
         self.Hboxlevel1 = QHBoxLayout()
 
         #Creating QLabel with welcome Text to display on first Tab
@@ -47,30 +46,9 @@ class GUI_Welcome_Tab(QMainWindow):
         self.proteomicsLFQ_Load_Explination_Label = QLabel()
         self.proteomicsLFQ_Run_Explination_Label = QLabel()
 
-        '''
-        self.loadButton = QtWidgets.QPushButton(self)
-        self.loadButton.setText("Load Data")
 
-        self.hboxLoadBtn = QHBoxLayout()
-        self.hboxLoadBtn.addWidget(self.loadButton)
-        self.hboxLoadBtn.setContentsMargins(25, 11, 11, 11)
-        self.hboxLoadBtn.addStretch(1)
-        #self.loadButton.clicked.connect(AnalyzerTabWidget.clickedLoadData)
-        '''
-
-        """
-        self.LineEdit = QLineEdit(self)
-        self.RenameButton = QtWidgets.QPushButton(self)
-        self.RenameButton.clicked.connect(lambda: self.get_Output_FileName(self.LineEdit))
-        self.RenameButton.setText('Set Name')
-        self.hbox = QHBoxLayout()
-        self.hbox.setSpacing(10)
-        self.hbox.addWidget(self.LineEdit)
-        self.hbox.addWidget(self.RenameButton)
-        self.hbox.addStretch(1)"""
 
         self.OutputName = QLineEdit(self)
-        #self.OutputName.setText("")
         self.OutputName_Label = QLabel(self)
         self.OutputName_Label.setText('Name for Output Files')
         self.hbox = QHBoxLayout()
@@ -115,7 +93,6 @@ class GUI_Welcome_Tab(QMainWindow):
 
 
         self.ExplenationLayout = QGridLayout()
-
         normalFont = QFont("Sanserif",11)
         boldFont = QFont("Sanserif", 11, QFont.Bold)
 
@@ -184,40 +161,25 @@ class GUI_Welcome_Tab(QMainWindow):
 
         #assignt Strings to Label as Text
 
-        #TODO Creat select folder button
-        #TODO creat text line for coosing output name
-        #TODO data load label needs to show which files are missing, data loaded when all files are provided
-
-
         self.Welcome_Title_Label.setText(welcome_Title)
         self.Hline_Welcome.setFrameStyle(QFrame.HLine | QFrame.Plain)
         self.Hline_Welcome.setLineWidth(2)
-
         self.Welcome_Title_Label.setLineWidth(2)
-        #self.Tabs_Explination_Label.setText(Tabs_Explination)
-
         self.proteomicsLFQ_Title_Label.setText(proteomicsLFQ_Title)
         self.HLine_LFQ.setFrameStyle(QFrame.HLine | QFrame.Plain)
         self.HLine_LFQ.setLineWidth(2)
         self.proteomicsLFQ_Load_Explination_Label.setText(proteomicsLFQ_Load_Explination)
         self.proteomicsLFQ_Run_Explination_Label.setText(proteomicsLFQ_Run_Explination)
-        # seting font for Labels
+
+        # setting font for Labels
+
         self.Welcome_Title_Label.setFont(QFont("Sanserif",20))
-        #self.Tabs_Explination_Label.setFont(QFont("Sanserif",12))
         self.proteomicsLFQ_Title_Label.setFont(QFont("Sanserif",20))
         self.proteomicsLFQ_Load_Explination_Label.setFont(QFont("Sanserif",10))
         self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",10))
-        #creating Buttons
 
-        #Button to load experimental Data
-        #self.Load_ExperimentalData_Button = QPushButton()
-        #self.Load_ExperimentalData_Button.setText("Load Data")
-        #self.Load_ExperimentalData_Button.clicked.connect(Welcome_Tab_Logic.Load_ExperimentalData)
 
-        #Button to run ProteomicsLFQ
-        #self.Run_ProteomicsLFQ_Button = QPushButton()
-        #self.Run_ProteomicsLFQ_Button.setText("Run ProteomicsLFQ")
-        #self.Run_ProteomicsLFQ_Button.clicked.connect(Welcome_Tab_Logic.Run_ProteomicsLFQ)
+
         self.pixmap = QPixmap('/home/caro/openMS.png')
         self.newpixmap = self.pixmap.scaledToWidth(300)
         self.Picture = QLabel()
@@ -227,11 +189,10 @@ class GUI_Welcome_Tab(QMainWindow):
         self.hboxExplenation.addWidget(self.Picture)
 
         #adding everything to Layouts
+
         self.main_layout.addWidget(self.Welcome_Title_Label)
         self.main_layout.addWidget(self.Hline_Welcome)
-        #self.main_layout.addWidget(self.Explenation)
         self.main_layout.addLayout(self.hboxExplenation)
-
         self.main_layout.addWidget(self.proteomicsLFQ_Title_Label)
         self.main_layout.addWidget(self.HLine_LFQ)
         self.main_layout.addWidget(self.proteomicsLFQ_Load_Explination_Label)
@@ -240,8 +201,6 @@ class GUI_Welcome_Tab(QMainWindow):
         self.main_layout.addLayout(self.hbox2)
         self.main_layout.addLayout(self.hbox3)
         self.main_layout.addWidget(self.proteomicsLFQ_Run_Explination_Label)
-        #self.Hboxlevel1.addWidget(self.Load_ExperimentalData_Button)
-        #self.Hboxlevel1.addWidget(self.Run_ProteomicsLFQ_Button)
         self.Hboxlevel1.addStretch(1)
         self.main_layout.addLayout(self.Hboxlevel1)
 
@@ -261,15 +220,3 @@ class GUI_Welcome_Tab(QMainWindow):
 
     def get_ProteinFDR(self, QLineEdit):
         self.ProteiFDR_Number = QLineEdit.text()
-
-
-
-#def main():
-#
- #   app = QApplication(sys.argv)
-  #  ex = GUI_Welcome_Tab()
-   # sys.exit(app.exec_())
-
-
-#if __name__ == '__main__':
- #   main()
