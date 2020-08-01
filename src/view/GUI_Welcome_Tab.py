@@ -17,6 +17,145 @@ from Welcome_Tab_Logic import Welcome_Tab_Logic
 
 
 class GUI_Welcome_Tab(QMainWindow):
+    """Creates an welcome Tab for the user that contains importan information
+    The information that is being shown on this tab is supposed to help
+    the user understand the functionality of this programm
+
+    Attributes
+    ----------
+    Output_Name : str
+        a string that contains the ouput name of the final file
+
+    Threads_Number : str
+        a string that contains the threads for the final file
+
+    ProteiFDR_Number : str
+        a string that contains the protein fdr number
+
+    mainwidget : QWidget
+        a main QtWidget that contains all other widgets
+
+    main_layout : QVBoxLayout
+        a vertical layout that contains all other layouts
+
+    Hboxlevel1 = QHBoxLayout
+        a horizontal layout
+
+    Welcome_Title_Label : QLabel
+        a label that contains the  title
+
+    Hline_Welcome : QLabel
+        a label that contains a horizontal line for visual separation
+
+    Tabs_Explination_Label : QLabel
+        a label that contains an explenation of the tabs
+
+    HLine_LFQ : QLabel
+        a label that contains a horizontal line for visual separation
+
+    proteomicsLFQ_Title_Label : QLabel
+        a label that contains a title
+
+    proteomicsLFQ_Load_Explination_Label : QLabel
+        a label that contains an explenation of proteomicsLFQ
+
+    proteomicsLFQ_Run_Explination_Label : QLabel
+        a label that contains an explenation of the run button
+
+    loadButton : QPushButton
+        a QPushButton that is connected to a method
+
+    hboxLoadBtn : QHBoxLayout
+     a horizontal layout
+
+     Threads : QLineEdit
+        a QLineEdit where the user can write his input
+
+    Threads_Label : QLabel
+        a label that contains strings
+
+    hbox2 : QHBoxLayout
+        a horizontal layout
+
+    ProteinFDR : QLineEdit
+        a QLineEdit where the user can wirte his input
+
+    ProteinFDR_Label : QLabel
+        a label that contains strings
+
+    hbox3 : QHBoxLayout
+        a horizontal layout
+
+    ExplenationLayout : QGridLayout
+        a layout in the form of a matrix
+
+    Explenation : QLabel
+        a label containing an explenation
+
+    FastaView : QLabel
+        a label containg a title
+
+    Spectrum : QLabel
+        a label containg a title
+
+    Spectrum_expl : QLabel
+        a label that contains an explenation
+
+    ExperimentalD : QLabel
+        a label containg a title
+
+    ExperimentalD_expl : QLabel
+        a label that contains an explenation
+
+    XmlV : QLabel
+        a label that contains a title
+
+    XmlV_expl : QLabel
+        a label that contains an explenation
+
+    Mztab : QLabel
+        a label that contains a title
+
+    Mztab_expl : QLabel
+        a label that contains an explenation
+
+    welcome_Title : str
+        the title of the welcome tab as a string
+
+    proteomicsLFQ_Title : str
+        the title of the proteomicsLFQ section of the screen as a string
+
+    proteomicsLFQ_Load_Explination : str
+        the proteomicsLFQ explination as a string
+
+    proteomicsLFQ_Run_Explination : str
+        the explination of the run button as a string
+
+    pixmap : QPixmap
+        a picture that is loaded through a given path
+
+    Picture : QLabel
+        a label that contains a picture
+
+    hboxExplenation : QHBoxLayout
+        a horizontal layout
+
+    hboxExplenation
+
+    Methods
+    -------
+    initUI
+        creates the layout of the window and sets the widgets
+
+    get_Output_FileName
+        gets the output filename that the user has given
+
+    get_Threads
+        gets the threads that the user has given
+
+    get_ProteinFDR
+        gets the prtein fdr number that the user has given
+    """
 
 
     def __init__(self):
@@ -222,10 +361,43 @@ class GUI_Welcome_Tab(QMainWindow):
         self.show()
 
     def get_Output_FileName(self, QLineEdit):
+        """
+        gets the output filename that the user has given
+
+        Parameters
+        ---------
+        QLineEdit from which the text has to be saved
+
+        Returns
+        -------
+        none
+        """
         self.Output_Name = QLineEdit.text()
 
     def get_Threads(self, QLineEdit):
+        """
+        gets the output threads that the user has given
+
+        Parameters
+        ---------
+        QLineEdit from which the text has to be saved
+
+        Returns
+        -------
+        none
+        """
         self.Threads_Number = QLineEdit.text()
 
     def get_ProteinFDR(self, QLineEdit):
+        """
+        gets the output number that the user has given
+
+        Parameters
+        ---------
+        QLineEdit from which the text has to be saved
+
+        Returns
+        -------
+        none
+        """
         self.ProteiFDR_Number = QLineEdit.text()

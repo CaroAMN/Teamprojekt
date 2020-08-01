@@ -25,6 +25,21 @@ sys.path.insert(0, '../FRACTIONS')
 from ProteomicsLFQ_command import ProteomicsLFQ_command
 Option_selected = "manualy"
 class TabWindow(QMainWindow):
+    """
+    This class is used to create the window and set the basic attributes of
+    the window such as size and title
+
+    Attributes
+    ----------
+    self : QMainWindow
+        The QmainWindow is modified in the _init_ method
+
+    Methods
+    -------
+    _init_()
+        sets the inital attributes of the Window such as title and size
+     """
+
     def __init__(self):
         super().__init__()
         self.resize(1200,720)
@@ -35,6 +50,94 @@ class TabWindow(QMainWindow):
 
 
 class AnalyzerTabWidget(QWidget):
+    """
+    This class is used to create the layout, design and also the functionality of
+    the window and its buttons and applications
+
+    Attributes
+    ----------
+    layout : QVBoxLayout
+        a vertical layout for the window
+
+    TabWidget : QTabWidget
+        a TabWidget which will contain all the different tabs
+
+    hboxlayout : QHBoxLayout
+        a horizontal layout for the window
+
+    Loadlabel : QLabel
+        a label that gives the user information
+
+    Output_Name : str
+        a string that contains the output name of the file
+        createt from the Algorithm
+
+    runButton : QPushButton
+        a button that is connected to a method
+
+    messagebox : QMessageBox
+        a message box to show information to the user
+
+    Option_selected : str
+        a string that shows which button the user clicked
+
+    fasta : str
+        a string containg the path to the file
+
+    tsv : str
+        a string containg the path to the file
+
+    ini : str
+        a string containg the path to the file
+
+    mzML : str
+        a string containg the path to the file
+
+    idXML : str
+        a string containg the path to the file
+
+    data_path : str
+        a string containg the path to the file
+
+    fastaLoaded : boolean
+        a boolean showing if the file has been loaded
+
+    tsvLoaded : boolean
+        a boolean showing if the file has been loaded
+
+    iniLoaded : boolean
+        a boolean showing if the file has been loaded
+
+    mzMLLoaded : boolean
+        a boolean showing if the file has been loaded
+
+    idXMLLoaded : boolean
+        a boolean showing if the file has been loaded
+
+    User_Warning : QMessageBox
+        a message box to show information to the user
+    run : str
+        a string needed for ProteimicsLFQ
+
+    Methods
+    -------
+
+    _init_()
+        sets all internal attributes of a window such as layout and buttons
+
+    user_Dialog
+        creates a QMessageBox to be shown to the user
+
+    option_selected
+        gets the option which the user has selected from the QMessageBox
+
+    clickedLoadData
+        loads the data automatically or manually
+
+    runProteomicsLFQ
+        runs the ProteimicsLFQ Algorithm
+    """
+
     def __init__(self, parent):
         super(QWidget, self).__init__(parent)
 
@@ -84,6 +187,17 @@ class AnalyzerTabWidget(QWidget):
         #creates a user dialog and ask the user to choose on option
 
     def user_Dialog(self):
+        """
+        creates a Messagebox to get user input
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
         messagebox = QMessageBox()
         messagebox.setWindowTitle("Information")
         messagebox.setIcon(QMessageBox.Question)
@@ -98,6 +212,19 @@ class AnalyzerTabWidget(QWidget):
         messagebox.exec_()
 
     def option_selected(self,button):
+        """
+        gets the option which the user has selected from the QMessageBox
+
+        Parameters
+        ---------
+        button : QPushButton
+            the button which the user clicked
+
+        Returns
+        -------
+        none
+        """
+
         global Option_selected
         Option_selected = button.text()
 
@@ -109,6 +236,19 @@ class AnalyzerTabWidget(QWidget):
 
 
     def clickedLoadData(self):
+
+        """
+        loads the data automatically or manually
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
+
         self.user_Dialog()
         global Option_selected
 
@@ -150,6 +290,18 @@ class AnalyzerTabWidget(QWidget):
 
 
     def runProteomicsLFQ(self):
+        """
+        runs the ProteimicsLFQ Algorithm
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
+
         self.Loadlabel.setText("loading...")
         """launch proteomicsLFQ and add output to PSM/ ProteinViewer Tab"""
 

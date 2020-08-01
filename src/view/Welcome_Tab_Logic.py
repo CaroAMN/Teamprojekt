@@ -23,9 +23,84 @@ from tableDataFrame import TableDataFrame as Tdf  # noqa E402
 
 class Welcome_Tab_Logic:
 
+    """
+    A class that defines methods to be used in the Welcome_Tab class
 
+
+
+    Attributes
+    ----------
+    ExperimentalData_Folder_Path : str
+        a string containing a path to a folder
+
+    fasta_files : str
+        a string containing a path to a file
+
+    tsv_files : str
+        a string containg a path to a file
+
+     mzML_files : str
+        a string containg a path to a file
+
+    idXML_files : str
+        a string containg a path to a file
+
+     ini_files : str
+        a string containg a path to a file
+
+    Working_directory : str
+        a string containing a pth to a folder
+
+    error : QMessageBox
+        a messagebox to show errors to the user
+
+    User_Warning : QMessageBox
+        a messagebox to inform the user
+
+    LFQ_command : str
+        a string that will be used to run the ProteomicsLFQ Algorithm
+
+    path_to_mzTab : str
+        a string containing a path to a file
+
+    Fasta_File_Path : str
+        a string containing a path to a file
+    Methods
+    -------
+    Load_ExperimentalData
+        returns the paths to the files and checks for errors
+
+    Load_ExperimentalData_Manualy
+        returns the paths to the files that cannot be set manually
+
+    Run_ProteomicsLFQ
+        runs the ProteomicsLFQ Algorithm with the given files paths
+
+    file_path_mzTab
+        return the path to the mzTab file
+
+    Select_Fasta_File
+        opens QFileDialog and asks user to select a fasta file
+
+    Select_Tsv_File
+        opens QFileDialog and asks user to select a tsv file
+
+    Select_ini_File
+        open QFileDialog and asks user to select a ini file
+    """
     def Load_ExperimentalData(self):
-        """load .tsv and .fasta files (part-automatically)"""
+        """
+        load .tsv,.fasta, .ini, mzML , idXML files (part-automatically)
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        Working_directory, mzML_files, idXML_files
+            strings containg paths to the selected directory and files
+        """
 
 
 
@@ -107,6 +182,21 @@ class Welcome_Tab_Logic:
     #this method is to load the idXML,mzML and Folder path for the manualy option
 
     def Load_ExperimentalData_Manualy(self):
+        """
+        loads  mzML , idXML files
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        Working_directory, mzML_files, idXML_files
+            strings containg paths to the selected directory and files
+        """
+
+
+
         ExperimentalData_Folder_Path = QFileDialog.getExistingDirectory(self, "Select Directory")
         idXML_files,mzML_files = Files_Number_Handler.Identify_Files_Numbers_Manualy(ExperimentalData_Folder_Path)
         Working_directory = ExperimentalData_Folder_Path
@@ -114,6 +204,21 @@ class Welcome_Tab_Logic:
 
 
     def Run_ProteomicsLFQ(self,Working_directory, mzML, idXML, fasta, tsv, ini, output_name, threads, fdr): # runs with ini file
+
+        """
+        runs the ProteomicsLFQ Algorithm with the given files paths
+
+        Parameters
+        ---------
+        Working_directory, mzML, idXML, fasta, tsv, ini, output_name, threads, fdr
+            strings containg paths to the selected directory and files
+
+        Returns
+        -------
+        mzTab_file
+            output of the ProteimicsLFQ algorithm
+        """
+
 
         os.chdir(Working_directory)
         LFQ_command = "ProteomicsLFQ -in "
@@ -137,6 +242,20 @@ class Welcome_Tab_Logic:
 
 
     def file_path_mzTab():
+
+        """
+        gets the path to an mztab file
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        path
+            a string containing a path to an mzTab file
+        """
+
         try:
             # generic path to just created mzTab
 
@@ -149,6 +268,18 @@ class Welcome_Tab_Logic:
 
 
     def Select_Fasta_File(self):
+
+        """
+        opens QFileDialog and asks user to select a fasta file
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
 
         Fasta_File =  QFileDialog.getOpenFileName()
         Fasta_File_Path = Fasta_File[0]
@@ -172,6 +303,17 @@ class Welcome_Tab_Logic:
 
     def Select_Tsv_File(self):
 
+        """
+        opens QFileDialog and asks user to select a tsv file
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
 
@@ -187,6 +329,18 @@ class Welcome_Tab_Logic:
             error = self.error.exec_()
 
     def Select_ini_File(self):
+
+        """
+        opens QFileDialog and asks user to select a ini file
+
+        Parameters
+        ---------
+        none
+
+        Returns
+        -------
+        none
+        """
         ExperimentalData_File =  QFileDialog.getOpenFileName()
         ExperimentalData_File_Path = ExperimentalData_File[0]
 

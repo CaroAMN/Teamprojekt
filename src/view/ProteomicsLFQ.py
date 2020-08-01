@@ -5,7 +5,18 @@ from pyopenms import *
 
 class ProteomicsLFQ:
 
-    
+     """
+       
+
+       ...
+
+       Attributes
+       ----------
+
+       Methods
+       -------
+
+       """
     def run_console_ProteomicsLFQ():
         designer = "/home/caro/Documents/Teamprojekt/src/FRACTIONS/BSA_design.tsv"
         fasta_file = "/home/caro/Desktop/18Protein_SoCe_Tr_detergents_trace_target_decoy.fasta"
