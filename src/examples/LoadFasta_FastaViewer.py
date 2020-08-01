@@ -31,7 +31,7 @@ class LoadFasta_FastaViewer:
         #with open(fastaFile) as file_content:
         file_content = open(fastaFile)
 
-            # Go through the fasta file, line by line
+        # Go through the fasta file, line by line
         nextline = file_content.readline()
 
         while(True):
@@ -90,14 +90,12 @@ class LoadFasta_FastaViewer:
                         
                     protein_sequence_string = ""
                     nextline = file_content.readline()
-                    print(nextline)
 
                     # read file line by line, till new protein (begins with '>')
                     while not nextline.startswith('>'):
                         protein_sequence_string += nextline[:-1]
                         try:
                             nextline = next(file_content)
-                            print(nextline)
                         except Exception:
                             break
 
