@@ -392,3 +392,6 @@ class ConfigView(QWidget):
             if len(temp) < 2:
                 file = file + ".ini"
             self.tree.write(file)
+
+    def clearConfigView(self):
+        self.treeWidget.clear()      

@@ -8,6 +8,7 @@ from GUI_FastaViewer import GUI_FastaViewer
 from mzTabTableWidget import Window
 from GUI_Welcome_Tab import GUI_Welcome_Tab
 from Welcome_Tab_Logic import *
+from Tab_SpectrumViewer import Tab_SpectrumViewer
 from ConfigView import ConfigView
 sys.path.insert(0, "../apps")
 from XMLViewer import XMLViewer
@@ -18,7 +19,7 @@ from mzMLTableView import mzMLTableView
 from FilesNumberHandler import Files_Number_Handler
 
 
-import os
+
 
 
 sys.path.insert(0, '../FRACTIONS')
@@ -148,7 +149,7 @@ class AnalyzerTabWidget(QWidget):
         self.TabWidget = QTabWidget()
         self.Tab0 = GUI_Welcome_Tab()
         self.Tab1 = GUI_FastaViewer()
-        self.Tab2 = App()
+        self.Tab2 = Tab_SpectrumViewer()
         self.Tab3 = mzMLTableView()
         self.Tab4 = ConfigView()
         self.Tab5 = Window()
@@ -274,6 +275,7 @@ class AnalyzerTabWidget(QWidget):
             self.Tab1.loadFile(Files_Number_Handler.Dictionary_Return_Value('fasta'))
             self.Tab3.loadExperimentalDesign(Files_Number_Handler.Dictionary_Return_Value('tsv'))
             self.Tab4.generateTreeModel(Files_Number_Handler.Dictionary_Return_Value('ini_path'))
+            self.Tab2.Load_mzML()
 
 
         #If User has selected manualy, than take files from dictionary
@@ -284,6 +286,7 @@ class AnalyzerTabWidget(QWidget):
             Files_Number_Handler.Dictionary_Change_File("mzML",mzML)
             Files_Number_Handler.Dictionary_Change_File("data",data_path)
             Files_Number_Handler.Dictionary_Change_Boolean("data")
+            self.Tab2.Load_mzML()
 
         self.Loadlabel.setText("data loaded")
 
