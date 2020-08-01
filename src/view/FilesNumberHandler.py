@@ -194,8 +194,6 @@ class Files_Number_Handler():
 
             mzML_files = []
             idXML_files= []
-            mzMLLoaded = 0
-            idXMLLoaded = 0
             fileslist = sorted(os.listdir(folder_path))
             for file in fileslist:
                 if file.endswith(".mzML"):
@@ -255,10 +253,7 @@ class Files_Number_Handler():
         -------
         True or False
         """
-        if len(arraytotest)>1:
-            return True
-        else :
-            return False
+        return len(arraytotest) > 1
 
     def Check_If_Less_Than_One(arraytotest):
         """
@@ -273,10 +268,8 @@ class Files_Number_Handler():
         -------
         True or False
         """
-        if len(arraytotest)==0:
-            return True
-        else :
-            return False
+        return len(arraytotest) == 0
+
     def Check_If_One(arraytotest) :
         """
         cheks if there is exactly one element in a given array
@@ -290,10 +283,7 @@ class Files_Number_Handler():
         -------
         True or False
         """
-        if len(arraytotest) == 1:
-            return True
-        else:
-            return False
+        return len(arraytotest) == 1
 
 
         #used to save paths of files when loaded manually from a tab widget
@@ -311,7 +301,6 @@ class Files_Number_Handler():
         -------
         none
         """
-        global files_dictionary
         files_dictionary[file_type] = file_path
 
         #used to return the values of the dictionary
@@ -330,7 +319,6 @@ class Files_Number_Handler():
         files_dictionary[file_type]
             a string that descibes a path to a spesific  file type
         """
-        global files_dictionary
         return files_dictionary[file_type]
 
         #changes the value to true if file loaded,
@@ -350,7 +338,6 @@ class Files_Number_Handler():
         -------
         none
         """
-        global booleans_dictionary
         booleans_dictionary[file_type] = True
 
         #returns the boolean for the file
@@ -369,5 +356,4 @@ class Files_Number_Handler():
         booleans_dictionary[file_type]
             a boolean that shows if a spesific file type has been loaded
         """
-        global booleans_dictionary
         return booleans_dictionary[file_type]
