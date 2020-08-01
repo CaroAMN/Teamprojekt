@@ -258,10 +258,8 @@ class AnalyzerTabWidget(QWidget):
 
         self.Tab5.clearmzTabTable()# new method to clear table
         self.Tab1.clearFastaViewer()# new methode to clear fasta viewer
-
         self.Tab3.SelectAllBtn()#first seltect all
         self.Tab3.RemoveBtn()#then clear all selected
-
         self.Tab4.clearConfigView()
 
         #if user has selected automatically than load everything from Directory
