@@ -1,4 +1,6 @@
+MANIFEST.in
 setup.py
+Pictures/OpenMS2.png
 Pictures/__init__.py
 ProteomicLFQ_Application.egg-info/PKG-INFO
 ProteomicLFQ_Application.egg-info/SOURCES.txt
