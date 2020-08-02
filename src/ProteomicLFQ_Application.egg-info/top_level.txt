@@ -1,0 +1,6 @@
+Pictures
+apps
+controller
+examples
+model
+view

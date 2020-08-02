@@ -1,0 +1,12 @@
+Metadata-Version: 1.2
+Name: ProteomicLFQ-Application
+Version: 1.0.0
+Summary: not yet done
+Home-page: https://github.com/CaroAMN/Teamprojekt/tree/Mainapp_Caro
+Author: Carolin Schwitalla, Hristian Gabrovski, Alexander Gebhard
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
