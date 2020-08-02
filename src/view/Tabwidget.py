@@ -19,11 +19,6 @@ from mzMLTableView import mzMLTableView
 from FilesNumberHandler import Files_Number_Handler
 
 
-
-
-
-sys.path.insert(0, '../FRACTIONS')
-from ProteomicsLFQ_command import ProteomicsLFQ_command
 Option_selected = "manualy"
 class TabWindow(QMainWindow):
     """
