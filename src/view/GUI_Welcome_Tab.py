@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip,
                              QPushButton, QApplication, QMainWindow,
@@ -322,8 +323,8 @@ class GUI_Welcome_Tab(QMainWindow):
         self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",11))
 
 
-
-        self.pixmap = QPixmap('/home/caro/OpenMS2.png')
+        picture = sys.path.append(os.getcwd()+'/../Pictures/OpenMS2.png')
+        self.pixmap = QPixmap(picture)
         self.newpixmap = self.pixmap.scaledToWidth(300)
         self.Picture = QLabel()
         self.Picture.setPixmap(self.newpixmap)
