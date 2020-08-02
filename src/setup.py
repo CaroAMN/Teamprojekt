@@ -8,6 +8,8 @@ setuptools.setup(
     description="not yet done",
     url="https://github.com/CaroAMN/Teamprojekt/tree/Mainapp_Caro",
     packages=setuptools.find_packages(),
+    package_data={'Pictures' : ['src/Pictures/OpenMS2.png']},
+    include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
