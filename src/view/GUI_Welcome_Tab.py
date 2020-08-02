@@ -323,7 +323,8 @@ class GUI_Welcome_Tab(QMainWindow):
         self.proteomicsLFQ_Run_Explination_Label.setFont(QFont("Sanserif",11))
 
 
-        picture = sys.path.append(os.getcwd()+'/../Pictures/OpenMS2.png')
+        my_path = os.path.abspath(os.path.dirname(__file__))
+        picture = os.path.join(my_path, "../Pictures/OpenMS2.png")
         self.pixmap = QPixmap(picture)
         self.newpixmap = self.pixmap.scaledToWidth(300)
         self.Picture = QLabel()
